@@ -1,0 +1,16 @@
+#!/bin/sh
+
+SELECTED_PROJECT="${1}"
+PROJECT_NAME="$(basename "$SELECTED_PROJECT")"
+
+if $(tmux has-session -t "${PROJECT_NAME}" >& /dev/null); then
+    SESSION_ID=$(tmux ls -F '#{session_id}' -f "#{==:#{session_name},${PROJECT_NAME}}")
+    if test -z "${SESSION_ID}" ; then
+        echo "Unknown session: ${PROJECT_NAME}"
+        exit 1
+    fi
+    tmux capture-pane -ep -t "${SESSION_ID}"
+else
+    echo "No session named $PROJECT_NAME"
+fi
+

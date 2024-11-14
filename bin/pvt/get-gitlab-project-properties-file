@@ -1,0 +1,13 @@
+#!/bin/sh
+
+GITLAB_PROJECTS_PROPERTIES_FILE="$HOME/.local/GitlabProjectProperties.json"
+
+if ! [[ -f $GITLAB_PROJECTS_PROPERTIES_FILE ]] || [[ $1 == '-f' ]]; then
+    # NOTE: This can only get projects in the infrastructure group and that's the only place I need it
+    PRIVATE_TOKEN_HEADER="PRIVATE-TOKEN: $(gopass show -o Gitlab/API_TOKEN)"
+    PROJECTS_URL="https://gitlab.com/api/v4/projects?owned=true"
+
+    curl -X GET --header "$PRIVATE_TOKEN_HEADER" "$PROJECTS_URL" 2>&1 | jq > $GITLAB_PROJECTS_PROPERTIES_FILE
+fi
+
+echo $GITLAB_PROJECTS_PROPERTIES_FILE

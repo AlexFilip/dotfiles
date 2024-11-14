@@ -1,0 +1,21 @@
+#!/bin/sh
+
+create_new_wallpaper() {
+    for OUTPUT in $@; do
+        $HOME/bin/go/set-wallpaper $OUTPUT
+    done
+}
+
+if [[ -z $(ps aux | grep swaylock | grep -v grep) ]]; then
+    OUTPUTS=$(swaymsg -p -t get_outputs | grep Output | awk '{ print $2 }')
+    create_new_wallpaper $OUTPUTS &
+
+    IMAGE_ARGS=()
+    for OUTPUT in $OUTPUTS; do
+        IMAGE_ARGS+=(-i "$OUTPUT:$HOME/.local/processed-wallpapers/lock-screen-$OUTPUT.png")
+    done
+
+    exec swaylock -e -f -l -c 000000 -s fit "${IMAGE_ARGS[@]}"
+else
+    echo "Attempted to lock screen when swaylock is already running" > ~/swaylock-error-logs
+fi

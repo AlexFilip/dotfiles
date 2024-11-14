@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# I will need to test this to see if it helps dnf include firmware updates. Check gnome-software after updating
+sudo -- sh -c "
+dnf update -y
+dnf --refresh upgrade -y;
+pkcon refresh force;
+pkcon update -y;
+"
+
+# Not installed
+#   snap refresh
+
+

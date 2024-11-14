@@ -1,0 +1,24 @@
+#!/bin/sh
+
+URL="$1"
+TITLE="$2"
+DESCRIPTION="$3"
+FEED_TITLE="$4"
+
+DEFAULT_PROFILE=""
+TAGS=""
+
+if [[ -z "$URL" ]]; then
+    echo "No URL provided"
+    exit 1
+fi
+
+source ~/bin/pvt/media-predicates
+
+if is_image_url "$URL"; then
+    exec wget "$URL"
+else
+    if [[ -z $(grep "$URL" ~/bookmarks) ]]; then
+        echo "$URL,$TITLE,$DEFAULT_PROFILE,$TAGS" >> ~/bookmarks
+    fi
+fi

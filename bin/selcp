@@ -1,0 +1,8 @@
+#!/bin/sh
+
+INDEX=0
+if [[ -n "$1" ]]; then
+    INDEX="$1"
+fi
+
+fzf --layout=reverse | awk '{ print $'$INDEX' }' | tr -d '\n' | wl-copy

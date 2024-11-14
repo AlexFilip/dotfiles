@@ -1,0 +1,476 @@
+# Complete reference: `man 5 sway`
+
+### Variables
+# Logo key. Use Mod1 for Alt.
+# Mod1 = Alt
+set $mod Mod4
+
+# Variables set for desktop These are the only 
+set $SCREEN_PRIMARY   DP-1
+set $SCREEN_SECONDARY HDMI-A-1
+set $SCREEN_LEFT      $SCREEN_SECONDARY
+set $SCREEN_RIGHT     $SCREEN_PRIMARY
+
+output DP-1     mode 3840x2160@59.997Hz position 1920,0
+output HDMI-A-1 mode 1920x1080@60.000Hz position 0,0
+
+# ==============================
+# You should not need to change any screen related variables below this line
+# ==============================
+
+# Home row direction keys, like vim
+set $left  h
+set $down  j
+set $up    k
+set $right l
+
+set $MainProfileBrave     "Profile-Main"
+set $PersonalProfileBrave "Profile-Personal"
+set $MusicProfileBrave    "Profile-Music"
+set $PlayProfileBrave     "Profile-Play"
+set $ResearchProfileBrave "Profile-Research"
+set $WorkProfileBrave     "Profile-Work"
+
+# Moving around:
+# Move your focus around
+bindsym $mod+$left  focus left
+bindsym $mod+$down  focus down
+bindsym $mod+$up    focus up
+bindsym $mod+$right focus right
+
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left  move left
+bindsym $mod+Shift+$down  move down
+bindsym $mod+Shift+$up    move up
+bindsym $mod+Shift+$right move right
+
+# Layout control
+bindsym $mod+z split horizontal; layout tabbed
+bindsym $mod+v layout toggle splith splitv
+bindsym $mod+x layout toggle tabbed splith
+
+# Move focus to the parent container
+bindsym $mod+a focus parent
+bindsym $mod+s focus child
+
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
+
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+f floating toggle
+
+# Swap focus between the tiling area and the floating area
+# bindsym $mod+n focus mode_toggle
+
+# Enable for now, because of IntelliJ & Signal
+# xwayland disable
+
+# Workspaces:
+bindsym $mod+comma  focus output $SCREEN_LEFT
+bindsym $mod+period focus output $SCREEN_RIGHT
+
+bindsym $mod+Shift+comma  move container to output $SCREEN_LEFT
+bindsym $mod+Shift+period move container to output $SCREEN_RIGHT
+
+# Browser (Docs)
+# set $WS1  1 
+# Terminal (work)
+# set $WS2  2 
+# Utilities (misc)
+# set $WS3  3 
+# News
+# set $WS4  4 
+# ToDo List
+# set $WS5  5 
+# Next Up (Opened project windows)
+# set $WS6  6 
+# Reading List
+# set $WS7  7 
+# Process monitor
+# set $WS8  8 
+# Inbox/Messaging
+# set $WS9  9 
+# Music
+# set $WS10 10 
+
+# Move window or focus to workspace depending on current output
+bindsym $mod+1 exec ~/bin/pvt/sway-cmd move_focus 1
+bindsym $mod+2 exec ~/bin/pvt/sway-cmd move_focus 2
+bindsym $mod+3 exec ~/bin/pvt/sway-cmd move_focus 3
+bindsym $mod+4 exec ~/bin/pvt/sway-cmd move_focus 4
+bindsym $mod+5 exec ~/bin/pvt/sway-cmd move_focus 5
+bindsym $mod+6 exec ~/bin/pvt/sway-cmd move_focus 6
+bindsym $mod+7 exec ~/bin/pvt/sway-cmd move_focus 7
+bindsym $mod+8 exec ~/bin/pvt/sway-cmd move_focus 8
+bindsym $mod+9 exec ~/bin/pvt/sway-cmd move_focus 9
+bindsym $mod+0 exec ~/bin/pvt/sway-cmd move_focus 10
+
+bindsym $mod+left  workspace prev
+bindsym $mod+right workspace next
+
+bindsym $mod+Shift+1 exec ~/bin/pvt/sway-cmd move_window 1
+bindsym $mod+Shift+2 exec ~/bin/pvt/sway-cmd move_window 2
+bindsym $mod+Shift+3 exec ~/bin/pvt/sway-cmd move_window 3
+bindsym $mod+Shift+4 exec ~/bin/pvt/sway-cmd move_window 4
+bindsym $mod+Shift+5 exec ~/bin/pvt/sway-cmd move_window 5
+bindsym $mod+Shift+6 exec ~/bin/pvt/sway-cmd move_window 6
+bindsym $mod+Shift+7 exec ~/bin/pvt/sway-cmd move_window 7
+bindsym $mod+Shift+8 exec ~/bin/pvt/sway-cmd move_window 8
+bindsym $mod+Shift+9 exec ~/bin/pvt/sway-cmd move_window 9
+bindsym $mod+Shift+0 exec ~/bin/pvt/sway-cmd move_window 10
+
+# Assign workspace to output
+workspace 1:1  output $SCREEN_PRIMARY
+workspace 1:2  output $SCREEN_PRIMARY
+workspace 1:3  output $SCREEN_PRIMARY
+workspace 1:4  output $SCREEN_PRIMARY
+workspace 1:5  output $SCREEN_PRIMARY
+workspace 1:6  output $SCREEN_PRIMARY
+workspace 1:7  output $SCREEN_PRIMARY
+workspace 1:8  output $SCREEN_PRIMARY
+workspace 1:9  output $SCREEN_PRIMARY
+workspace 1:10 output $SCREEN_PRIMARY
+
+# Secondary screen
+workspace 2:1  output $SCREEN_SECONDARY
+workspace 2:2  output $SCREEN_SECONDARY
+workspace 2:3  output $SCREEN_SECONDARY
+workspace 2:4  output $SCREEN_SECONDARY
+workspace 2:5  output $SCREEN_SECONDARY
+workspace 2:6  output $SCREEN_SECONDARY
+workspace 2:7  output $SCREEN_SECONDARY
+workspace 2:8  output $SCREEN_SECONDARY
+workspace 2:9  output $SCREEN_SECONDARY
+workspace 2:10 output $SCREEN_SECONDARY
+
+# Applications
+set $term_launch alacritty -e
+set $main_tmux_session main
+set $editor_title Neovim
+set $term alacritty
+
+set $lock lock-wm
+
+# exec ~/bin/go/set-wallpaper &
+
+# Screen locking
+exec swayidle -w \
+       timeout 300 "$lock" \
+       timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+       before-sleep "$lock"
+
+bindsym $mod+Shift+grave exec echo "Shutdown\nRestart\nLock\nLogOut" | fzfmenu | power-control
+
+### Input configuration
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+input "1267:12423:ELAN1300:00_04F3:3087_Touchpad" {
+    dwt enabled
+    click_method clickfinger
+    # tap enabled
+    # natural_scroll enabled
+    # middle_emulation enabled
+}
+bindsym XF86TouchpadToggle input type:touchpad events toggle enabled disabled
+
+# Map fn buttons on trackball mouse
+# Can also see all inputs (but not event number) with raw info using `swaymsg -t get_inputs -r | jq -r '.[] | .identifier'`
+# Get input event number from device name. Use `ls -l /dev/input/by-id` and find which event it symlinks to (there is also /dev/input/by-path, which might help)
+# To find the names of events use `sudo libinput debug-events --device /dev/input/by-id/<device-id>`
+set $TrackballMouse "1390:268:ELECOM_TrackBall_Mouse_HUGE_TrackBall"
+# bindsym --input-device=$TrackballMouse           --whole-window BTN_LEFT    exec ... down # Left mouse button
+# bindsym --input-device=$TrackballMouse --release --whole-window BTN_LEFT    exec ... up   # Left mouse button
+# bindsym --input-device=$TrackballMouse           --whole-window BTN_RIGHT   exec ... down # Right mouse button
+# bindsym --input-device=$TrackballMouse --release --whole-window BTN_RIGHT   exec ... up   # Right mouse button
+# bindsym --input-device=$TrackballMouse           --whole-window BTN_MIDDLE  exec ... down # Middle mouse button/Scroll wheel click
+# bindsym --input-device=$TrackballMouse --release --whole-window BTN_MIDDLE  exec ... up   # Middle mouse button/Scroll wheel click
+# bindsym --input-device=$TrackballMouse           --whole-window BTN_EXTRA   exec ... down # "Forward" button
+# bindsym --input-device=$TrackballMouse --release --whole-window BTN_EXTRA   exec ... up   # "Forward" button
+# bindsym --input-device=$TrackballMouse           --whole-window BTN_SIDE    exec ... down # "Back" button
+# bindsym --input-device=$TrackballMouse --release --whole-window BTN_SIDE    exec ... up   # "Back" button
+
+input $TrackballMouse {
+    # Scroll while pressing the Fn1 button
+    scroll_button BTN_FORWARD
+    scroll_method on_button_down
+}
+
+# BTN_FORWARD is already set to scroll above
+# NOTE: ~/bin/pvt/elecom-mouse-fn-button NO LONGER EXISTS
+# bindsym --input-device=$TrackballMouse           --whole-window BTN_FORWARD exec ~/bin/pvt/elecom-mouse-fn-button Fn1 down
+# bindsym --input-device=$TrackballMouse --release --whole-window BTN_FORWARD exec ~/bin/pvt/elecom-mouse-fn-button Fn1 up
+# bindsym --input-device=$TrackballMouse           --whole-window BTN_BACK exec ~/bin/pvt/elecom-mouse-fn-button Fn2 down
+# bindsym --input-device=$TrackballMouse --release --whole-window BTN_BACK exec ~/bin/pvt/elecom-mouse-fn-button Fn2 up
+# bindsym --input-device=$TrackballMouse           --whole-window BTN_BACK seat - cursor press   button2 # This is supposed to execute a middle-mouse-click but it's not working for some reason
+bindsym --input-device=$TrackballMouse --release --whole-window BTN_BACK seat - cursor release button2
+# bindsym --input-device=$TrackballMouse           --whole-window BTN_TASK exec ~/bin/pvt/elecom-mouse-fn-button Fn3 down
+# bindsym --input-device=$TrackballMouse --release --whole-window BTN_TASK exec ~/bin/pvt/elecom-mouse-fn-button Fn3 up
+
+### Key bindings
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+bindsym $mod+Shift+o move container to scratchpad
+bindsym $mod+o scratchpad show
+
+# Start a terminal
+bindsym $mod+t exec $term, mode "default"
+
+# Text editor
+bindsym $mod+e exec $term --title $editor_title -e nvim
+
+bindsym $mod+u mode Terminal
+mode "Terminal" {
+    # Bare terminal
+    bindsym $mod+t exec $term, mode "default"
+    bindsym      t exec $term, mode "default"
+
+    # Multiplex/tmux
+    bindsym $mod+m exec $term --title Tmux -e tmux new -As $main_tmux_session, mode "default"
+    bindsym      m exec $term --title Tmux -e tmux new -As $main_tmux_session, mode "default"
+
+    # Htop
+    bindsym $mod+h exec $term --title Htop -e htop, mode "default"
+    bindsym      h exec $term --title Htop -e htop, mode "default"
+
+    # Text editor + Tmux
+    bindsym $mod+e exec $term --title $editor_title -e tmux new -As editor nvim, mode "default"
+    bindsym      e exec $term --title $editor_title -e tmux new -As editor nvim, mode "default"
+
+    # Project selector
+    bindsym $mod+p exec $term --title $editor_title -e ~/bin/tmux-select-project, mode "default"
+    bindsym      p exec $term --title $editor_title -e ~/bin/tmux-select-project, mode "default"
+
+    # VPN Terminal
+    bindsym $mod+v exec $term --title VPNTerminal -e docker exec -it vpn-cli bash, mode "default"
+    bindsym      v exec $term --title VPNTerminal -e docker exec -it vpn-cli bash, mode "default"
+
+    # File browser (I mainly use a graphical app)
+    # bindsym $mod+f exec $term --title Ranger -e /usr/bin/ranger, mode "default"
+    # bindsym      f exec $term --title Ranger -e /usr/bin/ranger, mode "default"
+
+    # Floating term
+    bindsym $mod+f exec $term --class FloatingTerm, mode "default"
+    bindsym      f exec $term --class FloatingTerm, mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# Web browser
+bindsym $mod+w mode Browser
+mode "Browser" {
+    # Open default browser
+    bindsym $mod+w exec flatpak run com.brave.Browser --profile-directory=$MainProfileBrave, mode "default"
+    bindsym      w exec flatpak run com.brave.Browser --profile-directory=$MainProfileBrave, mode "default"
+
+    bindsym $mod+p exec flatpak run com.brave.Browser --profile-directory=$PersonalProfileBrave, mode "default"
+    bindsym      p exec flatpak run com.brave.Browser --profile-directory=$PersonalProfileBrave, mode "default"
+
+    # bindsym $mod+l exec open-app librewolf, mode "default"
+    # bindsym      l exec open-app librewolf, mode "default"
+
+    bindsym $mod+v mode "VPNBrowser"
+    bindsym      v mode "VPNBrowser"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+mode "VPNBrowser" {
+    bindsym $mod+f exec open-app vpn-firefox, mode "default"
+    bindsym      f exec open-app vpn-firefox, mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+g mode Apps
+mode "Apps" {
+    bindsym $mod+f exec open-app thunar, mode "default"
+    bindsym      f exec open-app thunar, mode "default"
+
+    bindsym      g exec flatpak run org.keepassxc.KeePassXC, mode "default"
+    bindsym $mod+g exec flatpak run org.keepassxc.KeePassXC, mode "default"
+
+    # bindsym $mod+ exec open-app , mode "default"
+    # bindsym       exec open-app , mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# Utilities
+bindsym $mod+bracketright exec alacritty --class weather --hold -e $HOME/bin/weather
+
+# Start launcher
+# bindsym $mod+space exec ulauncher
+# TODO
+# bindsym $mod+space exec all-desktop-apps | fzfmenu | open-app flatpak
+bindsym $mod+space exec all-commands | fzfmenu | open-app
+
+# Take screenshots
+bindsym Print exec $HOME/bin/take-screenshot
+
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod normal
+
+# Reload the configuration file (and notification center)
+bindsym $mod+Shift+r reload; exec swaync-client -R
+
+# Notification center
+bindsym $mod+Shift+n exec swaync-client -t -sw
+# Note: workspaces can have any name you want, not just numbers.
+# We just use 1-10 as the default.
+
+# Theme
+# border pixel 2
+default_border pixel 4
+default_floating_border pixel 4
+smart_borders on
+titlebar_padding 11 4
+titlebar_border_thickness 3
+
+include $HOME/.config/sway/catppuccin/themes/catppuccin-latte
+# include $HOME/.config/sway/catppuccin/themes/catppuccin-frappe
+# include $HOME/.config/sway/catppuccin/themes/catppuccin-macchiato
+# include $HOME/.config/sway/catppuccin/themes/catppuccin-mocha
+
+# target                 border    bg    text   indicator  child_border
+client.focused           $mauve    $base $text  $rosewater $mauve
+client.focused_inactive  $lavender $base $text  $rosewater $base
+client.unfocused         $lavender $base $text  $rosewater $base
+client.urgent            $peach    $base $peach $overlay0  $peach
+client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
+client.background        $base
+
+font pango:NotoSans Mono Regular 11
+
+#
+# Scratchpad:
+# Sway has a "scratchpad", which is place to store windows when they're not being used
+# You can send windows there and get them back later.
+
+# bindsym $mod+minus scratchpad show
+# Move the currently focused window to the scratchpad
+# bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+
+# Floating windows
+#   - Each window can be given its own dimensions
+for_window [app_id="fzfmenu"] floating enable, resize set 850 870
+# for_window [app_id="pass_decryption"] floating enable, resize set 850 870
+# for_window [app_id="alsamixer"] floating enable, resize set 1200 800
+# for_window [app_id="bluetoothctl"] floating enable, resize set 1200 800
+# for_window [app_id="network_manager"] floating enable, resize set 1200 800
+for_window [app_id="weather"] floating enable, resize set 1275 900
+for_window [app_id="FloatingTerm"] floating enable, resize set 1600 1800
+# for_window [app_id="thunar" name="File Operation Progress"] floating enable, resize set 1126 821
+
+# Resizing containers:
+bindsym $mod+r mode "resize"
+mode "resize" {
+    bindsym $left  resize shrink width  10px
+    bindsym $down  resize grow   height 10px
+    bindsym $up    resize shrink height 10px
+    bindsym $right resize grow   width  10px
+
+    bindsym minus gaps inner all plus  4;  gaps outer all plus  2
+    bindsym equal gaps inner all minus 4;  gaps outer all minus 2
+    bindsym plus  gaps inner all set   12; gaps outer all set   6
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+minus gaps inner all plus  4;  gaps outer all plus  2
+bindsym $mod+equal gaps inner all minus 4;  gaps outer all minus 2
+bindsym $mod+plus  gaps inner all set   12; gaps outer all set   6
+
+gaps inner 12
+gaps outer 6
+
+# Sound
+# status-bar: -SIGUSR1 status-bar
+# i3blocks:   -SIGRTMIN+1 i3blocks
+bindsym XF86AudioMute        exec amixer set Master toggle && pkill -x -SIGRTMIN+1 i3blocks
+bindsym XF86AudioRaiseVolume exec amixer set Master 5%+    && pkill -x -SIGRTMIN+1 i3blocks
+bindsym XF86AudioLowerVolume exec amixer set Master 5%-    && pkill -x -SIGRTMIN+1 i3blocks
+
+# bindsym XF86AudioMute        exec pactl set-sink-mute   @DEFAULT_SINK@ toggle
+# bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+# bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+# Screen brightness
+bindsym --locked XF86MonBrightnessUp   exec light -S "$(light -G | awk '{ b = int($1 + 5); print (b >   0 ? b :   0) }')"
+bindsym --locked XF86MonBrightnessDown exec light -S "$(light -G | awk '{ b = int($1 - 5); print (b < 100 ? b : 100) }')"
+
+bar {
+    font pango:DejaVu Sans Mono, FontAwesome 12
+    position top
+    status_command i3blocks
+    gaps 4
+    strip_workspace_numbers yes
+    # status_command /home/alex/bin/go/status-bar
+
+    colors {
+        separator          $rosewater
+        background         $base
+        statusline         $text
+        focused_workspace  $base  $base $mauve
+        active_workspace   $pink  $base $text
+        inactive_workspace $base  $base $text
+        urgent_workspace   $peach $base $peach
+    }
+}
+
+include /etc/sway/config.d/*
+
+# Start up background tasks
+exec swaync
+
+# Launch default applications
+
+# Music/Background
+# workspace $WS10
+# exec open-app brave-browser-stable --profile-directory=$PersonalProfileBrave
+
+# Messaging
+# workspace $WS9
+# exec thunderbird
+# exec open-app signal-desktop
+
+# workspace $WS8
+
+# workspace $WS7
+# exec $editor ~/ToRead-Articles.txt
+
+# workspace $WS6
+# Next Up
+
+# workspace $WS5
+# exec $editor ~/Todo.txt
+
+# News
+# workspace $WS4
+
+# Terminal
+#workspace $WS3
+#exec $term
+
+# Editor
+#workspace $WS2
+#exec $term --title $editor_title -e nvim
+
+# Browser
+#workspace $WS1
+#exec open-url "" --profile-directory=$MainProfileBrave
+
+# FIXME: Window does not move to scratchpad
+#exec keepassxc, move window to scratchpad

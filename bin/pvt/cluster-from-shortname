@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# ENVIRONMENT_SHORTNAMES_FILE="$HOME/environment-shortnames.json"
+ENVIRONMENT_SHORTNAMES_FILE="$HOME/environment-shortnames.txt"
+if [[ -n "$1" ]] && [[ -f $ENVIRONMENT_SHORTNAMES_FILE ]]; then
+    # ENVIRONMENT=$(jq -r '.["'$1'"] // ""' $ENVIRONMENT_SHORTNAMES_FILE)
+    ENVIRONMENT=$(awk '{
+        if(NF == 0)
+            next
+        for(i=1;i<=NF;i++)
+            if($i == "'$1'") {
+                print $NF
+                exit 0
+            }
+    }' $ENVIRONMENT_SHORTNAMES_FILE)
+    if [[ -n "$ENVIRONMENT" ]]; then
+        echo $ENVIRONMENT
+    else
+        exit 2
+    fi
+else
+    exit 1
+fi
+

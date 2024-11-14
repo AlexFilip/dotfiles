@@ -1,0 +1,15 @@
+#!/bin/sh
+
+
+RG_COMMAND="rg --color=never -- "
+EXTRACT_FILE_COMMAND="\$(echo \'{}\' | cut -f 1 -d : | cut -f 2 -d \"'\")"
+
+$RG_COMMAND '' | fzf \
+    --delimiter / \
+    --with-nth -1 \
+    --preview="cat \"$EXTRACT_FILE_COMMAND\"" \
+    --info=inline \
+    --phony \
+    --bind "change:reload:$RG_COMMAND {q}" \
+    --bind "enter:execute(nvim \"$EXTRACT_FILE_COMMAND\")"
+

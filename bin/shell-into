@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [[ -n "$1" ]]; then
+    exec kubectl exec --stdin --tty $@ -- /bin/bash
+else
+    exec echo "No pod name provided"
+fi

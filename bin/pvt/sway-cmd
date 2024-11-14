@@ -1,0 +1,31 @@
+#!/bin/sh
+
+COMMAND="${1:?"Expected command. Either move_window or move_focus"}"
+WORKSPACE="${2:?"Expected workspace number. {1..10}"}"
+
+if ! [[ $WORKSPACE =~ ^[0-9]|10$ ]]; then
+    echo "Expected second argument to be a number. Got $WORKSPACE" > /dev/stderr
+    exit 1
+fi
+
+# Screens by which workspaces they should take
+SCREEN1=DP-1
+SCREEN2=HDMI-A-1
+FOCUSED_DISPLAY=$(swaymsg -t get_outputs | jq -r "({\"$SCREEN1\": 1, \"$SCREEN2\": 2})[.[] | select(.focused).name]")
+
+case $COMMAND in
+    move_window)
+        swaymsg move container to workspace $FOCUSED_DISPLAY:$WORKSPACE
+        ;;
+
+    move_focus)
+        swaymsg workspace $FOCUSED_DISPLAY:$WORKSPACE
+        ;;
+
+    *)
+        echo "Unrecognized command $COMMAND. Expected either move_focus or move_window" > /dev/stderr
+        exit 1
+        ;;
+esac
+
+

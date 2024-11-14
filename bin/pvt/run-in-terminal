@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# INPUT_FIFO_NAME=/tmp/fzf-selection-input.txt
+# if [[ -a $INPUT_FIFO_NAME ]]; then
+#     rm $INPUT_FIFO_NAME
+# fi
+# mkfifo $INPUT_FIFO_NAME
+
+OUTPUT_FIFO_NAME=/tmp/fzf-selection-output.txt
+if [[ -a $OUTPUT_FIFO_NAME ]]; then
+    rm $OUTPUT_FIFO_NAME
+fi
+mkfifo $OUTPUT_FIFO_NAME
+
+alacritty --class fzfmenu -e sh -c "$1 | fzf --layout=reverse | $2 > $OUTPUT_FIFO_NAME 2>&1" &
+me/alex/bin:/home/alex/.nix-profile/bin:/home/alex/bin
+pid=$!
+
+swaymsg "[pid=\"$pid\"] floating enable" &> /dev/null
+# echo "$pid" > current_pid.txt
+
+# Wait for our process to close
+# tail --pid=$pid -f /dev/null
+
+cat $OUTPUT_FIFO_NAME
+
+# rm $INPUT_FIFO_NAME
+rm $OUTPUT_FIFO_NAME

@@ -1,0 +1,53 @@
+#!/bin/bash
+
+TMUX_SESSION_NAMES="$HOME/.local/tmux-session-names"
+if ! [[ -f $TMUX_SESSION_NAMES ]]; then
+    touch $TMUX_SESSION_NAMES
+fi
+
+ALL_PROJECTS=$($HOME/bin/pvt/tmux-get-project-sessions)
+
+# BIND_CTRL_W="ctrl-w:reload(tmux list-windows -a -F '#{session_name}:#{window_name}')+change-preview(${TMUX_PLUGIN_MANAGER_PATH%/}/tmux-sessionx/scripts/preview.sh -w {} | bat --style plain)"
+# BIND_CTRL_O="ctrl-o:print-query+execute(tmux new-session -d -s {})"
+# CTRL_X_PATH=$(tmux_option_or_fallback "@sessionx-x-path" "$HOME/.config")
+# BIND_CTRL_X="ctrl-x:reload(find $CTRL_X_PATH -mindepth 1 -maxdepth 1 -type d)"
+
+BIND_CTRL_D="ctrl-d:execute(tmux kill-session -t \$(basename {}))+reload($HOME/bin/pvt/tmux-get-project-sessions)"
+BIND_CTRL_R="ctrl-r:execute($HOME/bin/pvt/tmux-rename-session {})+reload($HOME/bin/pvt/tmux-get-project-sessions)"
+BIND_ENTER="enter:replace-query+print-query"
+
+# TODO: Ctrl-o should toggle between open sessions and 
+BIND_CTRL_O="ctrl-o:"
+
+SELECTED_PROJECT=$(echo "$ALL_PROJECTS"| \
+    fzf \
+    --header='󰿄=go C-d=del C-r=rename' \
+    --bind "$BIND_CTRL_D" \
+    --bind "$BIND_CTRL_R" \
+    --bind "$BIND_ENTER" \
+    --preview='~/bin/pvt/tmux-project-preview {}')
+
+if [[ -z $SELECTED_PROJECT ]]; then
+    exit 0
+fi
+
+PROJECT_NAME=$(basename $SELECTED_PROJECT)
+PROJECT_PATH="$SELECTED_PROJECT"
+
+if ! [[ -d $HOME/$PROJECT_PATH ]]; then
+    PROJECT_PATH=$(grep -n -E ":$SELECTED_PROJECT\$" $TMUX_SESSION_NAMES | head -1 | cut -f1 -d:)
+    PROJECT_NAME="$SELECTED_PROJECT"
+fi
+
+PROJECT_PATH="$HOME/$PROJECT_PATH"
+
+if [[ -z "$TMUX" ]]; then
+    # Not in tmux
+    exec tmux new -As $PROJECT_NAME -c "$PROJECT_PATH" nvim .
+else
+    # In tmux
+    # echo "$SELECTED_PROJECT" >> $DEBUG_FILE
+    # echo "$PROJECT_NAME" >> $DEBUG_FILE
+    tmux new -ds "$PROJECT_NAME" -c "$PROJECT_PATH" nvim .
+    exec tmux switch -t $PROJECT_NAME
+fi

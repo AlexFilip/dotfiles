@@ -1,0 +1,25 @@
+#!/bin/sh
+
+TMUX_SESSION_NAMES="$HOME/.local/tmux-session-names"
+if ! [[ -f $TMUX_SESSION_NAMES ]]; then
+    touch $TMUX_SESSION_NAMES
+fi
+
+if [[ -z "$PROJECT_DIRS" ]]; then
+    PROJECT_DIRS=($HOME/code/{Learn,Libraries,projects,Resume,Starters,tests,Forks,Containers})
+fi
+
+ALL_PROJECTS="$(find ${PROJECT_DIRS[@]} -maxdepth 4 -name '.git' -not -path '*/.terraform/*' -exec dirname {} \;)"
+ADDED_PROJECTS="$(echo $HOME/{bin,.config/{nvim,tmux,sway,alacritty}})"
+
+for PROJECT_PATH in $ALL_PROJECTS $ADDED_PROJECTS; do
+    EXPECTED_PATH=$(echo "$PROJECT_PATH" | cut -f4- -d/)
+    SESSION_NAME_LINE=$(grep -E "^$EXPECTED_PATH:" $TMUX_SESSION_NAMES | head -1 | cut -f2 -d:)
+
+    if [[ -n "$SESSION_NAME_LINE" ]]; then
+        echo "$SESSION_NAME_LINE"
+    else
+        echo "$EXPECTED_PATH"
+    fi
+done
+

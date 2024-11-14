@@ -1,0 +1,22 @@
+#!/bin/sh
+
+if [[ -z "$1" ]]; then
+    exit 1
+fi
+
+ENV_NAME=$(~/bin/pvt/cluster-from-shortname $1)
+shift
+
+COMMAND=$SHELL
+if [[ -n "$@" ]]; then
+    COMMAND=$@
+fi
+
+if [[ -z "$ENV_NAME" ]]; then
+    exit 2
+fi
+
+TEMP_FILE=$(mktemp -t kubeconfig-XXXXXXXXX)
+yq -y '.["current-context"] = "'$ENV_NAME'"' ~/.kube/config > $TEMP_FILE
+
+KUBECONFIG="$TEMP_FILE" $COMMAND

@@ -1,0 +1,31 @@
+#!/bin/sh
+
+if [[ -z $1 ]]; then
+    read -r COMMAND
+else
+    COMMAND="$1"
+    shift
+fi
+
+case "$COMMAND" in
+    Shutdown)
+        # echo "Shutdown" >> blah.txt
+        exec systemctl poweroff -i
+        ;;
+
+    Restart)
+        # echo "Restart" >> blah.txt
+        exec systemctl reboot
+        ;;
+
+    Lock)
+        # echo "Locking" >> blah.txt
+        exec lock-wm
+        ;;
+
+    LogOut)
+        # echo "Logging out" >> blah.txt
+        exec swaymsg exit
+        ;;
+
+esac

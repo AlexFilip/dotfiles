@@ -1,0 +1,33 @@
+#!/bin/sh
+
+printf >&2 "New name: "
+read NEW_NAME
+
+SESSION_NAME="$1"
+
+TMUX_SESSION_NAMES="$HOME/.local/tmux-session-names"
+if ! [[ -f $TMUX_SESSION_NAMES ]]; then
+    touch $TMUX_SESSION_NAMES
+fi
+
+SESSION_NAME_LINE=$(grep -n -E "^$SESSION_NAME:|:$SESSION_NAME\$" $TMUX_SESSION_NAMES | head -1 | cut -f1 -d:)
+
+if [[ -z "$SESSION_NAME_LINE" ]]; then
+    SESSION_PATH="$SESSION_NAME"
+else
+    SESSION_PATH=$(cat $TMUX_SESSION_NAMES | head -$SESSION_NAME_LINE | tail -1 | cut -f1 -d:)
+
+    SED_COMMAND="${SESSION_NAME_LINE}d"
+    echo "$SED_COMMAND" > /dev/stderr
+    sed -ie $SED_COMMAND $TMUX_SESSION_NAMES
+fi
+
+echo "$SESSION_PATH:$NEW_NAME" >> $TMUX_SESSION_NAMES
+
+# echo "SESSION_NAME = $SESSION_NAME" > /dev/stderr
+if ! $(tmux has-session -t "${SESSION_NAME}" >& /dev/null); then
+    SESSION_NAME=$(basename $SESSION_NAME)
+fi
+
+
+tmux rename-session -t "$SESSION_NAME" ${NEW_NAME}

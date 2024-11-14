@@ -1,0 +1,28 @@
+#!/bin/sh
+
+INPUT_FIFO_NAME=$(mktemp -u)
+mkfifo $INPUT_FIFO_NAME
+
+OUTPUT_FIFO_NAME=$(mktemp -u)
+mkfifo $OUTPUT_FIFO_NAME
+
+FZF_COMMAND="fzf --layout=reverse < $INPUT_FIFO_NAME"
+
+if [[ -n $1 ]]; then
+    # This is here in case we want to do extra processing on the output of fzf within the same terminal
+    #   ex. with pass/gopass
+    # NOTE: Whatever command you run, must not try to run curses overtop of fzf (ex. gpg's pinentry). Otherwise, it will fail in odd ways.
+    #       This is why we pass the output as an argument to a second command rather than piping into it.
+    #       It makes sure that the commands do not run at the same time.
+    WRAPPER="$1"
+    shift
+
+    FZF_COMMAND="$WRAPPER \$($FZF_COMMAND) $@"
+fi
+
+alacritty --class fzfmenu -e sh -c "$FZF_COMMAND > $OUTPUT_FIFO_NAME" &
+cat - > $INPUT_FIFO_NAME # This must go after the process above because it blocks until another process reads from the fifo
+
+cat $OUTPUT_FIFO_NAME
+
+rm $INPUT_FIFO_NAME $OUTPUT_FIFO_NAME

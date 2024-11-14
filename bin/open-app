@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# TODO:
+#   - Replace firejail with podman
+#   - Make this into a Go program
+
+if [[ -z $1 ]]; then
+    read -r COMMAND
+else
+    COMMAND="$1"
+    shift
+fi
+
+if [[ -z "$COMMAND" ]]; then
+    exit
+fi
+
+# NOTE This script is called by open-url in a few places
+
+# ENV_VARS=(GTK_THEME="Adwaita:dark" QT_STYLE_OVERRIDE="Adwaita-Dark")
+
+# export GTK_THEME="Adwaita:dark"
+# export QT_STYLE_OVERRIDE="Adwaita-Dark"
+export GTK_THEME="Adwaita:light"
+export QT_STYLE_OVERRIDE="Adwaita-light"
+
+if [[ "$COMMAND" =~ ^brave-browser(-stable)?$ ]]; then
+    EXTRA_OPTIONS=(--enable-features=UseOzonePlatform --ozone-platform=wayland)
+elif [[ "$COMMAND" == "vpn-firefox" ]]; then
+    COMMAND=$HOME/code/Homelab/vpn-apps/firefox
+
+    if [[ -z "$@" ]]; then
+        :
+        # EXTRA_OPTIONS+=($(cat $HOME/.config/surf/homepage | head -1))
+    fi
+fi
+
+OPTIONS=("$@")
+echo "Running exec $COMMAND ${EXTRA_OPTIONS[@]} ${OPTIONS[@]}"
+exec $COMMAND "${EXTRA_OPTIONS[@]}" "${OPTIONS[@]}"

@@ -1,0 +1,23 @@
+#!/bin/zsh -i
+
+if [[ "$1" != "" ]]; then
+    COMMAND="$1"
+else
+    COMMAND="echo"
+fi
+
+local HISTFILE="$HOME/.local/$COMMAND-hist"
+if ! [[ -a $HISTFILE ]]; then
+    touch $HISTFILE
+fi
+
+fc -pa
+
+while IFS="" vared -p "> " -c LINE; do
+    if [[ "$LINE" =~ ^(exit|quit)$ ]]; then
+        exit
+    fi
+    eval "$COMMAND $LINE"
+    LINE=""
+done
+

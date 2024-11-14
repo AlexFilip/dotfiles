@@ -1,0 +1,20 @@
+#!/bin/sh
+
+if [[ -z $1 ]]; then
+    echo "Filename expected" 1>&2
+    exit 1
+fi
+
+if [[ -z $2 ]]; then
+    echo "Recipient email expected" 1>&2
+    exit 2
+fi
+
+
+OUTPUT_FILENAME="$1"
+if [[ "$OUTPUT_FILENAME" != *.gpg ]] && [[ "$OUTPUT_FILENAME" != *.pgp ]] && [[ "$OUTPUT_FILENAME" != *.asc ]]; then
+    echo "Setting filename to $OUTPUT_FILENAME.gpg"
+    OUTPUT_FILENAME="$OUTPUT_FILENAME.gpg"
+fi
+
+gpg2 --output $OUTPUT_FILENAME --encrypt --recipient $2 <(echo -n "")

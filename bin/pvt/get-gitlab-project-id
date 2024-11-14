@@ -1,0 +1,28 @@
+#!/bin/sh
+
+if ! $(~/bin/pvt/is-git-repo); then
+    exit 2
+fi
+
+GITLAB_PROJECTS_PROPERTIES_FILE=$(~/bin/pvt/get-gitlab-project-properties-file)
+
+# Check again to make sure file was written to
+if [[ -f $GITLAB_PROJECTS_PROPERTIES_FILE ]]; then
+    REMOTE_URL=$(git remote get-url origin)
+    JQ_COMMAND='.[] | select(.ssh_url_to_repo == "'$REMOTE_URL'") | .id'
+    PROJECT_ID=$(jq "$JQ_COMMAND" $GITLAB_PROJECTS_PROPERTIES_FILE)
+
+    # If we don't find it refresh the 
+    if [[ -z "$PROJECT_ID" ]]; then
+        echo "Refreshing project"
+        GITLAB_PROJECTS_PROPERTIES_FILE=$(~/bin/pvt/get-gitlab-project-properties-file -f)
+        PROJECT_ID=$(jq "$JQ_COMMAND" $GITLAB_PROJECTS_PROPERTIES_FILE)
+        if [[ -z "$PROJECT_ID" ]]; then
+            exit 1
+        fi
+    fi
+    echo $PROJECT_ID
+else
+    printf "${RED}No file called ${GITLAB_PROJECTS_PROPERTIES_FILE}${RESETCOLOR}\n"
+    exit 1
+fi
