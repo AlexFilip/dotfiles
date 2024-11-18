@@ -26,9 +26,6 @@ set $right l
 
 set $MainProfileBrave     "Profile-Main"
 set $PersonalProfileBrave "Profile-Personal"
-set $MusicProfileBrave    "Profile-Music"
-set $PlayProfileBrave     "Profile-Play"
-set $ResearchProfileBrave "Profile-Research"
 set $WorkProfileBrave     "Profile-Work"
 
 # Moving around:
@@ -120,28 +117,28 @@ bindsym $mod+Shift+9 exec ~/bin/pvt/sway-cmd move_window 9
 bindsym $mod+Shift+0 exec ~/bin/pvt/sway-cmd move_window 10
 
 # Assign workspace to output
-workspace 1:1  output $SCREEN_PRIMARY
-workspace 1:2  output $SCREEN_PRIMARY
-workspace 1:3  output $SCREEN_PRIMARY
-workspace 1:4  output $SCREEN_PRIMARY
-workspace 1:5  output $SCREEN_PRIMARY
-workspace 1:6  output $SCREEN_PRIMARY
-workspace 1:7  output $SCREEN_PRIMARY
-workspace 1:8  output $SCREEN_PRIMARY
-workspace 1:9  output $SCREEN_PRIMARY
-workspace 1:10 output $SCREEN_PRIMARY
+workspace 10:1  output $SCREEN_PRIMARY
+workspace 11:2  output $SCREEN_PRIMARY
+workspace 12:3  output $SCREEN_PRIMARY
+workspace 13:4  output $SCREEN_PRIMARY
+workspace 14:5  output $SCREEN_PRIMARY
+workspace 15:6  output $SCREEN_PRIMARY
+workspace 16:7  output $SCREEN_PRIMARY
+workspace 17:8  output $SCREEN_PRIMARY
+workspace 18:9  output $SCREEN_PRIMARY
+workspace 19:10 output $SCREEN_PRIMARY
 
 # Secondary screen
-workspace 2:1  output $SCREEN_SECONDARY
-workspace 2:2  output $SCREEN_SECONDARY
-workspace 2:3  output $SCREEN_SECONDARY
-workspace 2:4  output $SCREEN_SECONDARY
-workspace 2:5  output $SCREEN_SECONDARY
-workspace 2:6  output $SCREEN_SECONDARY
-workspace 2:7  output $SCREEN_SECONDARY
-workspace 2:8  output $SCREEN_SECONDARY
-workspace 2:9  output $SCREEN_SECONDARY
-workspace 2:10 output $SCREEN_SECONDARY
+workspace 20:1  output $SCREEN_SECONDARY
+workspace 21:2  output $SCREEN_SECONDARY
+workspace 22:3  output $SCREEN_SECONDARY
+workspace 23:4  output $SCREEN_SECONDARY
+workspace 24:5  output $SCREEN_SECONDARY
+workspace 25:6  output $SCREEN_SECONDARY
+workspace 26:7  output $SCREEN_SECONDARY
+workspace 27:8  output $SCREEN_SECONDARY
+workspace 28:9  output $SCREEN_SECONDARY
+workspace 29:10 output $SCREEN_SECONDARY
 
 # Applications
 set $term_launch alacritty -e
@@ -151,7 +148,7 @@ set $term alacritty
 
 set $lock lock-wm
 
-# exec ~/bin/go/set-wallpaper &
+exec ~/bin/go/set-wallpaper &
 
 # Screen locking
 exec swayidle -w \
@@ -260,12 +257,16 @@ mode "Terminal" {
 # Web browser
 bindsym $mod+w mode Browser
 mode "Browser" {
+
     # Open default browser
     bindsym $mod+w exec flatpak run com.brave.Browser --profile-directory=$MainProfileBrave, mode "default"
     bindsym      w exec flatpak run com.brave.Browser --profile-directory=$MainProfileBrave, mode "default"
 
     bindsym $mod+p exec flatpak run com.brave.Browser --profile-directory=$PersonalProfileBrave, mode "default"
     bindsym      p exec flatpak run com.brave.Browser --profile-directory=$PersonalProfileBrave, mode "default"
+
+    bindsym $mod+j exec flatpak run com.brave.Browser --profile-directory=$WorkProfileBrave, mode "default"
+    bindsym      j exec flatpak run com.brave.Browser --profile-directory=$WorkProfileBrave, mode "default"
 
     # bindsym $mod+l exec open-app librewolf, mode "default"
     # bindsym      l exec open-app librewolf, mode "default"
@@ -304,13 +305,10 @@ mode "Apps" {
 bindsym $mod+bracketright exec alacritty --class weather --hold -e $HOME/bin/weather
 
 # Start launcher
-# bindsym $mod+space exec ulauncher
-# TODO
-# bindsym $mod+space exec all-desktop-apps | fzfmenu | open-app flatpak
 bindsym $mod+space exec all-commands | fzfmenu | open-app
 
 # Take screenshots
-bindsym Print exec $HOME/bin/take-screenshot
+bindsym Print exec grim -g "$(slurp -d)" "screenshots/$(date "+%Y-%m-%d-%H-%M-%S").png"
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -472,5 +470,3 @@ exec swaync
 #workspace $WS1
 #exec open-url "" --profile-directory=$MainProfileBrave
 
-# FIXME: Window does not move to scratchpad
-#exec keepassxc, move window to scratchpad
