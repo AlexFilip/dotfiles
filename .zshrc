@@ -85,6 +85,7 @@ path_add_begin \
     $HOME/bin/go \
     $HOME/bin
 
+export GPG_TTY=$(tty)
 export GOBIN=$HOME/bin/go
 export PATH
 export SBT_OPTS="-Xmx4G"

@@ -1,3 +1,6 @@
 [user]
 	name = AlexFilip
-	email = AlexFilipWork@gmail.com
+	email = work@alexfilip.com
+	signingkey = 767152993903A33A
+[commit]
+	gpgsign = true
