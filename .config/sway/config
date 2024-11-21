@@ -259,14 +259,14 @@ bindsym $mod+w mode Browser
 mode "Browser" {
 
     # Open default browser
-    bindsym $mod+w exec flatpak run com.brave.Browser --profile-directory=$MainProfileBrave, mode "default"
-    bindsym      w exec flatpak run com.brave.Browser --profile-directory=$MainProfileBrave, mode "default"
+    bindsym $mod+w exec flatpak run com.brave.Browser --enable-features=UseOzonePlatform --ozone-platform=wayland --profile-directory=$MainProfileBrave, mode "default"
+    bindsym      w exec flatpak run com.brave.Browser --enable-features=UseOzonePlatform --ozone-platform=wayland --profile-directory=$MainProfileBrave, mode "default"
 
-    bindsym $mod+p exec flatpak run com.brave.Browser --profile-directory=$PersonalProfileBrave, mode "default"
-    bindsym      p exec flatpak run com.brave.Browser --profile-directory=$PersonalProfileBrave, mode "default"
+    bindsym $mod+p exec flatpak run com.brave.Browser --enable-features=UseOzonePlatform --ozone-platform=wayland --profile-directory=$PersonalProfileBrave, mode "default"
+    bindsym      p exec flatpak run com.brave.Browser --enable-features=UseOzonePlatform --ozone-platform=wayland --profile-directory=$PersonalProfileBrave, mode "default"
 
-    bindsym $mod+j exec flatpak run com.brave.Browser --profile-directory=$WorkProfileBrave, mode "default"
-    bindsym      j exec flatpak run com.brave.Browser --profile-directory=$WorkProfileBrave, mode "default"
+    bindsym $mod+j exec flatpak run com.brave.Browser --enable-features=UseOzonePlatform --ozone-platform=wayland --profile-directory=$WorkProfileBrave, mode "default"
+    bindsym      j exec flatpak run com.brave.Browser --enable-features=UseOzonePlatform --ozone-platform=wayland --profile-directory=$WorkProfileBrave, mode "default"
 
     # bindsym $mod+l exec open-app librewolf, mode "default"
     # bindsym      l exec open-app librewolf, mode "default"
