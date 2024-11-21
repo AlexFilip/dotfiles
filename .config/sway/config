@@ -431,7 +431,7 @@ bar {
 include /etc/sway/config.d/*
 
 # Start up background tasks
-exec swaync
+# exec swaync
 
 # Launch default applications
 

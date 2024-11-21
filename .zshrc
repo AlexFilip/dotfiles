@@ -149,6 +149,8 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
+alias dotfiles="/usr/bin/git --work-tree=$HOME --git-dir=$HOME/.rc-files"
+
 # useful less flag: -S disables line-wrapping
 alias less='less -mNgiJQuR'
 export LESSHISTFILE="-" # no lesshst
