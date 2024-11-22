@@ -20,4 +20,4 @@ fi
 
 export PATH
 
-exec sway
+exec dbus-run-session sway
