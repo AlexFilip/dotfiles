@@ -1,3 +1,3 @@
 #!/bin/sh
 
-exec flatpak run --command=brave com.brave.Browser --profile-directory=Profile-Personal --app-id=mdpkiolbdkhdjpekfbkbmhigcaggjagi
+exec flatpak run --command=brave com.brave.Browser --enable-features=UseOzonePlatform --ozone-platform=wayland --profile-directory=Profile-Personal --app-id=mdpkiolbdkhdjpekfbkbmhigcaggjagi
