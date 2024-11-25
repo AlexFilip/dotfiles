@@ -156,6 +156,7 @@ alias less='less -mNgiJQuR'
 export LESSHISTFILE="-" # no lesshst
 
 alias k='kubectl'
+alias ls='ls --color=auto'
 
 export KEYTIMEOUT=1
 
