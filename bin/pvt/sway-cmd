@@ -11,7 +11,7 @@ fi
 # Screens by which workspaces they should take
 SCREEN1=DP-1
 SCREEN2=HDMI-A-1
-FOCUSED_DISPLAY=$(swaymsg -t get_outputs | jq -r "({\"$SCREEN1\": 1, \"$SCREEN2\": 2})[.[] | select(.focused).name]")
+FOCUSED_DISPLAY=$(swaymsg -t get_outputs | jq -r "({\"$SCREEN1\": 1, \"$SCREEN2\": 2})[.[] | select(.focused).name] // \"\"")
 
 WORKSPACE_NAME=$FOCUSED_DISPLAY$(( $WORKSPACE - 1 )):$WORKSPACE
 
