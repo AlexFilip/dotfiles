@@ -61,6 +61,7 @@ bindsym $mod+Shift+f floating toggle
 
 # Enable for now, because of IntelliJ & Signal
 # xwayland disable
+xwayland enable
 
 # Workspaces:
 bindsym $mod+comma  focus output $SCREEN_LEFT
@@ -167,10 +168,9 @@ input "1267:12423:ELAN1300:00_04F3:3087_Touchpad" {
     # natural_scroll enabled
     # middle_emulation enabled
 }
-bindsym XF86TouchpadToggle input type:touchpad events toggle enabled disabled
 
 # Map fn buttons on trackball mouse
-# Can also see all inputs (but not event number) with raw info using `swaymsg -t get_inputs -r | jq -r '.[] | .identifier'`
+# Can also see all inputs (but not event number) with raw info using `swaymsg -t get_inputs -r | jq -r '.[].identifier'`
 # Get input event number from device name. Use `ls -l /dev/input/by-id` and find which event it symlinks to (there is also /dev/input/by-path, which might help)
 # To find the names of events use `sudo libinput debug-events --device /dev/input/by-id/<device-id>`
 set $TrackballMouse "1390:268:ELECOM_TrackBall_Mouse_HUGE_TrackBall"
@@ -190,6 +190,25 @@ input $TrackballMouse {
     scroll_button BTN_FORWARD
     scroll_method on_button_down
 }
+
+bindsym XF86TouchpadToggle input type:touchpad events toggle enabled disabled
+input type:touchpad {
+  accel_profile adaptive
+  click_method clickfinger
+  drag enabled
+  dwt enabled
+  # events disabled_on_external_mouse
+  middle_emulation enabled
+  pointer_accel 0.5
+  scroll_method two_finger
+  tap disabled
+}
+
+# bindsym KEY_F20 exec echo "Mute mic" >> $HOME/sway-debug
+# bindsym KEY_BOOKMARKS exec echo "Bookmarks" >> $HOME/sway-debug
+# bindsym KEY_KEYBOARD exec echo "Keyboard" >> $HOME/sway-debug
+# bindsym KEY_CONFIG exec echo "Config" >> $HOME/sway-debug
+# bindsym KEY_WLAN exec echo "WLAN" >> $HOME/sway-debug
 
 # BTN_FORWARD is already set to scroll above
 # NOTE: ~/bin/pvt/elecom-mouse-fn-button NO LONGER EXISTS
@@ -257,7 +276,6 @@ mode "Terminal" {
 # Web browser
 bindsym $mod+w mode Browser
 mode "Browser" {
-
     # Open default browser
     bindsym $mod+w exec flatpak run com.brave.Browser --enable-features=UseOzonePlatform --ozone-platform=wayland --profile-directory=$MainProfileBrave, mode "default"
     bindsym      w exec flatpak run com.brave.Browser --enable-features=UseOzonePlatform --ozone-platform=wayland --profile-directory=$MainProfileBrave, mode "default"
@@ -307,8 +325,8 @@ bindsym $mod+bracketright exec alacritty --class weather --hold -e $HOME/bin/wea
 # Start launcher
 bindsym $mod+space exec all-commands | fzfmenu | open-app
 
-# Take screenshots
-bindsym Print exec grim -g "$(slurp -d)" "screenshots/$(date "+%Y-%m-%d-%H-%M-%S").png"
+# Take screenshots (complicated condition ensures that there is only one instance running
+bindsym Print exec [[ -z $(ps aux | awk "/slurp[[:space:]]-d/ && !/[[:space:]]sh[[:space:]]-c[[:space:]]/ {print}") ]] && grim -g "$(slurp -d)" "screenshots/$(date "+%Y-%m-%d-%H-%M-%S").png"
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -432,6 +450,9 @@ include /etc/sway/config.d/*
 
 # Start up background tasks
 # exec swaync
+
+# Notification center
+exec mako
 
 # Launch default applications
 

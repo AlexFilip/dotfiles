@@ -1,0 +1,42 @@
+
+# Mako config
+# man 5 mako for full docs
+
+max-history=20
+
+# sort=-time
+
+# on-button-left=invoke-default-action
+# on-button-right=dismiss
+# on-button-middle=none
+# on-touch=dismiss
+# on-notify=none # Maybe play a notification sound with `exec mpv 'sound-file'`
+
+background-color=#e2e9e7
+text-color=#0A0A0A
+border-color=#2596BE
+progress-color=over #5588AAFF
+
+border-size=4
+border-radius=10
+
+width=300
+height=200
+outer-margin=0
+margin=10
+padding=5
+
+font=Droid Sans Regular 11
+icons=1
+# icon-path=
+icon-location=left
+markup=1
+actions=1
+history=1
+# format=
+max-visible=5
+# output=
+layer=top
+anchor=top-right
+
+
