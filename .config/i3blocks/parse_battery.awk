@@ -13,10 +13,16 @@
     to_full = $(NF - 1) " " $NF
 }
 
+/to empty/ {
+    to_empty = $(NF - 1) " " $NF
+}
+
 END {
     output = state " " percentage
     if(to_full != 0){
-        output = output " | " to_full " to full"
+        output = output " (" to_full ")"
+    } else if(to_empty != 0) {
+        output = output " (" to_empty " left)"
     }
 
     print output
