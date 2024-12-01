@@ -19,6 +19,10 @@ command=hostname -I | awk '{ print "IP:" $1 }'
 interval=once
 # color=#91E78B
 
+[wifi]
+command=nmcli -f IN-USE,SSID,SIGNAL --overview device wifi | awk '/\*/ { print $2 " (" $3 "%)" }'
+interval=60
+
 # "bluetooth",
 # "cpu",
 # "memory",
@@ -28,7 +32,7 @@ interval=10
 
 # "backlight",
 [battery]
-command=upower -i $(upower -e | grep 'BAT') | awk -f $HOME/.config/i3blocks/parse_battery.awk | xargs echo
+command=upower -i $(upower -e | grep 'BAT') | awk -f $HOME/.config/i3blocks/parse_battery.awk
 interval=30
 
 # "battery#bat2",
