@@ -10,7 +10,7 @@ source ~/bin/pvt/media-predicates
 if is_media_url "$URL"; then
     exec open-app mpv --force-window=yes --geometry=85%x85%+50%+50% "$URL" > /dev/null 2>&1 &
 elif is_image_url "$URL"; then
-    exec feh "$URL" > /dev/null 2>&1 &
+    exec imv-wayland "$URL" > /dev/null 2>&1 &
 else
     BROWSER=brave-browser
     exec open-app "$BROWSER" "$@" $URL
