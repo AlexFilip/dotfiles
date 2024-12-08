@@ -147,15 +147,19 @@ set $main_tmux_session main
 set $editor_title Neovim
 set $term alacritty
 
+# lock-wm makes sure the wallpaper is set before activating swaylock
 set $lock lock-wm
 
 exec ~/bin/go/set-wallpaper &
 
+# Lock after 5 minutes, screen off after 10
 # Screen locking
 exec swayidle -w \
        timeout 300 "$lock" \
-       timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-       before-sleep "$lock"
+       timeout 600 'swaymsg "output * dpms off"' \
+       resume 'swaymsg "output * dpms on"' \
+       before-sleep "$lock" \
+       lock "$lock"
 
 bindsym $mod+Shift+grave exec echo "Shutdown\nRestart\nLock\nLogOut" | fzfmenu | power-control
 
