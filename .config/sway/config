@@ -290,6 +290,9 @@ mode "Browser" {
     bindsym $mod+j exec flatpak run com.brave.Browser --enable-features=UseOzonePlatform --ozone-platform=wayland --profile-directory=$WorkProfileBrave, mode "default"
     bindsym      j exec flatpak run com.brave.Browser --enable-features=UseOzonePlatform --ozone-platform=wayland --profile-directory=$WorkProfileBrave, mode "default"
 
+    bindsym $mod+x exec flatpak run com.brave.Browser --enable-features=UseOzonePlatform --ozone-platform=wayland --profile-directory=$MainProfileBrave --incognito, mode "default"
+    bindsym      x exec flatpak run com.brave.Browser --enable-features=UseOzonePlatform --ozone-platform=wayland --profile-directory=$MainProfileBrave --incognito, mode "default"
+
     # bindsym $mod+l exec open-app librewolf, mode "default"
     # bindsym      l exec open-app librewolf, mode "default"
 
