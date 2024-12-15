@@ -54,7 +54,17 @@ no-color() {
     sed -E "s/\x1b\\[[0-9;]+[mK]//g"
 }
 
--prompt-extra-options() {
+-prompt-extra-options1() {
+    local RESULT=''
+
+    if [[ -n "$SSH_CONNECTION" ]]; then
+        RESULT+=" $USER@$(hostname)"
+    fi
+
+    echo "$RESULT"
+}
+
+-prompt-extra-options2() {
     local RESULT=''
     if $(~/bin/pvt/is-git-repo); then
         # is a git repo
@@ -69,17 +79,13 @@ no-color() {
         fi
     fi
 
-    if [[ -n "$SSH_CONNECTION" ]]; then
-        RESULT+=" $USER@$(hostname)"
-    fi
-
-    echo $RESULT
+    echo "$RESULT"
 }
 
 setopt PROMPT_SUBST
 setopt hist_ignore_all_dups
 
-PS1=$'%{\e[0;33m%}%(5~|%-1~/.../%3~|%4~)$(-prompt-extra-options)\n\$ %{\e[0m%}'
+PS1=$'$(-prompt-extra-options1)%{\e[0;33m%}%(5~|%-1~/.../%3~|%4~)$(-prompt-extra-options2)\n\$ %{\e[0m%}'
 PS2=$'%{\e[0;33m%}> %{\e[0m%}'
 
 PIP_INSTALL_PATH="$(python3 -m site --user-base)/bin"
