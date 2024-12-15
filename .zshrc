@@ -58,7 +58,7 @@ no-color() {
     local RESULT=''
 
     if [[ -n "$SSH_CONNECTION" ]]; then
-        RESULT+=" $USER@$(hostname)"
+        RESULT+="$USER@$(hostname) "
     fi
 
     echo "$RESULT"
