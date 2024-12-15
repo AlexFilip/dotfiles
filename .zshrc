@@ -58,15 +58,19 @@ no-color() {
     local RESULT=''
     if $(~/bin/pvt/is-git-repo); then
         # is a git repo
-        RESULT="${RESULT} [${RESET_COLOR}$(git branch --show-current)${PROMPT_COLOR}]"
+        RESULT+=" [${RESET_COLOR}$(git branch --show-current)${PROMPT_COLOR}]"
     fi
 
     if which kubectl > /dev/null 2>&1; then
         local KUBE_CONTEXT
         KUBE_CONTEXT=$(kubectl config current-context 2>&1)
         if [[ $? == 0 ]]; then
-            RESULT="${RESULT} [${RESET_COLOR}${KUBE_CONTEXT}${PROMPT_COLOR}]"
+            RESULT+=" [${RESET_COLOR}${KUBE_CONTEXT}${PROMPT_COLOR}]"
         fi
+    fi
+
+    if [[ -n "$SSH_CONNECTION" ]]; then
+        RESULT+=" $USER@$(hostname)"
     fi
 
     echo $RESULT
