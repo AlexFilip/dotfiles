@@ -6,10 +6,12 @@ BEGIN {
 
 function print_all_details(print_exit_message) {
     output = state " " percentage
-    if(after_level == "to_full"){
-        output = output " (" to_full ")"
-    } else if(after_level == "to_empty") {
-        output = output " (" to_empty " left)"
+    if(state != "fully-charged" ) {
+        if(after_level == "to_full"){
+            output = output " (" to_full ")"
+        } else if(after_level == "to_empty") {
+            output = output " (" to_empty " left)"
+        }
     }
 
     if(print_exit_message && printed_on_history) {
