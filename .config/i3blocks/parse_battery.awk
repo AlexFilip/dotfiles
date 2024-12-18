@@ -1,6 +1,7 @@
 
 BEGIN {
     after_level = ""
+    printed_on_history = 0
 }
 
 function print_all_details(print_exit_message) {
@@ -43,10 +44,12 @@ function print_all_details(print_exit_message) {
 /to full/ {
     # NF - 1 = number, NF = units (minutes, hours, etc.)
     to_full = $(NF - 1) " " $NF
+    after_level = "to_full"
 }
 
 /to empty/ {
     to_empty = $(NF - 1) " " $NF
+    after_level = "to_empty"
 }
 
 /percentage/ {
@@ -57,7 +60,7 @@ function print_all_details(print_exit_message) {
 # NOTE: History is the last section in the entire block that is written. It's a good marker for when we are at the end of the output
 # Also, there are multiple blocks output, so internally, you get multiple lines for each change. This might not be a big problem, but worth keeping in mind.
 
-/History/ {
+/^$/ {
     printed_on_history = 1 # In case this is run once, while waiting for the monitor to start we should display something
     print_all_details(0)
 }
