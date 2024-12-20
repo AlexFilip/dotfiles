@@ -4,9 +4,13 @@
 sudo -- sh -c "
 dnf update -y
 dnf --refresh upgrade -y;
-pkcon refresh force;
-pkcon update -y;
 "
+
+# Formerly in the sudo section above
+# pkcon refresh force;
+# pkcon update -y;
+
+flatpak update -y
 
 # Not installed
 #   snap refresh
