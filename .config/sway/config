@@ -420,9 +420,9 @@ titlebar_padding 11 4
 titlebar_border_thickness 3
 
 # Nord colors https://github.com/nordtheme/nord/blob/develop/src/nord.css
-set $border     #88c0d0
+set $border     #81A1C1
 set $text       #eceff4
-set $background #434c5e
+set $background #3B4252
 set $indicator  #8fbcbb
 
 set $background_unfocused #2e3440
@@ -436,8 +436,8 @@ set $text_urgent   $text
 ## Window decoration
 # class                 border           backgr.                  text                    indicator   child_border
 client.focused          $border          $background              $text                   $indicator            $border
-client.focused_inactive $border          $background_unfocused    $text_unfocused         $border_unfocused     $border_unfocused
-client.unfocused        $border          $background_unfocused    $text_unfocused         $border_unfocused     $border_unfocused
+client.focused_inactive $background      $background_unfocused    $text_unfocused         $border_unfocused     $border_unfocused
+client.unfocused        $background      $background_unfocused    $text_unfocused         $border_unfocused     $border_unfocused
 client.urgent           $border_urgent   $border_urgent           $background_unfocused   $indicator            $border_urgent
 client.background       $background_unfocused
 
@@ -459,7 +459,7 @@ bar {
         #                  border         background  text
         focused_workspace  $border        $background $text
         active_workspace   $border        $background $text_unfocused
-        inactive_workspace $border        $background $text_unfocused
+        inactive_workspace $background    $background $text_unfocused
         urgent_workspace   $border_urgent $background $text_urgent
     }
 }

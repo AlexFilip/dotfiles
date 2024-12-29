@@ -1,7 +1,7 @@
 # Adapted from https://github.com/nordtheme/alacritty/blob/main/src/nord.yaml
 
 [colors.primary]
-background = "#2e3440"
+background = "#2E3440"
 foreground = "#d8dee9"
 dim_foreground = "#a5abb6"
 # bright_foreground = ""
