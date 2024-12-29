@@ -4,9 +4,3 @@
 [submodule "/home/alex/.config/tmux/plugins/tpm"]
 	path = /home/alex/.config/tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
-[submodule "/home/alex/.config/sway/catppuccin"]
-	path = /home/alex/.config/sway/catppuccin
-	url = https://github.com/catppuccin/i3.git
-[submodule "/home/alex/.config/alacritty/catppuccin"]
-	path = /home/alex/.config/alacritty/catppuccin
-	url = https://github.com/catppuccin/alacritty.git
