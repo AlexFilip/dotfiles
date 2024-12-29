@@ -350,39 +350,6 @@ bindsym $mod+Shift+n exec swaync-client -t -sw
 # Note: workspaces can have any name you want, not just numbers.
 # We just use 1-10 as the default.
 
-# Theme
-# border pixel 2
-default_border pixel 4
-default_floating_border pixel 4
-smart_borders on
-titlebar_padding 11 4
-titlebar_border_thickness 3
-
-include $HOME/.config/sway/catppuccin/themes/catppuccin-latte
-# include $HOME/.config/sway/catppuccin/themes/catppuccin-frappe
-# include $HOME/.config/sway/catppuccin/themes/catppuccin-macchiato
-# include $HOME/.config/sway/catppuccin/themes/catppuccin-mocha
-
-# target                 border    bg    text   indicator  child_border
-# client.focused           $mauve    $base $text  $rosewater $mauve
-# client.focused_inactive  $lavender $base $text  $rosewater $base
-# client.unfocused         $lavender $base $text  $rosewater $base
-# client.urgent            $peach    $base $peach $overlay0  $peach
-# client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
-# client.background        $base
-
-# Src : https://github.com/lokesh-krishna/dotfiles/blob/master/nord-v3/config/sway/config
-## Window decoration
-# class                 border  backgr. text    indicator child_border
-client.focused          #88c0d0 #434c5e #eceff4 #8fbcbb   #88c0d0
-client.focused_inactive #88c0d0 #2e3440 #d8dee9 #4c566a   #4c566a
-client.unfocused        #88c0d0 #2e3440 #d8dee9 #4c566a   #4c566a
-client.urgent           #ebcb8b #ebcb8b #2e3440 #8fbcbb   #ebcb8b
-# client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
-client.background       #2e3440
-
-font pango:NotoSans Mono Regular 11
-
 #
 # Scratchpad:
 # Sway has a "scratchpad", which is place to store windows when they're not being used
@@ -444,6 +411,38 @@ bindsym XF86AudioLowerVolume exec amixer set Master 5%-    && pkill -x -SIGRTMIN
 bindsym --locked XF86MonBrightnessUp   exec light -S "$(light -G | awk '{ b = int($1 + 5); print (b >   0 ? b :   0) }')"
 bindsym --locked XF86MonBrightnessDown exec light -S "$(light -G | awk '{ b = int($1 - 5); print (b < 100 ? b : 100) }')"
 
+# Theme
+# border pixel 2
+default_border pixel 2
+default_floating_border pixel 2
+smart_borders on
+titlebar_padding 11 4
+titlebar_border_thickness 3
+
+# Nord colors https://github.com/nordtheme/nord/blob/develop/src/nord.css
+set $border     #88c0d0
+set $text       #eceff4
+set $background #434c5e
+set $indicator  #8fbcbb
+
+set $background_unfocused #2e3440
+set $text_unfocused       #d8dee9
+set $border_unfocused     #4c566a
+
+set $border_urgent #ebcb8b
+set $text_urgent   $text
+
+# Src : https://github.com/lokesh-krishna/dotfiles/blob/master/nord-v3/config/sway/config
+## Window decoration
+# class                 border           backgr.                  text                    indicator   child_border
+client.focused          $border          $background              $text                   $indicator            $border
+client.focused_inactive $border          $background_unfocused    $text_unfocused         $border_unfocused     $border_unfocused
+client.unfocused        $border          $background_unfocused    $text_unfocused         $border_unfocused     $border_unfocused
+client.urgent           $border_urgent   $border_urgent           $background_unfocused   $indicator            $border_urgent
+client.background       $background_unfocused
+
+font pango:NotoSans Mono Regular 11
+
 bar {
     font pango:DejaVu Sans Mono, FontAwesome 12
     position top
@@ -453,13 +452,15 @@ bar {
     # status_command /home/alex/bin/go/status-bar
 
     colors {
-        separator          $rosewater
-        background         $base
+        separator          $indicator
+        background         $background
         statusline         $text
-        focused_workspace  $base  $base $mauve
-        active_workspace   $pink  $base $text
-        inactive_workspace $base  $base $text
-        urgent_workspace   $peach $base $peach
+
+        #                  border         background  text
+        focused_workspace  $border        $background $text
+        active_workspace   $border        $background $text_unfocused
+        inactive_workspace $border        $background $text_unfocused
+        urgent_workspace   $border_urgent $background $text_urgent
     }
 }
 
