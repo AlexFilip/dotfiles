@@ -146,6 +146,7 @@ set $term_launch alacritty -e
 set $main_tmux_session main
 set $editor_title Neovim
 set $term alacritty
+set $alacritty_config /home/alex/.config/alacritty/alacritty.yaml
 
 # lock-wm makes sure the wallpaper is set before activating swaylock
 set $lock lock-wm
@@ -234,44 +235,44 @@ bindsym $mod+Shift+o move container to scratchpad
 bindsym $mod+o scratchpad show
 
 # Start a terminal
-bindsym $mod+t exec $term, mode "default"
+bindsym $mod+t exec $term --config-file $alacritty_config, mode "default"
 
 # Text editor
-bindsym $mod+e exec $term --title $editor_title -e nvim
+bindsym $mod+e exec $term --config-file $alacritty_config --title $editor_title -e nvim
 
 bindsym $mod+u mode Terminal
 mode "Terminal" {
     # Bare terminal
-    bindsym $mod+t exec $term, mode "default"
-    bindsym      t exec $term, mode "default"
+    bindsym $mod+t exec $term --config-file $alacritty_config, mode "default"
+    bindsym      t exec $term --config-file $alacritty_config, mode "default"
 
     # Multiplex/tmux
-    bindsym $mod+m exec $term --title Tmux -e tmux new -As $main_tmux_session, mode "default"
-    bindsym      m exec $term --title Tmux -e tmux new -As $main_tmux_session, mode "default"
+    bindsym $mod+m exec $term --config-file $alacritty_config --title Tmux -e tmux new -As $main_tmux_session, mode "default"
+    bindsym      m exec $term --config-file $alacritty_config --title Tmux -e tmux new -As $main_tmux_session, mode "default"
 
     # Htop
-    bindsym $mod+h exec $term --title Htop -e htop, mode "default"
-    bindsym      h exec $term --title Htop -e htop, mode "default"
+    bindsym $mod+h exec $term --config-file $alacritty_config --title Htop -e htop, mode "default"
+    bindsym      h exec $term --config-file $alacritty_config --title Htop -e htop, mode "default"
 
     # Text editor + Tmux
-    bindsym $mod+e exec $term --title $editor_title -e tmux new -As editor nvim, mode "default"
-    bindsym      e exec $term --title $editor_title -e tmux new -As editor nvim, mode "default"
+    bindsym $mod+e exec $term --config-file $alacritty_config --title $editor_title -e tmux new -As editor nvim, mode "default"
+    bindsym      e exec $term --config-file $alacritty_config --title $editor_title -e tmux new -As editor nvim, mode "default"
 
     # Project selector
-    bindsym $mod+p exec $term --title $editor_title -e ~/bin/tmux-select-project, mode "default"
-    bindsym      p exec $term --title $editor_title -e ~/bin/tmux-select-project, mode "default"
+    bindsym $mod+p exec $term --config-file $alacritty_config --title $editor_title -e ~/bin/tmux-select-project, mode "default"
+    bindsym      p exec $term --config-file $alacritty_config --title $editor_title -e ~/bin/tmux-select-project, mode "default"
 
     # VPN Terminal
-    bindsym $mod+v exec $term --title VPNTerminal -e docker exec -it vpn-cli bash, mode "default"
-    bindsym      v exec $term --title VPNTerminal -e docker exec -it vpn-cli bash, mode "default"
+    bindsym $mod+v exec $term --config-file $alacritty_config --title VPNTerminal -e docker exec -it vpn-cli bash, mode "default"
+    bindsym      v exec $term --config-file $alacritty_config --title VPNTerminal -e docker exec -it vpn-cli bash, mode "default"
 
     # File browser (I mainly use a graphical app)
-    # bindsym $mod+f exec $term --title Ranger -e /usr/bin/ranger, mode "default"
-    # bindsym      f exec $term --title Ranger -e /usr/bin/ranger, mode "default"
+    # bindsym $mod+f exec $term --config-file $alacritty_config --title Ranger -e /usr/bin/ranger, mode "default"
+    # bindsym      f exec $term --config-file $alacritty_config --title Ranger -e /usr/bin/ranger, mode "default"
 
-    # Floating term
-    bindsym $mod+f exec $term --class FloatingTerm, mode "default"
-    bindsym      f exec $term --class FloatingTerm, mode "default"
+    # Floating term --config-file $alacritty_config
+    bindsym $mod+f exec $term --config-file $alacritty_config --class FloatingTerm, mode "default"
+    bindsym      f exec $term --config-file $alacritty_config --class FloatingTerm, mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -327,7 +328,7 @@ mode "Apps" {
 }
 
 # Utilities
-bindsym $mod+bracketright exec alacritty --class weather --hold -e $HOME/bin/weather
+bindsym $mod+bracketright exec $term --config-file $alacritty_config --class weather --hold -e $HOME/bin/weather
 
 # Start launcher
 bindsym $mod+space exec all-commands | fzfmenu | open-app

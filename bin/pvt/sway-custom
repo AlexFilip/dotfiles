@@ -9,6 +9,8 @@ export MOZ_ENABLE_WAYLAND=1 # Firefox wayland
 export GTK_THEME="Adwaita:light" # Light mode
 export QT_STYLE_OVERRIDE="Adwaita-light" # Light mode for kde apps
 export PINENTRY_USER_DATA="curses" # gpg decrypt UI
+export XDG_CONFIG_HOME="$HOME/.config"
+export TERMINAL="alacritty"
 
 if [[ ":$PATH:" != *":$HOME/bin/go:"* ]]; then
     PATH="$HOME/bin/go:$PATH"

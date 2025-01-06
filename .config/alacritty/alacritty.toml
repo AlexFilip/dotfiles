@@ -21,5 +21,4 @@ family = "monospace"
 opacity = 0.91
 
 [general]
-# import = ["/home/alex/.config/alacritty/catppuccin/catppuccin-macchiato.toml"]
 import = ["/home/alex/.config/alacritty/nord.toml"]
