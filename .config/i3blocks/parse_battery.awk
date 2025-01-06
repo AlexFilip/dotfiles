@@ -28,6 +28,8 @@ function print_all_details(print_exit_message) {
     }
 
     print percentage > battery_info_file
+    close(battery_info_file)
+
     if(output != old_output) {
         print output
         fflush() # Needed for persist mode in i3blocks
