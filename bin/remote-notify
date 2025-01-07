@@ -1,0 +1,2 @@
+#!/bin/sh
+ssh homelab-prod docker compose -f services/ntfy/docker-compose.yaml exec app /ntfy-secrets/publish "$@"
