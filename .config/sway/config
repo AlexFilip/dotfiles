@@ -92,30 +92,30 @@ bindsym $mod+Shift+period move container to output $SCREEN_RIGHT
 # set $WS10 10 
 
 # Move window or focus to workspace depending on current output
-bindsym $mod+1 exec ~/bin/pvt/sway-cmd move_focus 1
-bindsym $mod+2 exec ~/bin/pvt/sway-cmd move_focus 2
-bindsym $mod+3 exec ~/bin/pvt/sway-cmd move_focus 3
-bindsym $mod+4 exec ~/bin/pvt/sway-cmd move_focus 4
-bindsym $mod+5 exec ~/bin/pvt/sway-cmd move_focus 5
-bindsym $mod+6 exec ~/bin/pvt/sway-cmd move_focus 6
-bindsym $mod+7 exec ~/bin/pvt/sway-cmd move_focus 7
-bindsym $mod+8 exec ~/bin/pvt/sway-cmd move_focus 8
-bindsym $mod+9 exec ~/bin/pvt/sway-cmd move_focus 9
-bindsym $mod+0 exec ~/bin/pvt/sway-cmd move_focus 10
+bindsym $mod+1 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 1
+bindsym $mod+2 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 2
+bindsym $mod+3 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 3
+bindsym $mod+4 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 4
+bindsym $mod+5 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 5
+bindsym $mod+6 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 6
+bindsym $mod+7 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 7
+bindsym $mod+8 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 8
+bindsym $mod+9 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 9
+bindsym $mod+0 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 10
 
 bindsym $mod+left  workspace prev
 bindsym $mod+right workspace next
 
-bindsym $mod+Shift+1 exec ~/bin/pvt/sway-cmd move_window 1
-bindsym $mod+Shift+2 exec ~/bin/pvt/sway-cmd move_window 2
-bindsym $mod+Shift+3 exec ~/bin/pvt/sway-cmd move_window 3
-bindsym $mod+Shift+4 exec ~/bin/pvt/sway-cmd move_window 4
-bindsym $mod+Shift+5 exec ~/bin/pvt/sway-cmd move_window 5
-bindsym $mod+Shift+6 exec ~/bin/pvt/sway-cmd move_window 6
-bindsym $mod+Shift+7 exec ~/bin/pvt/sway-cmd move_window 7
-bindsym $mod+Shift+8 exec ~/bin/pvt/sway-cmd move_window 8
-bindsym $mod+Shift+9 exec ~/bin/pvt/sway-cmd move_window 9
-bindsym $mod+Shift+0 exec ~/bin/pvt/sway-cmd move_window 10
+bindsym $mod+Shift+1 exec ~/bin/pvt/sway-cmd move_window_to_workspace 1
+bindsym $mod+Shift+2 exec ~/bin/pvt/sway-cmd move_window_to_workspace 2
+bindsym $mod+Shift+3 exec ~/bin/pvt/sway-cmd move_window_to_workspace 3
+bindsym $mod+Shift+4 exec ~/bin/pvt/sway-cmd move_window_to_workspace 4
+bindsym $mod+Shift+5 exec ~/bin/pvt/sway-cmd move_window_to_workspace 5
+bindsym $mod+Shift+6 exec ~/bin/pvt/sway-cmd move_window_to_workspace 6
+bindsym $mod+Shift+7 exec ~/bin/pvt/sway-cmd move_window_to_workspace 7
+bindsym $mod+Shift+8 exec ~/bin/pvt/sway-cmd move_window_to_workspace 8
+bindsym $mod+Shift+9 exec ~/bin/pvt/sway-cmd move_window_to_workspace 9
+bindsym $mod+Shift+0 exec ~/bin/pvt/sway-cmd move_window_to_workspace 10
 
 # Assign workspace to output
 workspace 10:1  output $SCREEN_PRIMARY

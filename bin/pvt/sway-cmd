@@ -1,6 +1,6 @@
 #!/bin/sh
 
-COMMAND="${1:?"Expected command. Either move_window or move_focus"}"
+COMMAND="${1:?"Expected command. Either move_window_to_workspace or move_focus_to_workspace"}"
 WORKSPACE="${2:?"Expected workspace number. {1..10}"}"
 
 if ! [[ $WORKSPACE =~ ^[0-9]|10$ ]]; then
@@ -8,24 +8,20 @@ if ! [[ $WORKSPACE =~ ^[0-9]|10$ ]]; then
     exit 1
 fi
 
-# Screens by which workspaces they should take
-SCREEN1=DP-1
-SCREEN2=HDMI-A-1
-FOCUSED_DISPLAY=$(swaymsg -t get_outputs | jq -r "({\"$SCREEN1\": 1, \"$SCREEN2\": 2})[.[] | select(.focused).name] // \"\"")
-
+FOCUSED_DISPLAY=$(swaymsg -t get_outputs | jq 'sort_by(.name) | to_entries | map(select(.value.focused)) | .[0].key + 1')
 WORKSPACE_NAME=$FOCUSED_DISPLAY$(( $WORKSPACE - 1 )):$WORKSPACE
 
 case $COMMAND in
-    move_window)
+    move_window_to_workspace)
         swaymsg move container to workspace $WORKSPACE_NAME
         ;;
 
-    move_focus)
+    move_focus_to_workspace)
         swaymsg workspace $WORKSPACE_NAME
         ;;
 
     *)
-        echo "Unrecognized command $COMMAND. Expected either move_focus or move_window" > /dev/stderr
+        echo "Unrecognized command $COMMAND. Expected either move_focus_to_workspace or move_window_to_workspace" > /dev/stderr
         exit 1
         ;;
 esac
