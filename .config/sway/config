@@ -142,11 +142,32 @@ workspace 28:9  output $SCREEN_SECONDARY
 workspace 29:10 output $SCREEN_SECONDARY
 
 # Applications
-set $term_launch alacritty -e
 set $main_tmux_session main
 set $editor_title Neovim
-set $term alacritty
-set $alacritty_config /home/alex/.config/alacritty/alacritty.yaml
+
+# set $term alacritty
+# set $term_app_id_opt --class
+# set $term_title_opt --title
+# set $term_remain_open_opt --hold
+# set $term_exec_opt -e
+
+
+# Currently using footclient for all terminals except `$mod+u t`
+#   pros:
+#     - single process
+#     - slightly faster load times
+#     - slightly less memory
+#       - single font cache
+#   cons:
+#     - can slow each other down, since wayland communication happens on one thread
+#     - if one term crashes the process, they all go down
+exec foot --server
+set $term foot
+set $term-client footclient
+set $term_app_id_opt --app-id
+set $term_title_opt --title
+set $term_remain_open_opt --hold
+# set $term_exec_opt $""
 
 # lock-wm makes sure the wallpaper is set before activating swaylock
 set $lock lock-wm
@@ -217,14 +238,15 @@ input type:touchpad {
 
 # BTN_FORWARD is already set to scroll above
 # NOTE: ~/bin/pvt/elecom-mouse-fn-button NO LONGER EXISTS
-# bindsym --input-device=$TrackballMouse           --whole-window BTN_FORWARD exec ~/bin/pvt/elecom-mouse-fn-button Fn1 down
-# bindsym --input-device=$TrackballMouse --release --whole-window BTN_FORWARD exec ~/bin/pvt/elecom-mouse-fn-button Fn1 up
-# bindsym --input-device=$TrackballMouse           --whole-window BTN_BACK exec ~/bin/pvt/elecom-mouse-fn-button Fn2 down
-# bindsym --input-device=$TrackballMouse --release --whole-window BTN_BACK exec ~/bin/pvt/elecom-mouse-fn-button Fn2 up
+bindsym --input-device=$TrackballMouse           --whole-window --no-repeat BTN_FORWARD exec ~/bin/pvt/elecom-mouse-fn-button Fn1 down
+bindsym --input-device=$TrackballMouse --release --whole-window --no-repeat BTN_FORWARD exec ~/bin/pvt/elecom-mouse-fn-button Fn1 up
+bindsym --input-device=$TrackballMouse           --whole-window --no-repeat BTN_BACK exec ~/bin/pvt/elecom-mouse-fn-button Fn2 down
+bindsym --input-device=$TrackballMouse --release --whole-window --no-repeat BTN_BACK exec ~/bin/pvt/elecom-mouse-fn-button Fn2 up
+
 # bindsym --input-device=$TrackballMouse           --whole-window BTN_BACK seat - cursor press   button2 # This is supposed to execute a middle-mouse-click but it's not working for some reason
-bindsym --input-device=$TrackballMouse --release --whole-window BTN_BACK seat - cursor release button2
-# bindsym --input-device=$TrackballMouse           --whole-window BTN_TASK exec ~/bin/pvt/elecom-mouse-fn-button Fn3 down
-# bindsym --input-device=$TrackballMouse --release --whole-window BTN_TASK exec ~/bin/pvt/elecom-mouse-fn-button Fn3 up
+# bindsym --input-device=$TrackballMouse --release --whole-window BTN_BACK seat - cursor release button2
+bindsym --input-device=$TrackballMouse --release --whole-window --no-repeat BTN_TASK exec ~/bin/pvt/elecom-mouse-fn-button Fn3 up
+bindsym --input-device=$TrackballMouse           --whole-window --no-repeat BTN_TASK exec ~/bin/pvt/elecom-mouse-fn-button Fn3 down
 
 ### Key bindings
 
@@ -235,44 +257,44 @@ bindsym $mod+Shift+o move container to scratchpad
 bindsym $mod+o scratchpad show
 
 # Start a terminal
-bindsym $mod+t exec $term --config-file $alacritty_config, mode "default"
+bindsym $mod+t exec $term-client, mode "default"
 
 # Text editor
-bindsym $mod+e exec $term --config-file $alacritty_config --title $editor_title -e nvim
+bindsym $mod+e exec $term-client $term_title_opt $editor_title nvim
 
 bindsym $mod+u mode Terminal
 mode "Terminal" {
-    # Bare terminal
-    bindsym $mod+t exec $term --config-file $alacritty_config, mode "default"
-    bindsym      t exec $term --config-file $alacritty_config, mode "default"
+    # Bare terminal (not running with client, so that I have control over this)
+    bindsym $mod+t exec $term, mode "default"
+    bindsym      t exec $term, mode "default"
 
     # Multiplex/tmux
-    bindsym $mod+m exec $term --config-file $alacritty_config --title Tmux -e tmux new -As $main_tmux_session, mode "default"
-    bindsym      m exec $term --config-file $alacritty_config --title Tmux -e tmux new -As $main_tmux_session, mode "default"
+    bindsym $mod+m exec $term-client $term_title_opt Tmux tmux new -As $main_tmux_session, mode "default"
+    bindsym      m exec $term-client $term_title_opt Tmux tmux new -As $main_tmux_session, mode "default"
 
     # Htop
-    bindsym $mod+h exec $term --config-file $alacritty_config --title Htop -e htop, mode "default"
-    bindsym      h exec $term --config-file $alacritty_config --title Htop -e htop, mode "default"
+    bindsym $mod+h exec $term-client $term_title_opt Htop htop, mode "default"
+    bindsym      h exec $term-client $term_title_opt Htop htop, mode "default"
 
     # Text editor + Tmux
-    bindsym $mod+e exec $term --config-file $alacritty_config --title $editor_title -e tmux new -As editor nvim, mode "default"
-    bindsym      e exec $term --config-file $alacritty_config --title $editor_title -e tmux new -As editor nvim, mode "default"
+    bindsym $mod+e exec $term-client $term_title_opt $editor_title tmux new -As editor nvim, mode "default"
+    bindsym      e exec $term-client $term_title_opt $editor_title tmux new -As editor nvim, mode "default"
 
     # Project selector
-    bindsym $mod+p exec $term --config-file $alacritty_config --title $editor_title -e ~/bin/tmux-select-project, mode "default"
-    bindsym      p exec $term --config-file $alacritty_config --title $editor_title -e ~/bin/tmux-select-project, mode "default"
+    bindsym $mod+p exec $term-client $term_title_opt $editor_title ~/bin/tmux-select-project, mode "default"
+    bindsym      p exec $term-client $term_title_opt $editor_title ~/bin/tmux-select-project, mode "default"
 
     # VPN Terminal
-    bindsym $mod+v exec $term --config-file $alacritty_config --title VPNTerminal -e docker exec -it vpn-cli bash, mode "default"
-    bindsym      v exec $term --config-file $alacritty_config --title VPNTerminal -e docker exec -it vpn-cli bash, mode "default"
+    bindsym $mod+v exec $term-client $term_title_opt VPNTerminal docker exec -it vpn-cli bash, mode "default"
+    bindsym      v exec $term-client $term_title_opt VPNTerminal docker exec -it vpn-cli bash, mode "default"
 
     # File browser (I mainly use a graphical app)
-    # bindsym $mod+f exec $term --config-file $alacritty_config --title Ranger -e /usr/bin/ranger, mode "default"
-    # bindsym      f exec $term --config-file $alacritty_config --title Ranger -e /usr/bin/ranger, mode "default"
+    # bindsym $mod+f exec $term-client $term_title_opt Ranger /usr/bin/ranger, mode "default"
+    # bindsym      f exec $term-client $term_title_opt Ranger /usr/bin/ranger, mode "default"
 
-    # Floating term --config-file $alacritty_config
-    bindsym $mod+f exec $term --config-file $alacritty_config --class FloatingTerm, mode "default"
-    bindsym      f exec $term --config-file $alacritty_config --class FloatingTerm, mode "default"
+    # Floating term
+    bindsym $mod+f exec $term-client $term_app_id_opt FloatingTerm, mode "default"
+    bindsym      f exec $term-client $term_app_id_opt FloatingTerm, mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -328,7 +350,8 @@ mode "Apps" {
 }
 
 # Utilities
-bindsym $mod+bracketright exec $term --config-file $alacritty_config --class weather --hold -e $HOME/bin/weather
+# bindsym $mod+bracketright exec $term $term_app_id_opt weather $term_remain_open_opt $HOME/bin/weather
+bindsym $mod+bracketright exec $term-client $term_app_id_opt weather $term_remain_open_opt $HOME/bin/weather
 
 # Start launcher
 bindsym $mod+space exec all-commands | fzfmenu | open-app
@@ -457,7 +480,7 @@ bar {
         background         $background
         statusline         $text
 
-        #                  border         background  text
+        #                   border         background  text
         focused_workspace  $border        $background $text
         active_workspace   $border        $background $text_unfocused
         inactive_workspace $background    $background $text_unfocused
@@ -504,7 +527,7 @@ exec mako
 
 # Editor
 #workspace $WS2
-#exec $term --title $editor_title -e nvim
+#exec $term $term_title_opt $editor_title nvim
 
 # Browser
 #workspace $WS1
