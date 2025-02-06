@@ -10,7 +10,8 @@ export GTK_THEME="Adwaita:light" # Light mode
 export QT_STYLE_OVERRIDE="Adwaita-light" # Light mode for kde apps
 export PINENTRY_USER_DATA="curses" # gpg decrypt UI
 export XDG_CONFIG_HOME="$HOME/.config"
-export TERMINAL="alacritty"
+export TERMINAL="foot"
+export _JAVA_AWT_WM_NONREPARENTING=1 # For burpsuite
 
 if [[ ":$PATH:" != *":$HOME/bin/go:"* ]]; then
     PATH="$HOME/bin/go:$PATH"
