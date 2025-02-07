@@ -28,6 +28,9 @@ set $MainProfileBrave     "Profile-Main"
 set $PersonalProfileBrave "Profile-Personal"
 set $WorkProfileBrave     "Profile-Work"
 
+set $MainProfileFirefox "default-release"
+set $SecurityTestingProfileFirefox "Security_Testing"
+
 # Moving around:
 # Move your focus around
 bindsym $mod+$left  focus left
@@ -57,7 +60,7 @@ bindsym $mod+f fullscreen
 bindsym $mod+Shift+f floating toggle
 
 # Swap focus between the tiling area and the floating area
-# bindsym $mod+n focus mode_toggle
+# bindsym $mod+ focus mode_toggle
 
 # Enable for now, because of IntelliJ & Signal
 # xwayland disable
@@ -262,6 +265,9 @@ bindsym $mod+t exec $term-client, mode "default"
 # Text editor
 bindsym $mod+e exec $term-client $term_title_opt $editor_title nvim
 
+# Obsidian (Notes)
+bindsym $mod+n exec obsidian
+
 bindsym $mod+u mode Terminal
 mode "Terminal" {
     # Bare terminal (not running with client, so that I have control over this)
@@ -315,6 +321,12 @@ mode "Browser" {
 
     bindsym $mod+x exec flatpak run com.brave.Browser --enable-features=UseOzonePlatform --ozone-platform=wayland --profile-directory=$MainProfileBrave --incognito, mode "default"
     bindsym      x exec flatpak run com.brave.Browser --enable-features=UseOzonePlatform --ozone-platform=wayland --profile-directory=$MainProfileBrave --incognito, mode "default"
+
+    bindsym $mod+f exec open-app firefox -P "$MainProfileFirefox", mode "default"
+    bindsym      f exec open-app firefox -P "$MainProfileFirefox", mode "default"
+
+    bindsym $mod+s exec open-app firefox -P "$SecurityTestingProfileFirefox", mode "default"
+    bindsym      s exec open-app firefox -P "$SecurityTestingProfileFirefox", mode "default"
 
     # bindsym $mod+l exec open-app librewolf, mode "default"
     # bindsym      l exec open-app librewolf, mode "default"
