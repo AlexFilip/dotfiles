@@ -6,7 +6,8 @@ if ! [[ -f $TMUX_SESSION_NAMES ]]; then
 fi
 
 if [[ -z "$PROJECT_DIRS" ]]; then
-    PROJECT_DIRS=($HOME/code/{learn,Homelab,Libraries,projects,Resume,Starters,tests,Forks,LocalContainers})
+    # PROJECT_DIRS=($HOME/code/{learn,Homelab,Libraries,projects,Resume,Starters,tests,Forks,LocalContainers})
+    PROJECT_DIRS=($HOME/code)
 fi
 
 ALL_PROJECTS="$(find ${PROJECT_DIRS[@]} -maxdepth 4 -name '.git' -not -path '*/.terraform/*' -exec dirname {} \;)"
