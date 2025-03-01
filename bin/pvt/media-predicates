@@ -4,8 +4,12 @@ media_url_prefixes=("www.youtube.com/watch?v=")
 image_urls=()
 
 is_media_url() {
+    if [[ "$1" =~ .*\.(mp4|mp3|mkv|webm)(\?.*)? ]]; then
+        return 0
+    fi
+
     for prefix in ${media_url_prefixes[@]}; do
-        if [[ "$1" =~ ".*\.(mp4|mp3|mkv|webm)(\?.*)?" ]] || [[ "$1" == *"$prefix"* ]]; then
+        if [[ "$1" =~ https?://"$prefix".* ]]; then
             return 0
         fi
     done
@@ -13,8 +17,12 @@ is_media_url() {
 }
 
 is_image_url() {
+    if [[ "$1" =~ .*\.(jpg|jpeg|png|gif)(\?.*)? ]]; then
+        return 0
+    fi
+
     for url_part in ${image_urls[@]}; do
-        if [[ "$1" =~ ".*\.(jpg|png|gif)(\?.*)?" ]] || [[ "$1" == *"$url_part"* ]]; then
+        if [[ "$1" == *"$url_part"* ]]; then
             return 0
         fi
     done

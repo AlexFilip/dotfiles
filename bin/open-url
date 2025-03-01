@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [[ $# > 0 ]]; then
-    URL="$1"
+    URL="${@:$#}"
     shift
 fi
 
@@ -10,9 +10,9 @@ source ~/bin/pvt/media-predicates
 if is_media_url "$URL"; then
     exec open-app mpv --force-window=yes --geometry=85%x85%+50%+50% "$URL" > /dev/null 2>&1 &
 elif is_image_url "$URL"; then
-    exec imv-wayland "$URL" > /dev/null 2>&1 &
+    exec ~/bin/image-viewer "$URL" > /dev/null 2>&1 &
 else
-    BROWSER=brave-browser
-    exec open-app "$BROWSER" "$@" $URL
+    DEFAULT_BROWSER=brave
+    exec open-app "$DEFAULT_BROWSER" "$@" $URL
 fi
 

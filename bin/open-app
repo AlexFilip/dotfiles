@@ -24,8 +24,9 @@ fi
 export GTK_THEME="Adwaita:light"
 export QT_STYLE_OVERRIDE="Adwaita-light"
 
+EXTRA_OPTIONS_CHROMIUM=(--enable-features=UseOzonePlatform --ozone-platform=wayland)
 if [[ "$COMMAND" =~ ^brave-browser(-stable)?$ ]]; then
-    EXTRA_OPTIONS=(--enable-features=UseOzonePlatform --ozone-platform=wayland)
+    EXTRA_OPTIONS=(${EXTRA_OPTIONS_CHROMIUM[@]})
 elif [[ "$COMMAND" == "vpn-firefox" ]]; then
     COMMAND=$HOME/code/Homelab/vpn-apps/firefox
 
