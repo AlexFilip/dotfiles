@@ -1,9 +1,5 @@
 #!/bin/sh
 
-# TODO:
-#   - Replace firejail with podman
-#   - Make this into a Go program
-
 if [[ -z $1 ]]; then
     read -r COMMAND
 else
@@ -23,18 +19,18 @@ fi
 # export QT_STYLE_OVERRIDE="Adwaita-Dark"
 export GTK_THEME="Adwaita:light"
 export QT_STYLE_OVERRIDE="Adwaita-light"
+export PATH=${PATH}:$HOME/bin/applications
 
-EXTRA_OPTIONS_CHROMIUM=(--enable-features=UseOzonePlatform --ozone-platform=wayland)
-if [[ "$COMMAND" =~ ^brave-browser(-stable)?$ ]]; then
-    EXTRA_OPTIONS=(${EXTRA_OPTIONS_CHROMIUM[@]})
-elif [[ "$COMMAND" == "vpn-firefox" ]]; then
-    COMMAND=$HOME/code/Homelab/vpn-apps/firefox
-
-    if [[ -z "$@" ]]; then
-        :
-        # EXTRA_OPTIONS+=($(cat $HOME/.config/surf/homepage | head -1))
-    fi
-fi
+# EXTRA_OPTIONS_CHROMIUM=(--enable-features=UseOzonePlatform --ozone-platform=wayland)
+# if [[ "$COMMAND" =~ ^brave-browser(-stable)?$ ]]; then
+#     EXTRA_OPTIONS=(${EXTRA_OPTIONS_CHROMIUM[@]})
+# elif [[ "$COMMAND" == "vpn-firefox" ]]; then
+#     COMMAND=$HOME/code/Homelab/vpn-apps/firefox
+#     if [[ -z "$@" ]]; then
+#         :
+#         # EXTRA_OPTIONS+=($(cat $HOME/.config/surf/homepage | head -1))
+#     fi
+# fi
 
 OPTIONS=("$@")
 echo "Running exec $COMMAND ${EXTRA_OPTIONS[@]} ${OPTIONS[@]}"

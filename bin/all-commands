@@ -1,3 +1,4 @@
 #!/bin/sh
 
-compgen -c | grep -E '^[a-zA-Z]' | sort
+# compgen -c | grep -E '^[a-zA-Z]' | sort
+ls $HOME/bin/applications
