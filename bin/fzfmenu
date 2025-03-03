@@ -20,7 +20,9 @@ if [[ -n $1 ]]; then
     FZF_COMMAND="$WRAPPER \$($FZF_COMMAND) $@"
 fi
 
-alacritty --class fzfmenu -e sh -c "$FZF_COMMAND > $OUTPUT_FIFO_NAME" &
+footclient --app-id fzfmenu sh -c "$FZF_COMMAND > $OUTPUT_FIFO_NAME" &
+
+# alacritty --class fzfmenu -e sh -c "$FZF_COMMAND > $OUTPUT_FIFO_NAME" &
 cat - > $INPUT_FIFO_NAME # This must go after the process above because it blocks until another process reads from the fifo
 
 cat $OUTPUT_FIFO_NAME
