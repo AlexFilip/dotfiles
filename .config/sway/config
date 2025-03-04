@@ -269,7 +269,7 @@ bindsym $mod+t exec $term-client, mode "default"
 bindsym $mod+e exec $term-client $term_title_opt $editor_title nvim
 
 # Obsidian (Notes)
-bindsym $mod+n exec obsidian
+bindsym $mod+n exec open-app obsidian
 
 bindsym $mod+u mode Terminal
 mode "Terminal" {
@@ -316,14 +316,14 @@ mode "Browser" {
     bindsym $mod+w exec open-url, mode "default"
     bindsym      w exec open-url, mode "default"
 
-    bindsym $mod+p exec brave --profile-directory=$PersonalProfileBrave, mode "default"
-    bindsym      p exec brave --profile-directory=$PersonalProfileBrave, mode "default"
+    bindsym $mod+p exec open-app brave --profile-directory=$PersonalProfileBrave, mode "default"
+    bindsym      p exec open-app brave --profile-directory=$PersonalProfileBrave, mode "default"
 
-    bindsym $mod+j exec brave --profile-directory=$WorkProfileBrave, mode "default"
-    bindsym      j exec brave --profile-directory=$WorkProfileBrave, mode "default"
+    bindsym $mod+j exec open-app brave --profile-directory=$WorkProfileBrave, mode "default"
+    bindsym      j exec open-app brave --profile-directory=$WorkProfileBrave, mode "default"
 
-    bindsym $mod+x exec brave --profile-directory=$MainProfileBrave --incognito, mode "default"
-    bindsym      x exec brave --profile-directory=$MainProfileBrave --incognito, mode "default"
+    bindsym $mod+x exec open-app brave --profile-directory=$MainProfileBrave --incognito, mode "default"
+    bindsym      x exec open-app brave --profile-directory=$MainProfileBrave --incognito, mode "default"
 
     bindsym $mod+f exec open-app firefox -P "$MainProfileFirefox", mode "default"
     bindsym      f exec open-app firefox -P "$MainProfileFirefox", mode "default"
