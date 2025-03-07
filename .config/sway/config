@@ -178,7 +178,8 @@ set $term_remain_open_opt --hold
 # lock-wm makes sure the wallpaper is set before activating swaylock
 set $lock lock-wm
 
-exec ~/bin/go/set-wallpaper &
+# exec ~/bin/go/set-wallpaper &
+exec ~/code/cli-tools/set-wallpaper-go/run-image &
 
 # Lock after 5 minutes, screen off after 10
 # Screen locking
