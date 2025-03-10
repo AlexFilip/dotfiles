@@ -415,6 +415,8 @@ for_window [app_id="fzfmenu"] floating enable, resize set 850 870
 for_window [app_id="weather"] floating enable, resize set 1275 900
 for_window [app_id="FloatingTerm"] floating enable, resize set 1600 1800
 # for_window [app_id="thunar" name="File Operation Progress"] floating enable, resize set 1126 821
+for_window [app_id="^org\.mozilla\.Thunderbird$" title="^Edit Event:"] floating enable, resize set 1126 821
+for_window [app_id="^org\.mozilla\.Thunderbird$" title="Reminders?$"] floating enable, resize set 754 381
 
 # Resizing containers:
 bindsym $mod+r mode "resize"
