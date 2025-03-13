@@ -179,7 +179,7 @@ set $term_remain_open_opt --hold
 set $lock lock-wm
 
 # exec ~/bin/go/set-wallpaper &
-exec ~/code/cli-tools/set-wallpaper-go/run-image &
+exec ~/code/cli-tools/set-wallpaper-go/run-image --no-build &
 
 # Lock after 5 minutes, screen off after 10
 # Screen locking
@@ -415,8 +415,13 @@ for_window [app_id="fzfmenu"] floating enable, resize set 850 870
 for_window [app_id="weather"] floating enable, resize set 1275 900
 for_window [app_id="FloatingTerm"] floating enable, resize set 1600 1800
 # for_window [app_id="thunar" name="File Operation Progress"] floating enable, resize set 1126 821
-for_window [app_id="^org\.mozilla\.Thunderbird$" title="^Edit Event:"] floating enable, resize set 1126 821
-for_window [app_id="^org\.mozilla\.Thunderbird$" title="Reminders?$"] floating enable, resize set 754 381
+
+for_window [app_id="^org\.mozilla\.Thunderbird$" window_role="[pP]op-up|[bB]ubble|[dD]ialog|task_dialog|About"] floating enable
+for_window [app_id="^org\.mozilla\.Thunderbird$" window_type="[dD]ialog|menu"] floating enable
+for_window [app_id="^org\.mozilla\.Thunderbird$" class="[dD]ialog"] floating enable
+
+for_window [app_id="^org\.mozilla\.Thunderbird$" title="^Edit Event:"] resize set 1126 821
+for_window [app_id="^org\.mozilla\.Thunderbird$" title="Reminders?$"] resize set 21 ppt 17 ppt, move position 79 ppt 0 ppt
 
 # Resizing containers:
 bindsym $mod+r mode "resize"
