@@ -42,7 +42,8 @@ interval=persist
 # Use a docker container that provides the time every minute accurately, instead of starting a new process every minute
 # fallback to a while loop if the docker container fails or does not exist
 [time]
-command=docker run --rm -e TZ="America/Toronto" -e TIME_FORMAT="Mon 02 Jan 2006 15:04" current-time:custom || while :; do date "+%a %b %d, %Y %H:%M"; sleep 60; done
+command=while :; do docker run --rm -e TZ="America/Toronto" -e TIME_FORMAT="Mon 02 Jan 2006 15:04" current-time:custom; done
+# while :; do date "+%a %b %d, %Y %H:%M"; sleep 60; done
 interval=persist
 
 # "tray"
