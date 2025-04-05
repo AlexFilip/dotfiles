@@ -1,0 +1,10 @@
+#!/bin/sh
+
+PROFILE="--profile-directory=Profile-Main"
+
+if [[ "$1" == --profile-directory=* ]]; then
+    PROFILE="$1"
+    shift
+fi
+
+exec flatpak run com.google.Chrome --enable-features=UseOzonePlatform --ozone-platform=wayland $PROFILE "$@"
