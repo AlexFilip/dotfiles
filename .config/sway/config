@@ -264,7 +264,7 @@ bindsym $mod+Shift+o move container to scratchpad
 bindsym $mod+o scratchpad show
 
 # Start a terminal
-bindsym $mod+t exec $term-client, mode "default"
+bindsym $mod+t exec $term-client $term_title_opt Terminal, mode "default"
 
 # Text editor
 bindsym $mod+e exec $term-client $term_title_opt $editor_title nvim
