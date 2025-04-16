@@ -34,7 +34,7 @@ interval=60
 
 # "backlight",
 [battery]
-command=BAT=$(upower -e | grep 'BAT'); upower -i $BAT | awk -f $HOME/.config/i3blocks/parse_battery.awk; upower --monitor-detail $BAT | awk -f $HOME/.config/i3blocks/parse_battery.awk
+command=BAT=$(upower -e | grep 'BAT'); ( upower -i $BAT; upower --monitor-detail $BAT) | awk -f $HOME/.config/i3blocks/parse_battery.awk
 interval=persist
 
 # "battery#bat2",

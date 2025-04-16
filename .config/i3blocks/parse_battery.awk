@@ -2,10 +2,17 @@
 BEGIN {
     after_level = ""
     printed_on_history = 0
+
+    battery_info_file = ENVIRON["HOME"] "/.local/last_battery_percentage"
+    getline last_percentage < battery_info_file
+
+    # (+0) casts to int (no need to remove '%')
+    last_percentage = last_percentage+0
+    warn_on_percentage = 10
 }
 
 function print_all_details(print_exit_message) {
-    output = state " " percentage
+    output = state " " current_percentage
     if(state != "fully-charged" ) {
         if(after_level == "to_full"){
             output = output " (" to_full ")"
@@ -18,16 +25,13 @@ function print_all_details(print_exit_message) {
         output = output " (Monitor exited)"
     }
 
-    warn_on_percentage = 10
-    battery_info_file = ENVIRON["HOME"] "/.local/last_battery_percentage"
-
-    # (+0) casts to int (no need to remove '%')
-    getline last_percentage < battery_info_file
-    if((last_percentage+0) >= warn_on_percentage && (percentage+0) < warn_on_percentage) {
-        system("notify-send --urgency=critical 'LOW BATTERY (" percentage ")' 'Battery level is low, please plug your laptop in'")
+    if(last_percentage >= warn_on_percentage && current_percentage < warn_on_percentage) {
+        system("notify-send --urgency=critical 'LOW BATTERY (" current_percentage ")' 'Battery level is low, please plug your laptop in'")
     }
 
-    print percentage > battery_info_file
+    last_percentage = current_percentage
+
+    print current_percentage > battery_info_file
     close(battery_info_file)
 
     if(output != old_output) {
@@ -57,8 +61,8 @@ function print_all_details(print_exit_message) {
 }
 
 /percentage/ {
-    # Ends with %
-    percentage = $2
+    # Ends with %, so you have to cast to int with +0
+    current_percentage = ($2)+0
 }
 
 # NOTE: History is the last section in the entire block that is written. It's a good marker for when we are at the end of the output
