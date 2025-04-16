@@ -1,7 +1,6 @@
 
 BEGIN {
     after_level = ""
-    printed_on_history = 0
 
     battery_info_file = ENVIRON["HOME"] "/.local/last_battery_percentage"
     getline last_percentage < battery_info_file
@@ -11,18 +10,14 @@ BEGIN {
     warn_on_percentage = 10
 }
 
-function print_all_details(print_exit_message) {
-    output = state " " current_percentage
+function print_all_details() {
+    output = state " " current_percentage "%"
     if(state != "fully-charged" ) {
         if(after_level == "to_full"){
             output = output " (" to_full ")"
         } else if(after_level == "to_empty") {
             output = output " (" to_empty " left)"
         }
-    }
-
-    if(print_exit_message && printed_on_history) {
-        output = output " (Monitor exited)"
     }
 
     if(last_percentage >= warn_on_percentage && current_percentage < warn_on_percentage) {
@@ -41,7 +36,6 @@ function print_all_details(print_exit_message) {
 
     old_output = output
     output = ""
-
 }
 
 /state/ {
@@ -66,14 +60,8 @@ function print_all_details(print_exit_message) {
 }
 
 # NOTE: History is the last section in the entire block that is written. It's a good marker for when we are at the end of the output
-# Also, there are multiple blocks output, so internally, you get multiple lines for each change. This might not be a big problem, but worth keeping in mind.
-
+# Also, the battery monitor outputs multiple blocks so, internally, you get multiple lines for each change. This might not be a big problem, but worth keeping in mind.
 /^$/ {
-    printed_on_history = 1 # In case this is run once, while waiting for the monitor to start we should display something
-    print_all_details(0)
-}
-
-END {
-    print_all_details(1)
+    print_all_details()
 }
 
