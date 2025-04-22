@@ -161,6 +161,8 @@ zle-keymap-select
 autoload edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
+bindkey -M vicmd Y vi-yank-eol
+# bindkey -M vicmd : :
 
 # Add some emacs keybindings, since that's how most command lines work by default
 bindkey -M viins ^a beginning-of-line
@@ -169,6 +171,8 @@ bindkey -M viins ^f forward-char
 bindkey -M viins ^b backward-char
 bindkey -M viins ^p up-line-or-history
 bindkey -M viins ^n down-line-or-history
+bindkey -M viins ^k kill-line
+bindkey -M viins ^y yank
 
 alias dotfiles="/usr/bin/git --work-tree=$HOME --git-dir=$HOME/.rc-files"
 
