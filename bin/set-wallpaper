@@ -1,0 +1,3 @@
+#!/bin/sh
+
+$HOME/code/cli-tools/set-wallpaper-go/run-image --no-build
