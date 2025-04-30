@@ -244,16 +244,18 @@ input type:touchpad {
 # bindsym KEY_WLAN exec echo "WLAN" >> $HOME/sway-debug
 
 # BTN_FORWARD is already set to scroll above
-# NOTE: ~/bin/pvt/elecom-mouse-fn-button NO LONGER EXISTS
-bindsym --input-device=$TrackballMouse           --whole-window --no-repeat BTN_FORWARD exec ~/bin/pvt/elecom-mouse-fn-button Fn1 down
-bindsym --input-device=$TrackballMouse --release --whole-window --no-repeat BTN_FORWARD exec ~/bin/pvt/elecom-mouse-fn-button Fn1 up
-bindsym --input-device=$TrackballMouse           --whole-window --no-repeat BTN_BACK exec ~/bin/pvt/elecom-mouse-fn-button Fn2 down
-bindsym --input-device=$TrackballMouse --release --whole-window --no-repeat BTN_BACK exec ~/bin/pvt/elecom-mouse-fn-button Fn2 up
 
-# bindsym --input-device=$TrackballMouse           --whole-window BTN_BACK seat - cursor press   button2 # This is supposed to execute a middle-mouse-click but it's not working for some reason
-# bindsym --input-device=$TrackballMouse --release --whole-window BTN_BACK seat - cursor release button2
-bindsym --input-device=$TrackballMouse --release --whole-window --no-repeat BTN_TASK exec ~/bin/pvt/elecom-mouse-fn-button Fn3 up
-bindsym --input-device=$TrackballMouse           --whole-window --no-repeat BTN_TASK exec ~/bin/pvt/elecom-mouse-fn-button Fn3 down
+# Fn1 button
+# bindsym --input-device=$TrackballMouse           --whole-window --no-repeat BTN_FORWARD exec ~/bin/pvt/elecom-mouse-fn-button Fn1 down
+# bindsym --input-device=$TrackballMouse --release --whole-window --no-repeat BTN_FORWARD exec ~/bin/pvt/elecom-mouse-fn-button Fn1 up
+
+# Fn2 button
+bindsym --input-device=$TrackballMouse           --whole-window --no-repeat BTN_BACK seat - cursor press   BTN_MIDDLE
+bindsym --input-device=$TrackballMouse --release --whole-window --no-repeat BTN_BACK seat - cursor release BTN_MIDDLE
+
+# Fn3 Button
+# bindsym --input-device=$TrackballMouse           --whole-window --no-repeat BTN_TASK exec ~/bin/pvt/elecom-mouse-fn-button Fn3 down
+# bindsym --input-device=$TrackballMouse --release --whole-window --no-repeat BTN_TASK exec ~/bin/pvt/elecom-mouse-fn-button Fn3 up
 
 ### Key bindings
 

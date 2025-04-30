@@ -3,8 +3,8 @@
 # Windsor (Tecumseh mall): 42.32,-82.94
 # EmeryVille (Mom's house): 42.30,-82.75
 
-exec curl -s 'wttr.in/42.32,-82.94?m&F'
-# exec curl -s 'wttr.in/42.30,-82.75?m&F'
+exec curl -s 'https://wttr.in/42.32,-82.94?m&F'
+# exec curl -s 'https://wttr.in/42.30,-82.75?m&F'
 
-# exec curl -s 'wttr.in?m&F'
+# exec curl -s 'https://wttr.in?m&F'
 
