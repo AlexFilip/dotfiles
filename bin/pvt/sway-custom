@@ -13,6 +13,11 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export TERMINAL="foot"
 export _JAVA_AWT_WM_NONREPARENTING=1 # For burpsuite
 
+if [[ ":$XDG_DATA_DIRS:" != *"$HOME/.local/share/flatpak/exports/share"* ]]; then
+    XDG_DATA_DIRS=$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share
+fi
+export XDG_DATA_DIRS
+
 if [[ ":$PATH:" != *":$HOME/bin/go:"* ]]; then
     PATH="$HOME/bin/go:$PATH"
 fi
