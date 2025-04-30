@@ -1,10 +1,20 @@
 #!/bin/bash
 
 # I will need to test this to see if it helps dnf include firmware updates. Check gnome-software after updating
-sudo -- sh -c "
-dnf update -y
-dnf --refresh upgrade -y;
-"
+DISTRO_NAME=$(source /etc/os-release && echo $ID)
+if [[ "$DISTRO_NAME" == fedora ]]; then
+    SYSTEM_UPDATE_COMMAND="
+        dnf update -y
+        dnf --refresh upgrade -y;
+    "
+elif [[ "$DISTRO_NAME" == debian ]]; then
+    SYSTEM_UPDATE_COMMAND="
+        apt update
+        apt upgrade -yq
+    "
+fi
+
+sudo -- sh -c "$SYSTEM_UPDATE_COMMAND"
 
 # Formerly in the sudo section above
 # pkcon refresh force;
