@@ -162,7 +162,11 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 bindkey -M vicmd Y vi-yank-eol
-# bindkey -M vicmd : :
+
+# Don't respond to :
+noop() {}
+zle -N noop
+bindkey -M vicmd : noop
 
 # Add some emacs keybindings, since that's how most command lines work by default
 bindkey -M viins ^a beginning-of-line
@@ -173,6 +177,7 @@ bindkey -M viins ^p up-line-or-history
 bindkey -M viins ^n down-line-or-history
 bindkey -M viins ^k kill-line
 bindkey -M viins ^y yank
+bindkey -M viins ^d delete-char-or-list
 
 alias dotfiles="/usr/bin/git --work-tree=$HOME --git-dir=$HOME/.rc-files"
 
