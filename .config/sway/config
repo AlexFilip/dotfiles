@@ -31,7 +31,7 @@ set $WorkProfileBrave     "Profile-Work"
 set $MainProfileFirefox "default-release"
 set $SecurityTestingProfileFirefox "Security_Testing"
 
-set $MainProfileZen "default-release"
+set $MainProfileZen "Main"
 set $SecurityTestingProfileZen "Security_Testing"
 
 # Moving around:
@@ -330,9 +330,6 @@ mode "Browser" {
 
     bindsym $mod+f exec open-app firefox -P "$MainProfileFirefox", mode "default"
     bindsym      f exec open-app firefox -P "$MainProfileFirefox", mode "default"
-
-    bindsym $mod+s exec open-app zen -P "$SecurityTestingProfileZen", mode "default"
-    bindsym      s exec open-app zen -P "$SecurityTestingProfileZen", mode "default"
 
     bindsym $mod+z exec open-app zen -P "$MainProfileZen", mode "default"
     bindsym      z exec open-app zen -P "$MainProfileZen", mode "default"
