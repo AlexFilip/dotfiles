@@ -26,7 +26,6 @@ set $right l
 
 set $MainProfileBrave     "Profile-Main"
 set $PersonalProfileBrave "Profile-Personal"
-set $WorkProfileBrave     "Profile-Work"
 
 set $MainProfileFirefox "default-release"
 set $SecurityTestingProfileFirefox "Security_Testing"
@@ -321,9 +320,6 @@ mode "Browser" {
 
     bindsym $mod+p exec open-app brave --profile-directory=$PersonalProfileBrave, mode "default"
     bindsym      p exec open-app brave --profile-directory=$PersonalProfileBrave, mode "default"
-
-    bindsym $mod+j exec open-app brave --profile-directory=$WorkProfileBrave, mode "default"
-    bindsym      j exec open-app brave --profile-directory=$WorkProfileBrave, mode "default"
 
     bindsym $mod+x exec open-app brave --profile-directory=$MainProfileBrave --incognito, mode "default"
     bindsym      x exec open-app brave --profile-directory=$MainProfileBrave --incognito, mode "default"

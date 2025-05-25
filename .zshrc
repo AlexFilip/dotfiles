@@ -160,6 +160,7 @@ zle-keymap-select
 # script that will be run in the shell
 autoload edit-command-line
 zle -N edit-command-line
+bindkey -M emacs "^X^E" edit-command-line
 bindkey -M vicmd v edit-command-line
 bindkey -M vicmd Y vi-yank-eol
 
@@ -180,6 +181,7 @@ bindkey -M viins ^y yank
 bindkey -M viins ^d delete-char-or-list
 
 alias dotfiles="/usr/bin/git --work-tree=$HOME --git-dir=$HOME/.rc-files"
+alias vim='nvim'
 
 # useful less flag: -S disables line-wrapping
 alias less='less -mNgiJQuR'
