@@ -388,7 +388,6 @@ bindsym $mod+Shift+n exec swaync-client -t -sw
 # Note: workspaces can have any name you want, not just numbers.
 # We just use 1-10 as the default.
 
-#
 # Scratchpad:
 # Sway has a "scratchpad", which is place to store windows when they're not being used
 # You can send windows there and get them back later.
@@ -411,12 +410,12 @@ for_window [app_id="weather"] floating enable, resize set 1275 900
 for_window [app_id="FloatingTerm"] floating enable, resize set 1600 1800
 # for_window [app_id="thunar" name="File Operation Progress"] floating enable, resize set 1126 821
 
-for_window [app_id="^org\.mozilla\.Thunderbird$" window_role="[pP]op-up|[bB]ubble|[dD]ialog|task_dialog|About"] floating enable
-for_window [app_id="^org\.mozilla\.Thunderbird$" window_type="[dD]ialog|menu"] floating enable
-for_window [app_id="^org\.mozilla\.Thunderbird$" class="[dD]ialog"] floating enable
+# for_window [app_id="^org\.mozilla\.Thunderbird$" window_role="[pP]op-up|[bB]ubble|[dD]ialog|task_dialog|About"] floating enable
+# for_window [app_id="^org\.mozilla\.Thunderbird$" window_type="[dD]ialog|menu"] floating enable
+# for_window [app_id="^org\.mozilla\.Thunderbird$" class="[dD]ialog"] floating enable
 
-for_window [app_id="^org\.mozilla\.Thunderbird$" title="^Edit Event:"] resize set 1126 821
-for_window [app_id="^org\.mozilla\.Thunderbird$" title="Reminders?$"] resize set 21 ppt 17 ppt, move position 79 ppt 0 ppt
+# for_window [app_id="^org\.mozilla\.Thunderbird$" title="^Edit Event:"] resize set 1126 821
+# for_window [app_id="^org\.mozilla\.Thunderbird$" title="Reminders?$"] resize set 21 ppt 17 ppt, move position 79 ppt 0 ppt
 
 # Resizing containers:
 bindsym $mod+r mode "resize"
@@ -553,4 +552,3 @@ exec mako
 # Browser
 #workspace $WS1
 #exec open-url "" --profile-directory=$MainProfileBrave
-
