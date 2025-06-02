@@ -14,13 +14,14 @@ elif [[ "$DISTRO_NAME" == debian ]]; then
     "
 fi
 
-sudo -- sh -c "$SYSTEM_UPDATE_COMMAND"
+sudo -- sh -c "$SYSTEM_UPDATE_COMMAND; flatpak update -y"
 
 # Formerly in the sudo section above
 # pkcon refresh force;
 # pkcon update -y;
 
-flatpak update -y
+#
+# flatpak update -y
 
 # Not installed
 #   snap refresh
