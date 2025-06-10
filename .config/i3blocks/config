@@ -6,12 +6,12 @@ interval=once
 signal=1
 
 # Hourly weather
-[weather]
+# [weather]
 # command=if [[ $button ]]; then $HOME/bin/weather; else curl -Ss 'https://wttr.in?0&T&Q' | cut -c 16- | head -2 | xargs echo; fi
 # command=curl -Ss 'https://wttr.in?0&T&Q' | cut -c 16- | head -2 | xargs echo
 # command=curl 'https://wttr.in?format=j1' | jq -r '(.current_condition | .[] | ((.weatherDesc | .[].value) + " " + .temp_C + "(" + .FeelsLikeC + ") °C")) + " (" + (.nearest_area | .[] | ((.areaName | .[].value) + ", " + (.region | .[].value))) + ")"'
-command=curl 'https://wttr.in/?format=%C+%t(%f)+(%l)'
-interval=3600
+# command=curl 'https://wttr.in/?format=%C+%t(%f)+(%l)'
+# interval=3600
 # color=#A4C2F4
 
 # Query my default IP address only on startup
