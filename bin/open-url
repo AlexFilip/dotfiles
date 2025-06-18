@@ -7,12 +7,21 @@ fi
 
 source ~/bin/pvt/media-predicates
 
-if [[ "$URL" =~ https?://(www.)?youtube.com.* ]]; then
+should_open_in_personal_profile() {
+    if [[ "$1" =~ ^https?://([a-z]+\.)*((openai|chatgpt|cloudflare|tailscale|mail\.google|calendar\.google)\.com|(proton)\.me) ]]; then
+        return 0
+    fi
+    return 1
+}
+
+if [[ "$URL" =~ ^https?://(www.)?youtube.com.* ]]; then
     exec flatpak run io.freetubeapp.FreeTube "$URL"
 elif is_media_url "$URL"; then
     exec open-app mpv --force-window=yes --geometry=85%x85%+50%+50% "$URL" > /dev/null 2>&1 &
 elif is_image_url "$URL"; then
     exec ~/bin/image-viewer "$URL" > /dev/null 2>&1 &
+elif should_open_in_personal_profile "$URL"; then
+    exec open-app brave --profile-directory="Profile-Personal" "$@" "$URL"
 else
     # DEFAULT_BROWSER=brave
     DEFAULT_BROWSER=zen
