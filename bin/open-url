@@ -7,7 +7,9 @@ fi
 
 source ~/bin/pvt/media-predicates
 
-if is_media_url "$URL"; then
+if [[ "$URL" =~ https?://(www.)?youtube.com.* ]]; then
+    exec flatpak run io.freetubeapp.FreeTube "$URL"
+elif is_media_url "$URL"; then
     exec open-app mpv --force-window=yes --geometry=85%x85%+50%+50% "$URL" > /dev/null 2>&1 &
 elif is_image_url "$URL"; then
     exec ~/bin/image-viewer "$URL" > /dev/null 2>&1 &
