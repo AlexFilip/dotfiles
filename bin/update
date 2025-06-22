@@ -10,6 +10,7 @@ if [[ "$DISTRO_NAME" == fedora ]]; then
         echo 'Running dnf update'
         dnf update -y
         dnf --refresh upgrade -y
+        dnf autoremove -y
     "
 elif [[ "$DISTRO_NAME" == debian ]]; then
     SYSTEM_UPDATE_COMMAND="
@@ -17,6 +18,7 @@ elif [[ "$DISTRO_NAME" == debian ]]; then
         echo 'Running apt update'
         apt update
         apt upgrade -yq
+        apt autoremove -yq
     "
 fi
 
@@ -25,6 +27,7 @@ if which flatpak 2>&1 > /dev/null; then
         $SYSTEM_UPDATE_COMMAND
         echo 'Running flatpak update'
         flatpak update -y
+        flatpak uninstall --unused -y
     "
 fi
 
