@@ -8,13 +8,13 @@ fi
 source ~/bin/pvt/media-predicates
 
 should_open_in_personal_profile() {
-    if [[ "$1" =~ ^https?://([a-z]+\.)*((openai|chatgpt|cloudflare|tailscale|mail\.google|calendar\.google)\.com|(proton)\.me) ]]; then
+    if [[ "$1" =~ ^https?://([a-z]+\.)*((openai|chatgpt|cloudflare|tailscale|mail\.google|calendar\.google|github)\.com|(proton)\.me) ]]; then
         return 0
     fi
     return 1
 }
 
-if [[ "$URL" =~ ^https?://(www.)?youtube.com.* ]]; then
+if [[ "$URL" =~ ^https?://(www.)?youtube\.com.* ]]; then
     exec flatpak run io.freetubeapp.FreeTube "$URL"
 elif is_media_url "$URL"; then
     exec open-app mpv --force-window=yes --geometry=85%x85%+50%+50% "$URL" > /dev/null 2>&1 &
@@ -25,6 +25,6 @@ elif should_open_in_personal_profile "$URL"; then
 else
     # DEFAULT_BROWSER=brave
     DEFAULT_BROWSER=zen
-    exec open-app "$DEFAULT_BROWSER" "$@" $URL
+    exec open-app "$DEFAULT_BROWSER" -P Main "$@" $URL
 fi
 
