@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+DISTRO_NAME=$(source /etc/os-release && echo $ID)
+if [[ "$DISTRO_NAME" == fedora ]]; then
+    echo 'Running dnf update'
+    dnf update -y
+    dnf --refresh upgrade -y
+    dnf autoremove -y
+
+elif [[ "$DISTRO_NAME" == debian ]] || [[ "$DISTRO_NAME" == ubuntu ]]; then
+    echo 'Running apt update'
+    apt update
+    apt upgrade -yq
+    apt autoremove -yq
+fi
+
+if which flatpak 2>&1 > /dev/null; then
+    echo 'Running flatpak update'
+    flatpak update -y
+    flatpak uninstall --unused -y
+fi
+
+if which snap 2>&1 > /dev/null; then
+    # Not installed on any of my systems
+    echo 'Running snap update'
+    snap refresh
+fi
+
+if which pkcon 2>&1 > /dev/null; then
+    echo 'Running pkcon update'
+    pkcon refresh force
+    pkcon update -y
+fi
+

@@ -1,53 +1,5 @@
-#!/bin/bash
+#!/bin/sh
 
-SYSTEM_UPDATE_COMMAND=""
-
-# I will need to test this to see if it helps dnf include firmware updates. Check gnome-software after updating
-DISTRO_NAME=$(source /etc/os-release && echo $ID)
-if [[ "$DISTRO_NAME" == fedora ]]; then
-    SYSTEM_UPDATE_COMMAND="
-        $SYSTEM_UPDATE_COMMAND
-        echo 'Running dnf update'
-        dnf update -y
-        dnf --refresh upgrade -y
-        dnf autoremove -y
-    "
-elif [[ "$DISTRO_NAME" == debian ]]; then
-    SYSTEM_UPDATE_COMMAND="
-        $SYSTEM_UPDATE_COMMAND
-        echo 'Running apt update'
-        apt update
-        apt upgrade -yq
-        apt autoremove -yq
-    "
-fi
-
-if which flatpak 2>&1 > /dev/null; then
-    SYSTEM_UPDATE_COMMAND="
-        $SYSTEM_UPDATE_COMMAND
-        echo 'Running flatpak update'
-        flatpak update -y
-        flatpak uninstall --unused -y
-    "
-fi
-
-if which snap 2>&1 > /dev/null; then
-    # Not installed
-    SYSTEM_UPDATE_COMMAND="
-        $SYSTEM_UPDATE_COMMAND
-        echo 'Running snap update'
-        snap refresh
-    "
-fi
-
-if which pkcon 2>&1 > /dev/null; then
-    SYSTEM_UPDATE_COMMAND="
-        $SYSTEM_UPDATE_COMMAND
-        echo 'Running pkcon update'
-        pkcon refresh force
-        pkcon update -y
-    "
-fi
-
-sudo -- sh -c "$SYSTEM_UPDATE_COMMAND"
+# Run the script
+sudo -- "$HOME/bin/pvt/update-impl"
 
