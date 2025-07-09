@@ -14,11 +14,11 @@ elif [[ "$DISTRO_NAME" == debian ]] || [[ "$DISTRO_NAME" == ubuntu ]]; then
     apt autoremove -yq
 fi
 
-if which flatpak 2>&1 > /dev/null; then
-    echo 'Running flatpak update'
-    flatpak update -y
-    flatpak uninstall --unused -y
-fi
+# if which flatpak 2>&1 > /dev/null; then
+#     echo 'Running flatpak update'
+#     flatpak update -y
+#     flatpak uninstall --unused -y
+# fi
 
 if which snap 2>&1 > /dev/null; then
     # Not installed on any of my systems

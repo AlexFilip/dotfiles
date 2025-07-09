@@ -3,3 +3,5 @@
 # Run the script
 sudo -- "$HOME/bin/pvt/update-impl"
 
+flatpak update --user -y
+flatpak uninstall --unused -y
