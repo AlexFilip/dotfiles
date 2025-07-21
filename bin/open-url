@@ -20,11 +20,12 @@ elif is_media_url "$URL"; then
     exec open-app mpv --force-window=yes --geometry=85%x85%+50%+50% "$URL" > /dev/null 2>&1 &
 elif is_image_url "$URL"; then
     exec ~/bin/image-viewer "$URL" > /dev/null 2>&1 &
-elif should_open_in_personal_profile "$URL"; then
-    exec open-app brave --profile-directory="Profile-Personal" "$@" "$URL"
+# elif should_open_in_personal_profile "$URL"; then
+#     exec open-app chrome "$@" "$URL"
 else
+    DEFAULT_BROWSER=chrome
     # DEFAULT_BROWSER=brave
-    DEFAULT_BROWSER=zen
-    exec open-app "$DEFAULT_BROWSER" -P Main "$@" $URL
+    # DEFAULT_BROWSER=zen # -P Main
+    exec open-app "$DEFAULT_BROWSER" "$@" $URL
 fi
 
