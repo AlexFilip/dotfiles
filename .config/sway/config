@@ -381,10 +381,11 @@ bindsym Print exec [[ -z $(ps aux | awk "/slurp[[:space:]]-d/ && !/[[:space:]]sh
 floating_modifier $mod normal
 
 # Reload the configuration file (and notification center)
-bindsym $mod+Shift+r reload; exec swaync-client -R
+bindsym $mod+Shift+r reload
+# ; exec swaync-client -R
 
 # Notification center
-bindsym $mod+Shift+n exec swaync-client -t -sw
+# bindsym $mod+Shift+n exec swaync-client -t -sw
 # Note: workspaces can have any name you want, not just numbers.
 # We just use 1-10 as the default.
 
