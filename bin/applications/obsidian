@@ -1,4 +1,5 @@
 #!/bin/sh
 
+# flatpak override --user md.obsidian.Obsidian --socket=wayland --system-talk-name=org.freedesktop.login1
 OBSIDIAN_USE_WAYLAND=1 exec flatpak run md.obsidian.Obsidian --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland "$@"
 
