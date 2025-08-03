@@ -1,6 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 (setq custom-file "~/.config/emacs/custom.el")
-(load-file custom-file)
+(if (file-exists-p custom-file) (load-file custom-file))
 
 (defun require-pkg (package-name)
   (unless (package-installed-p package-name)
