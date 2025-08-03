@@ -14,10 +14,11 @@ should_open_in_personal_profile() {
     return 1
 }
 
-if [[ "$URL" =~ ^https?://(www.)?youtube\.com.* ]]; then
-    exec flatpak run io.freetubeapp.FreeTube "$URL"
+if [[ "$URL" =~ ^https?://(www.)?youtube\.com.* ]] || [[ "$URL" =~ ^https://youtu\.be/.* ]]; then
+    # exec flatpak run io.freetubeapp.FreeTube "$URL"
+    exec mpv --save-position-on-quit "$URL"
 elif is_media_url "$URL"; then
-    exec open-app mpv --force-window=yes --geometry=85%x85%+50%+50% "$URL" > /dev/null 2>&1 &
+    exec open-app mpv --save-position-on-quit --force-window=yes --geometry=85%x85%+50%+50% "$URL" > /dev/null 2>&1 &
 elif is_image_url "$URL"; then
     exec ~/bin/image-viewer "$URL" > /dev/null 2>&1 &
 # elif should_open_in_personal_profile "$URL"; then

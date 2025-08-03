@@ -24,14 +24,9 @@ set $down  j
 set $up    k
 set $right l
 
-set $MainProfileBrave     "Profile-Main"
 set $PersonalProfileBrave "Profile-Personal"
-
 set $MainProfileFirefox "default-release"
-set $SecurityTestingProfileFirefox "Security_Testing"
-
 set $MainProfileZen "Main"
-set $SecurityTestingProfileZen "Security_Testing"
 
 # Moving around:
 # Move your focus around
@@ -321,9 +316,6 @@ mode "Browser" {
     bindsym $mod+p exec open-app brave --profile-directory=$PersonalProfileBrave, mode "default"
     bindsym      p exec open-app brave --profile-directory=$PersonalProfileBrave, mode "default"
 
-    bindsym $mod+x exec open-app brave --profile-directory=$MainProfileBrave --incognito, mode "default"
-    bindsym      x exec open-app brave --profile-directory=$MainProfileBrave --incognito, mode "default"
-
     bindsym $mod+f exec open-app firefox -P "$MainProfileFirefox", mode "default"
     bindsym      f exec open-app firefox -P "$MainProfileFirefox", mode "default"
 
@@ -552,4 +544,3 @@ exec mako
 
 # Browser
 #workspace $WS1
-#exec open-url "" --profile-directory=$MainProfileBrave
