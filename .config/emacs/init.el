@@ -14,6 +14,7 @@
 (package-initialize)
 
 (require-pkg 'naysayer-theme)
+(require-pkg 'gruber-darker-theme)
 (load-theme 'naysayer t)
 
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.config/emacs/themes/"))
