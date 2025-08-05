@@ -19,7 +19,7 @@ case "$CONFIG_NAME" in
         ;;
 
     *)
-        echo "Unknown location '$CONFIG_LOCATION'" > /dev/stderr
+        echo "Unknown config '$CONFIG_NAME'" > /dev/stderr
         exit 1
 esac
 
