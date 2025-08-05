@@ -3,21 +3,25 @@
 
 (defun some (fn list)
   "CUSTOM implementation of some"
-  (let ((f (if (symbolp fn)
-	       (symbol-function fn)
-	     fn)))
-    (if (funcall f (car list))
-	t
-      (some f (cdr list)))))
+  (if (null list)
+      nil
+    (let ((f (if (symbolp fn)
+		 (symbol-function fn)
+	       fn)))
+      (if (funcall f (car list))
+	  t
+	(some f (cdr list))))))
 
 (defun all (fn list)
   "CUSTOM implementation of all"
-  (let ((f (if (symbolp fn)
-	       (symbol-function fn)
-	     fn)))
-    (if (funcall f (car list))
-	(all f (cdr list))
-      t)))
+  (if (null list)
+      t
+      (let ((f (if (symbolp fn)
+		   (symbol-function fn)
+		 fn)))
+	(if (funcall f (car list))
+	    (all f (cdr list))
+	  nil))))
 
 (defun require-pkg (package-name)
   (unless (package-installed-p package-name)
@@ -27,11 +31,10 @@
 
 (defun require-pkgs (&rest package-names)
   (unless (all 'package-installed-p package-names)
-      (progn
-	(package-refresh-contents)
-	(dolist (pkg package-names)
-	  (unless (package-installed-p pkg)
-	    (package-install pkg)))))
+    (package-refresh-contents)
+    (dolist (pkg package-names)
+      (unless (package-installed-p pkg)
+	(package-install pkg))))
   (dolist (pkg package-names) (require pkg)))
 
 (require 'package)
