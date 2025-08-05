@@ -23,7 +23,7 @@ case "$CONFIG_NAME" in
         exit 1
 esac
 
-if [[ -s "$SYMLINK_LOCATION" ]]; then
+if [[ -h "$SYMLINK_LOCATION" ]]; then
     rm "$SYMLINK_LOCATION"
 fi
 
