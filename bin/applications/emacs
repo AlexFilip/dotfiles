@@ -1,3 +1,4 @@
 #!/bin/sh
 
+export SPACEMACSDIR="$HOME/.config/spacemacs"
 exec emacs
