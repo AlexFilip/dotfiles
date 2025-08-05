@@ -1,4 +1,5 @@
 #!/bin/sh
 
-export SPACEMACSDIR="$HOME/.config/spacemacs"
+export SPACEMACSDIR="$HOME/.config/emacs-configs/spacemacs"
+export DOOMDIR="$HOME/.config/emacs-configs/doom"
 exec emacs
