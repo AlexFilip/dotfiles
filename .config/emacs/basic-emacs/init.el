@@ -47,21 +47,23 @@
 
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.config/emacs/themes/"))
 
-(setq auto-save-file-directory "~/.local/emacs-saves/")
-(make-directory auto-save-file-directory t)
-(setq auto-save-file-name-transforms `(("." ,auto-save-file-directory t)))
-
-(setq backup-directory-alist `(("." . auto-save-file-directory)))
-(setq backup-by-copying t)
+(let ((backup-file-directory "~/.local/emacs-saves/") (auto-save-file-directory temporary-file-directory))
+  (make-directory backup-file-directory t)
+  (setq auto-save-file-name-transforms `(("." ,auto-save-file-directory t)))
+  (setq auto-save-no-message t)
+  (setq backup-directory-alist `(("." . ,backup-file-directory)))
+  (setq backup-by-copying t))
 
 (setq-default
  inhibit-startup-message t
  inhibit-startup-screen t
- initial-scratch-message nil)
+ initial-scratch-message nil
+ ring-bell-function 'ignore)
 
 (tool-bar-mode -1)
 (unless (eq system-type 'darwin) (menu-bar-mode -1))
 (scroll-bar-mode -1)
+(blink-cursor-mode 0)
 
 (when (file-exists-p custom-file)
   (load-file custom-file))
