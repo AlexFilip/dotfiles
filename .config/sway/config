@@ -5,7 +5,7 @@
 # Mod1 = Alt
 set $mod Mod4
 
-# Variables set for desktop These are the only 
+# Variables set for desktop
 set $SCREEN_PRIMARY   DP-1
 set $SCREEN_SECONDARY HDMI-A-1
 set $SCREEN_LEFT      $SCREEN_SECONDARY
@@ -13,10 +13,6 @@ set $SCREEN_RIGHT     $SCREEN_PRIMARY
 
 output DP-1     mode 3840x2160@59.997Hz position 1920,0
 output HDMI-A-1 mode 1920x1080@60.000Hz position 0,0
-
-# ==============================
-# You should not need to change any screen related variables below this line
-# ==============================
 
 # Home row direction keys, like vim
 set $left  h
@@ -28,14 +24,13 @@ set $PersonalProfileBrave "Profile-Personal"
 set $MainProfileFirefox "default-release"
 set $MainProfileZen "Main"
 
-# Moving around:
-# Move your focus around
+# Focus
 bindsym $mod+$left  focus left
 bindsym $mod+$down  focus down
 bindsym $mod+$up    focus up
 bindsym $mod+$right focus right
 
-# Move the focused window with the same, but add Shift
+# Moving windows
 bindsym $mod+Shift+$left  move left
 bindsym $mod+Shift+$down  move down
 bindsym $mod+Shift+$up    move up
@@ -69,27 +64,6 @@ bindsym $mod+period focus output $SCREEN_RIGHT
 
 bindsym $mod+Shift+comma  move container to output $SCREEN_LEFT
 bindsym $mod+Shift+period move container to output $SCREEN_RIGHT
-
-# Browser (Docs)
-# set $WS1  1 
-# Terminal (work)
-# set $WS2  2 
-# Utilities (misc)
-# set $WS3  3 
-# News
-# set $WS4  4 
-# ToDo List
-# set $WS5  5 
-# Next Up (Opened project windows)
-# set $WS6  6 
-# Reading List
-# set $WS7  7 
-# Process monitor
-# set $WS8  8 
-# Inbox/Messaging
-# set $WS9  9 
-# Music
-# set $WS10 10 
 
 # Move window or focus to workspace depending on current output
 bindsym $mod+1 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 1
@@ -145,34 +119,16 @@ workspace 29:10 output $SCREEN_SECONDARY
 set $main_tmux_session main
 set $editor_title Neovim
 
-# set $term alacritty
-# set $term_app_id_opt --class
-# set $term_title_opt --title
-# set $term_remain_open_opt --hold
-# set $term_exec_opt -e
-
-
-# Currently using footclient for all terminals except `$mod+u t` just in case something goes wrong there
-#   pros:
-#     - single process
-#     - slightly faster load times
-#     - slightly less memory
-#       - single font cache
-#   cons:
-#     - can slow each other down, since wayland communication happens on one thread
-#     - if one term crashes the process, they all go down
 exec foot --server
 set $term foot
 set $term-client footclient
 set $term_app_id_opt --app-id
 set $term_title_opt --title
 set $term_remain_open_opt --hold
-# set $term_exec_opt $""
 
 # lock-wm makes sure the wallpaper is set before activating swaylock
 set $lock lock-wm
 
-# exec ~/bin/go/set-wallpaper &
 exec ~/code/cli-tools/set-wallpaper-go/run-image --no-build &
 
 # Lock after 5 minutes, screen off after 10
@@ -256,8 +212,8 @@ bindsym --input-device=$TrackballMouse --release --whole-window --no-repeat BTN_
 # Kill focused window
 bindsym $mod+Shift+q kill
 
-bindsym $mod+Shift+o move container to scratchpad
-bindsym $mod+o scratchpad show
+bindsym $mod+Shift+o move container to scratchpad, exec pkill -x -SIGRTMIN+2 i3blocks
+bindsym $mod+o scratchpad show, exec pkill -x -SIGRTMIN+2 i3blocks
 
 # Start a terminal
 bindsym $mod+t exec $term-client $term_title_opt Terminal, mode "default"
@@ -316,40 +272,8 @@ mode "Browser" {
     bindsym $mod+p exec open-app brave --profile-directory=$PersonalProfileBrave, mode "default"
     bindsym      p exec open-app brave --profile-directory=$PersonalProfileBrave, mode "default"
 
-    bindsym $mod+f exec open-app firefox -P "$MainProfileFirefox", mode "default"
-    bindsym      f exec open-app firefox -P "$MainProfileFirefox", mode "default"
-
     bindsym $mod+z exec open-app zen -P "$MainProfileZen", mode "default"
     bindsym      z exec open-app zen -P "$MainProfileZen", mode "default"
-
-    # bindsym $mod+l exec open-app librewolf, mode "default"
-    # bindsym      l exec open-app librewolf, mode "default"
-
-    bindsym $mod+v mode "VPNBrowser"
-    bindsym      v mode "VPNBrowser"
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-mode "VPNBrowser" {
-    bindsym $mod+f exec open-app vpn-firefox, mode "default"
-    bindsym      f exec open-app vpn-firefox, mode "default"
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-bindsym $mod+g mode Apps
-mode "Apps" {
-    bindsym $mod+f exec open-app thunar, mode "default"
-    bindsym      f exec open-app thunar, mode "default"
-
-    bindsym      g exec flatpak run org.keepassxc.KeePassXC, mode "default"
-    bindsym $mod+g exec flatpak run org.keepassxc.KeePassXC, mode "default"
-
-    # bindsym $mod+ exec open-app , mode "default"
-    # bindsym       exec open-app , mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -372,59 +296,12 @@ bindsym Print exec [[ -z $(ps aux | awk "/slurp[[:space:]]-d/ && !/[[:space:]]sh
 # mouse button for dragging.
 floating_modifier $mod normal
 
-# Reload the configuration file (and notification center)
 bindsym $mod+Shift+r reload
-# ; exec swaync-client -R
-
-# Notification center
-# bindsym $mod+Shift+n exec swaync-client -t -sw
-# Note: workspaces can have any name you want, not just numbers.
-# We just use 1-10 as the default.
-
-# Scratchpad:
-# Sway has a "scratchpad", which is place to store windows when they're not being used
-# You can send windows there and get them back later.
-
-# bindsym $mod+minus scratchpad show
-# Move the currently focused window to the scratchpad
-# bindsym $mod+Shift+minus move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
 
 # Floating windows
-#   - Each window can be given its own dimensions
 for_window [app_id="fzfmenu"] floating enable, resize set 850 870
-# for_window [app_id="pass_decryption"] floating enable, resize set 850 870
-# for_window [app_id="alsamixer"] floating enable, resize set 1200 800
-# for_window [app_id="bluetoothctl"] floating enable, resize set 1200 800
-# for_window [app_id="network_manager"] floating enable, resize set 1200 800
 for_window [app_id="weather"] floating enable, resize set 1275 900
 for_window [app_id="FloatingTerm"] floating enable, resize set 1600 1800
-# for_window [app_id="thunar" name="File Operation Progress"] floating enable, resize set 1126 821
-
-# for_window [app_id="^org\.mozilla\.Thunderbird$" window_role="[pP]op-up|[bB]ubble|[dD]ialog|task_dialog|About"] floating enable
-# for_window [app_id="^org\.mozilla\.Thunderbird$" window_type="[dD]ialog|menu"] floating enable
-# for_window [app_id="^org\.mozilla\.Thunderbird$" class="[dD]ialog"] floating enable
-
-# for_window [app_id="^org\.mozilla\.Thunderbird$" title="^Edit Event:"] resize set 1126 821
-# for_window [app_id="^org\.mozilla\.Thunderbird$" title="Reminders?$"] resize set 21 ppt 17 ppt, move position 79 ppt 0 ppt
-
-# Resizing containers:
-bindsym $mod+r mode "resize"
-mode "resize" {
-    bindsym $left  resize shrink width  10px
-    bindsym $down  resize grow   height 10px
-    bindsym $up    resize shrink height 10px
-    bindsym $right resize grow   width  10px
-
-    bindsym minus gaps inner all plus  4;  gaps outer all plus  2
-    bindsym equal gaps inner all minus 4;  gaps outer all minus 2
-    bindsym plus  gaps inner all set   12; gaps outer all set   6
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
 
 bindsym $mod+minus gaps inner all plus  4;  gaps outer all plus  2
 bindsym $mod+equal gaps inner all minus 4;  gaps outer all minus 2
@@ -439,10 +316,6 @@ gaps outer 6
 bindsym XF86AudioMute        exec amixer set Master toggle && pkill -x -SIGRTMIN+1 i3blocks
 bindsym XF86AudioRaiseVolume exec amixer set Master 5%+    && pkill -x -SIGRTMIN+1 i3blocks
 bindsym XF86AudioLowerVolume exec amixer set Master 5%-    && pkill -x -SIGRTMIN+1 i3blocks
-
-# bindsym XF86AudioMute        exec pactl set-sink-mute   @DEFAULT_SINK@ toggle
-# bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-# bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 
 # Screen brightness
 bindsym --locked XF86MonBrightnessUp   exec light -S "$(light -G | awk '{ b = int($1 + 5); print (b >   0 ? b :   0) }')"
@@ -459,7 +332,7 @@ titlebar_border_thickness 3
 # Nord colors https://github.com/nordtheme/nord/blob/develop/src/nord.css
 set $border     #81A1C1
 set $text       #eceff4
-set $background #3B4252
+set $background #3E434F
 set $indicator  #8fbcbb
 
 set $background_unfocused #2e3440
@@ -483,6 +356,7 @@ font pango:NotoSans Mono Regular 11
 bar {
     font pango:DejaVu Sans Mono, FontAwesome 12
     position top
+    # workspace_command ~/bin/pvt/swaybar-workspace
     status_command i3blocks
     gaps 4
     strip_workspace_numbers yes
@@ -503,44 +377,5 @@ bar {
 
 include /etc/sway/config.d/*
 
-# Start up background tasks
-# exec swaync
-
 # Notification center
 exec mako
-
-# Launch default applications
-
-# Music/Background
-# workspace $WS10
-# exec open-app brave-browser-stable --profile-directory=$PersonalProfileBrave
-
-# Messaging
-# workspace $WS9
-# exec thunderbird
-# exec open-app signal-desktop
-
-# workspace $WS8
-
-# workspace $WS7
-# exec $editor ~/ToRead-Articles.txt
-
-# workspace $WS6
-# Next Up
-
-# workspace $WS5
-# exec $editor ~/Todo.txt
-
-# News
-# workspace $WS4
-
-# Terminal
-#workspace $WS3
-#exec $term
-
-# Editor
-#workspace $WS2
-#exec $term $term_title_opt $editor_title nvim
-
-# Browser
-#workspace $WS1

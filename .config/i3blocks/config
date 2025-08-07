@@ -1,4 +1,9 @@
 
+[scratchpad]
+command=X="$(swaymsg -t get_tree | jq '.nodes[] | select(.name == "__i3").nodes[] | select(.name == "__i3_scratch").floating_nodes | length')"; if [[ "$X" > 0 ]]; then echo "(S:$X)"; fi
+interval=once
+signal=2
+
 [volume]
 # command=if [[ $button ]]; then alacritty --class alsamixer -e alsamixer; else amixer get Master | sed -nre 's/.*\[off\].*/      muted/p; s/.*\[(.*%)\].*/    \1/p'; fi
 command=amixer get Master | tail -1 | sed -nre 's/.*\[off\].*/      muted/p; s/.*\[(.*%)\].*/    \1/p'
