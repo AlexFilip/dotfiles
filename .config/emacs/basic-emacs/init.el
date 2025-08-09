@@ -42,7 +42,11 @@
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
 (package-initialize)
 
-(require-pkgs 'naysayer-theme 'gruber-darker-theme)
+;; Packages
+(require-pkgs 'bluetooth)
+
+;; Theming
+(require-pkgs 'naysayer-theme)
 (load-theme 'naysayer t)
 
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.config/emacs/themes/"))
