@@ -238,25 +238,13 @@ mode "Terminal" {
     bindsym $mod+h exec $term-client $term_title_opt Htop htop, mode "default"
     bindsym      h exec $term-client $term_title_opt Htop htop, mode "default"
 
-    # Text editor + Tmux
-    bindsym $mod+e exec $term-client $term_title_opt $editor_title tmux new -As editor nvim, mode "default"
-    bindsym      e exec $term-client $term_title_opt $editor_title tmux new -As editor nvim, mode "default"
+    # Emacs + Tmux
+    bindsym $mod+e exec $term-client $term_title_opt $editor_title tmux new -As editor emacs -nw, mode "default"
+    bindsym      e exec $term-client $term_title_opt $editor_title tmux new -As editor emacs -nw, mode "default"
 
-    # Project selector
-    bindsym $mod+p exec $term-client $term_title_opt $editor_title ~/bin/tmux-select-project, mode "default"
-    bindsym      p exec $term-client $term_title_opt $editor_title ~/bin/tmux-select-project, mode "default"
-
-    # VPN Terminal
-    bindsym $mod+v exec $term-client $term_title_opt VPNTerminal docker exec -it vpn-cli bash, mode "default"
-    bindsym      v exec $term-client $term_title_opt VPNTerminal docker exec -it vpn-cli bash, mode "default"
-
-    # File browser (I mainly use a graphical app)
-    # bindsym $mod+f exec $term-client $term_title_opt Ranger /usr/bin/ranger, mode "default"
-    # bindsym      f exec $term-client $term_title_opt Ranger /usr/bin/ranger, mode "default"
-
-    # Floating term
-    bindsym $mod+f exec $term-client $term_app_id_opt FloatingTerm, mode "default"
-    bindsym      f exec $term-client $term_app_id_opt FloatingTerm, mode "default"
+    # Neovim + Tmux
+    bindsym $mod+v exec $term-client $term_title_opt $editor_title tmux new -As editor nvim, mode "default"
+    bindsym      v exec $term-client $term_title_opt $editor_title tmux new -As editor nvim, mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
