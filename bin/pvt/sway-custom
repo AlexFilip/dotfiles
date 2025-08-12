@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # symlink this file in /bin
 #   sudo ln -s $HOME/bin/pvt/sway-custom /bin/sway-custom

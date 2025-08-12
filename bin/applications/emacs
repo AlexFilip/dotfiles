@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 cd "$HOME"
 export SPACEMACSDIR="$HOME/.config/emacs-configs/spacemacs"

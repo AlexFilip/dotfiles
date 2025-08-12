@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # flatpak override --env=SIGNAL_PASSWORD_STORE=gnome-libsecret org.signal.Signal
 exec flatpak run org.signal.Signal --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland "$@"

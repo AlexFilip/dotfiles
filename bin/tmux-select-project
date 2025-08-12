@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 TMUX_SESSION_NAMES="$HOME/.local/tmux-session-names"
 if ! [[ -f $TMUX_SESSION_NAMES ]]; then

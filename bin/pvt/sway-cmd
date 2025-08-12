@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 COMMAND="${1:?"Expected command. Either move_window_to_workspace or move_focus_to_workspace"}"
 WORKSPACE="${2:?"Expected workspace number. {1..10}"}"
