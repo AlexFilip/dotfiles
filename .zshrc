@@ -66,7 +66,7 @@ no-color() {
 
 -prompt-extra-options2() {
     local RESULT=''
-    if $(~/bin/pvt/is-git-repo); then
+    if $(source ~/bin/pvt/is-git-repo); then
         # is a git repo
         RESULT+=" [${RESET_COLOR}$(git branch --show-current)${PROMPT_COLOR}]"
     fi

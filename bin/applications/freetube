@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # flatpak override --user io.freetubeapp.FreeTube --socket=wayland --system-talk-name=org.freedesktop.login1
 exec flatpak run io.freetubeapp.FreeTube --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland "$@"
