@@ -13,7 +13,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export TERMINAL="foot"
 export _JAVA_AWT_WM_NONREPARENTING=1 # For burpsuite
 
-if [[ ":$XDG_DATA_DIRS:" != *"$HOME/.local/share/flatpak/exports/share"* ]]; then
+if [[ -z "$XDG_DATA_DIRS" ]]; then
+    XDG_DATA_DIRS="/usr/local/share/:/usr/share/:/home/alex/.local/share/flatpak/exports/share"
+elif [[ ":$XDG_DATA_DIRS:" != *"$HOME/.local/share/flatpak/exports/share"* ]]; then
     XDG_DATA_DIRS=$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share
 fi
 export XDG_DATA_DIRS
