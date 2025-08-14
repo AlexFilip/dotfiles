@@ -44,6 +44,7 @@
 
 ;; Packages
 (require-pkgs 'bluetooth)
+(require-pkgs 'clojure-mode 'slime)
 
 ;; Theming
 (require-pkgs 'naysayer-theme)
@@ -70,6 +71,9 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (blink-cursor-mode 0)
+
+(ido-mode 1)
+; (ido-everywhere 1)
 
 (when (file-exists-p custom-file)
   (load-file custom-file))
