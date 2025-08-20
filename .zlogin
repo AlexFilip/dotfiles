@@ -1,3 +1,4 @@
+#!/bin/zsh
 
 LOG_FILE=$HOME/zsh-login-error-log
 if [[ "$(tty)" == "/dev/tty1" ]]; then
