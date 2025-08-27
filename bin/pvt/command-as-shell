@@ -1,4 +1,4 @@
-#!/bin/zsh -i
+#!/bin/bash -i
 
 if [[ "$1" != "" ]]; then
     COMMAND="$1"

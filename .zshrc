@@ -194,7 +194,6 @@ alias k='kubectl'
 alias ls='ls --color=auto'
 
 export KEYTIMEOUT=1
-
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
