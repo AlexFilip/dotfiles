@@ -70,8 +70,8 @@ export VISUAL="emacs -nw"
 set -o emacs
 
 # --- Prompt ---
-PROMPT_COLOR="$(tput setaf 3)" # Yellow
-PROMPT_RESET="$(tput sgr0)"
+PROMPT_COLOR="\[$(tput setaf 3)\]" # Yellow
+PROMPT_RESET="\[$(tput sgr0)\]"
 
 -prompt-ssh-info() {
     local RESULT=''
@@ -101,7 +101,16 @@ PROMPT_RESET="$(tput sgr0)"
     echo -n "$RESULT"
 }
 
-PROMPT_COMMAND="-prompt-env-info; -prompt-ssh-info"
-PS1=$'${PROMPT_COLOR}\w\n\$ ${PROMPT_RESET}'
-PS2=$'${PROMPT_COLOR}> ${PROMPT_RESET}'
+PROMPT_COMMAND='PS1="$(-prompt-ssh-info)${PROMPT_COLOR}\w $(-prompt-env-info)\n${PROMPT_COLOR}\$ ${PROMPT_RESET}"'
+PS2="${PROMPT_COLOR}> ${PROMPT_RESET}"
 # --- End Prompt ---
+
+# --- Language specific configs ---
+#   Node
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+#   Rust
+. "$HOME/.cargo/env"
+# --- End Language specific configs ---
