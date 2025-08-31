@@ -7,7 +7,7 @@ export XKB_DEFAULT_OPTIONS=ctrl:nocaps # Caps lock to ctrl
 export GDK_BACKEND=wayland # wayland on GTK apps (if they need X, launch with GDK_BACKEND=x11)
 export MOZ_ENABLE_WAYLAND=1 # Firefox wayland
 export GTK_THEME="Adwaita:light" # Light mode
-export QT_STYLE_OVERRIDE="Adwaita-light" # Light mode for kde apps
+export QT_STYLE_OVERRIDE="Adwaita" # Light mode for kde apps
 export PINENTRY_USER_DATA="curses" # gpg decrypt UI
 export XDG_CONFIG_HOME="$HOME/.config"
 export TERMINAL="foot"
@@ -15,7 +15,9 @@ export _JAVA_AWT_WM_NONREPARENTING=1 # For burpsuite
 
 if [[ -z "$XDG_DATA_DIRS" ]]; then
     XDG_DATA_DIRS="/usr/local/share/:/usr/share/:/home/alex/.local/share/flatpak/exports/share"
-elif [[ ":$XDG_DATA_DIRS:" != *"$HOME/.local/share/flatpak/exports/share"* ]]; then
+fi
+
+if [[ ":$XDG_DATA_DIRS:" != *"$HOME/.local/share/flatpak/exports/share"* ]]; then
     XDG_DATA_DIRS=$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share
 fi
 export XDG_DATA_DIRS

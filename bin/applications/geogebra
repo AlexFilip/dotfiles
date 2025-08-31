@@ -1,4 +1,4 @@
 #!/bin/sh
 
-exec flatpak run org.geogebra.GeoGebra --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland "$@"
+exec flatpak run org.geogebra.GeoGebra "$@"
 
