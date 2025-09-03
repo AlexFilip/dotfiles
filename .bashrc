@@ -31,6 +31,7 @@ alias vim='nvim'
 # useful less flag: -S disables line-wrapping
 alias less='less -mNgiJQuR'
 export LESSHISTFILE="-" # no lesshst
+export HISTCONTROL=ignoreboth # Ignore repeated command and commands that begin with a space
 
 PIP_INSTALL_PATH="$(python3 -m site --user-base)/bin"
 
