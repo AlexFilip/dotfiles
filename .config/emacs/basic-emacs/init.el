@@ -72,6 +72,7 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (blink-cursor-mode 0)
+(global-visual-line-mode t)
 
 (ido-mode 1)
 ; (ido-everywhere 1)
