@@ -16,12 +16,12 @@
   "CUSTOM implementation of all"
   (if (null list)
       t
-      (let ((f (if (symbolp fn)
-		   (symbol-function fn)
-		 fn)))
-	(if (funcall f (car list))
-	    (all f (cdr list))
-	  nil))))
+    (let ((f (if (symbolp fn)
+		 (symbol-function fn)
+	       fn)))
+      (if (funcall f (car list))
+	  (all f (cdr list))
+	nil))))
 
 (defun require-pkg (package-name)
   (unless (package-installed-p package-name)
@@ -52,6 +52,7 @@
 
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.config/emacs/themes/"))
 
+;; Settings
 (let ((backup-file-directory "~/.local/emacs-saves/")
       (auto-save-file-directory temporary-file-directory))
   (make-directory backup-file-directory t)
@@ -67,7 +68,7 @@
  initial-scratch-message nil
  ring-bell-function 'ignore)
 
-(unless (eq system-type 'darwin) (menu-bar-mode -1))
+(unless (eq system-type 'darwin) (menu-bar-mode -1)) ;; Mac's menu bar is always at the top and looks awkward if it's blank
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (blink-cursor-mode 0)
