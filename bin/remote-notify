@@ -1,6 +1,10 @@
 #!/bin/sh
+
+CHANNEL=${1:?"Expected channel"}
+shift
+
 ssh homelab-prod \
     docker compose \
         -f services/ntfy/docker-compose.yaml \
         exec app \
-        /ntfy-secrets/publish "$@"
+        /ntfy-secrets/publish "$CHANNEL" "$*"
