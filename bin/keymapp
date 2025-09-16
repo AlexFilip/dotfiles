@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# All requirements: https://github.com/zsa/wally/wiki/Linux-install
+
+# Packages needed
+# - libwebkit2gtk-4.1-0
+# - libgtk-3-0
+# - libusb-1.0-0
+
+# sudo nvim /etc/udev/rules.d/50-zsa.rules
+# sudo groupadd plugdev
+# sudo usermod -aG plugdev $USER
+
+KEYMAPP_PARENT_DIR="$HOME/bin/pvt"
+KEYMAPP_PATH="$KEYMAPP_PARENT_DIR/keymapp"
+if ! [[ -a "$KEYMAPP_PATH" ]]; then
+    KEYMAPP_TMP_PATH="/tmp/keymapp.tar.gz"
+    wget -O "$KEYMAPP_TMP_PATH" "https://oryx.nyc3.cdn.digitaloceanspaces.com/keymapp/keymapp-latest.tar.gz"
+    tar xzf "$KEYMAPP_TMP_PATH" -C "$KEYMAPP_PARENT_DIR" keymapp
+    rm "$KEYMAPP_TMP_PATH"
+fi
+
+exec "$KEYMAPP_PATH"
