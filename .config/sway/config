@@ -251,21 +251,7 @@ mode "Terminal" {
 }
 
 # Web browser
-bindsym $mod+w mode Browser
-mode "Browser" {
-    # Open default browser
-    bindsym $mod+w exec open-url, mode "default"
-    bindsym      w exec open-url, mode "default"
-
-    bindsym $mod+p exec open-app brave --profile-directory=$PersonalProfileBrave, mode "default"
-    bindsym      p exec open-app brave --profile-directory=$PersonalProfileBrave, mode "default"
-
-    bindsym $mod+z exec open-app zen -P "$MainProfileZen", mode "default"
-    bindsym      z exec open-app zen -P "$MainProfileZen", mode "default"
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
+bindsym $mod+w exec open-url, mode "default"
 
 # Utilities
 # bindsym $mod+bracketright exec $term $term_app_id_opt weather $term_remain_open_opt $HOME/bin/weather
