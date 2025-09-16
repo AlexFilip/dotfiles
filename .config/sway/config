@@ -3,6 +3,7 @@
 ### Variables
 # Logo key. Use Mod1 for Alt.
 # Mod1 = Alt
+# Mod4 = Super (Command or Windows key)
 set $mod Mod4
 
 # Variables set for desktop
@@ -212,6 +213,7 @@ bindsym --input-device=$TrackballMouse --release --whole-window --no-repeat BTN_
 # Kill focused window
 bindsym $mod+Shift+q kill
 
+# Scratchpad
 bindsym $mod+Shift+o move container to scratchpad, exec pkill -x -SIGRTMIN+2 i3blocks
 bindsym $mod+o scratchpad show, exec pkill -x -SIGRTMIN+2 i3blocks
 
