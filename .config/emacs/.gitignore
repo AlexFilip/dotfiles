@@ -1,7 +1,7 @@
 *~
-/basic-emacs/elpa
-/basic-emacs/eln-cache
-/basic-emacs/url
-/basic-emacs/custom.el
+/elpa
+/eln-cache
+/url
+/custom.el
 transient/
 ido.last
