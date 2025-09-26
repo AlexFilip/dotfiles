@@ -1,17 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
 (setq custom-file "~/.config/emacs/custom.el")
 
-(defun some (fn list)
-  "CUSTOM implementation of some"
-  (if (null list)
-      nil
-    (let ((f (if (symbolp fn)
-		 (symbol-function fn)
-	       fn)))
-      (if (funcall f (car list))
-	  t
-	(some f (cdr list))))))
-
 (defun all (fn list)
   "CUSTOM implementation of all"
   (if (null list)
@@ -22,12 +11,6 @@
       (if (funcall f (car list))
 	  (all f (cdr list))
 	nil))))
-
-(defun require-pkg (package-name)
-  (unless (package-installed-p package-name)
-    (package-refresh-contents)
-    (package-install package-name))
-  (require package-name))
 
 (defun require-pkgs (&rest package-names)
   (unless (all 'package-installed-p package-names)
@@ -47,10 +30,12 @@
 (require-pkgs 'clojure-mode 'slime)
 
 ;; Theming
-(require-pkgs 'naysayer-theme)
-(load-theme 'naysayer t)
+(require-pkgs 'naysayer-theme 'doom-themes)
+; (load-theme 'naysayer t)
+(load-theme 'doom-one t)
 
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.config/emacs/themes/"))
+; (load-theme 'custom t)
 
 ;; Settings
 (let ((backup-file-directory "~/.local/emacs-saves/")
