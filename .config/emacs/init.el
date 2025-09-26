@@ -30,12 +30,8 @@
 (require-pkgs 'clojure-mode 'slime)
 
 ;; Theming
-(require-pkgs 'naysayer-theme 'doom-themes)
-; (load-theme 'naysayer t)
-(load-theme 'doom-one t)
-
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.config/emacs/themes/"))
-; (load-theme 'custom t)
+(load-theme 'custom t)
 
 ;; Settings
 (let ((backup-file-directory "~/.local/emacs-saves/")
@@ -57,7 +53,9 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (blink-cursor-mode 0)
-(global-visual-line-mode t)
+
+; Line wraping
+(global-visual-line-mode t) ; Soft-wrap lines
 
 (ido-mode 1)
 ; (ido-everywhere 1)
