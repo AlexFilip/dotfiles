@@ -2,10 +2,10 @@
 
 cd "$HOME"
 
-if ! emacsclient -e 0 >&/dev/null; then
+if ! /usr/local/bin/emacsclient -e 0 >&/dev/null; then
     echo "Starting emacs server" > /dev/stderr
-    emacs --daemon
+    /usr/local/bin/emacs --daemon
 fi
 
-exec emacsclient -c "${@}"
+exec /usr/local/bin/emacsclient -c "${@}"
 
