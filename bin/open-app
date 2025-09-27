@@ -19,9 +19,14 @@ fi
 # export QT_STYLE_OVERRIDE="Adwaita-Dark"
 export GTK_THEME="Adwaita:light"
 export QT_STYLE_OVERRIDE="Adwaita-light"
-export PATH=$HOME/bin/applications:${PATH}
+# export PATH=$HOME/bin/applications:${PATH}
 
 # EXTRA_OPTIONS_CHROMIUM=(--enable-features=UseOzonePlatform --ozone-platform=wayland)
+
+if [[ -n "$(ls "$HOME/bin/applications" | grep "$COMMAND")" ]]; then
+    echo "Opening from bin/applications"
+    COMMAND="$HOME/bin/applications/$COMMAND"
+fi
 
 OPTIONS=("$@")
 echo "Running exec $COMMAND ${EXTRA_OPTIONS[@]} ${OPTIONS[@]}"
