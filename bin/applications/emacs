@@ -1,7 +1,11 @@
 #!/bin/sh
 
 cd "$HOME"
-export SPACEMACSDIR="$HOME/.config/emacs-configs/spacemacs"
-export DOOMDIR="$HOME/.config/emacs-configs/doom"
-exec emacsclient -c -a "${@}" ""
+
+if ! emacsclient -e 0 >&/dev/null; then
+    echo "Starting emacs server" > /dev/stderr
+    emacs --daemon
+fi
+
+exec emacsclient -c "${@}"
 

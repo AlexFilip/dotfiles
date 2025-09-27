@@ -19,7 +19,7 @@ fi
 # export QT_STYLE_OVERRIDE="Adwaita-Dark"
 export GTK_THEME="Adwaita:light"
 export QT_STYLE_OVERRIDE="Adwaita-light"
-export PATH=${PATH}:$HOME/bin/applications
+export PATH=$HOME/bin/applications:${PATH}
 
 # EXTRA_OPTIONS_CHROMIUM=(--enable-features=UseOzonePlatform --ozone-platform=wayland)
 
