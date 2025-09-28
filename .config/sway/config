@@ -221,7 +221,8 @@ bindsym $mod+o scratchpad show, exec pkill -x -SIGRTMIN+2 i3blocks
 bindsym $mod+t exec $term-client $term_title_opt Terminal, mode "default"
 
 # Text editor
-bindsym $mod+e exec $term-client $term_title_opt $editor_title nvim
+# bindsym $mod+e exec $term-client $term_title_opt $editor_title nvim
+bindsym $mod+e exec open-app emacs
 
 # Obsidian (Notes)
 bindsym $mod+n exec open-app obsidian
@@ -241,8 +242,8 @@ mode "Terminal" {
     bindsym      h exec $term-client $term_title_opt Htop htop, mode "default"
 
     # Emacs + Tmux
-    bindsym $mod+e exec $term-client $term_title_opt $editor_title tmux new -As editor emacs -nw, mode "default"
-    bindsym      e exec $term-client $term_title_opt $editor_title tmux new -As editor emacs -nw, mode "default"
+    bindsym $mod+e exec $term-client $term_title_opt $editor_title tmux new -As editor open-app emacs -nw, mode "default"
+    bindsym      e exec $term-client $term_title_opt $editor_title tmux new -As editor open-app emacs -nw, mode "default"
 
     # Neovim + Tmux
     bindsym $mod+v exec $term-client $term_title_opt $editor_title tmux new -As editor nvim, mode "default"
