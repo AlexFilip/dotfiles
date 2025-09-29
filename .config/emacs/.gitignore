@@ -3,5 +3,6 @@
 /eln-cache
 /url
 /custom.el
+/eshell
 transient/
 ido.last
