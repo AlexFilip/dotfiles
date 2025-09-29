@@ -36,10 +36,14 @@
  initial-scratch-message nil
  ring-bell-function 'ignore)
 
+(setq
+ auto-revert-verbose nil)
+
 (unless (eq system-type 'darwin) (menu-bar-mode -1)) ;; Mac's menu bar is always at the top and looks awkward if it's blank
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (blink-cursor-mode 0)
+(global-auto-revert-mode t)
 
 ; Line wraping
 (global-visual-line-mode t) ; Soft-wrap lines
