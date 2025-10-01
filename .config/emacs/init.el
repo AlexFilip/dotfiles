@@ -70,9 +70,9 @@
       org-default-notes-file (concat org-directory "captures.org")
       org-capture-templates
       `(("t" "Todo" entry (file+headline ,(concat org-directory "test.org") "Tasks")
-         "** TODO %?\n  %i\n  %a")
+         "** TODO %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n  %a")
         ("j" "Journal" entry (file+datetree ,(concat org-directory "journal.org"))
-         "** %?\nEntered on %U\n  %i\n  %a")
+         "* %T\n  %?\n  %a")
 	("b" "Bookmark" entry (file+headline ,(concat org-directory "test.org") "Bookmarks")
          "** [[%i][%?]]\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n")
 	("c" "Raw Capture" entry (file+headline ,(concat org-directory "captures.org") "Captures")
