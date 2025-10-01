@@ -1,0 +1,6 @@
+#!/bin/sh
+
+CONTENT="$(wl-paste --primary | sed 's/\\/\\\\/g; s/"/\\"/g' | tr -d '\n')"
+OPTION="${1:?Expected an option for bookmarking}"
+
+exec emacsclient -c -F '((name . "Org Capture"))' --eval "(org-capture-string \"${CONTENT}\" \"${OPTION}\")"
