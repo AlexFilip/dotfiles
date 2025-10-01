@@ -66,8 +66,8 @@ export SBT_OPTS="-Xmx4G"
 
 # export EDITOR=vim
 # export VISUAL=vim
-export EDITOR=emacs
-export VISUAL="emacs -nw"
+export EDITOR=$HOME/bin/applications/emacs
+export VISUAL="$HOME/bin/applications/emacs -nw"
 set -o emacs
 
 # --- Prompt ---
