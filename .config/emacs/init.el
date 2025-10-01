@@ -59,7 +59,6 @@
 ; (ido-everywhere 1)
 
 ;; Org-mode
-(setq org-directory (expand-file-name "~/notes.org/"))
 
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c a") #'org-agenda)
@@ -67,15 +66,22 @@
 
 ;; Org capture templates from https://orgmode.org/manual/Capture-templates.html
 ;; TODO: Make this load from a template directory
-(setq org-default-notes-file (concat org-directory "captures.org")
+(setq org-directory (expand-file-name "~/notes.org/")
+      org-default-notes-file (concat org-directory "captures.org")
       org-capture-templates
       `(("t" "Todo" entry (file+headline ,(concat org-directory "test.org") "Tasks")
-         "* TODO %?\n  %i\n  %a")
+         "** TODO %?\n  %i\n  %a")
         ("j" "Journal" entry (file+datetree ,(concat org-directory "journal.org"))
-         "* %?\nEntered on %U\n  %i\n  %a")
+         "** %?\nEntered on %U\n  %i\n  %a")
 	("b" "Bookmark" entry (file+headline ,(concat org-directory "test.org") "Bookmarks")
-         "* %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n" :empty-lines 1)))
+         "** [[%i][%?]]\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n")
+	("c" "Raw Capture" entry (file+headline ,(concat org-directory "captures.org") "Captures")
+	 "** Captured %U\n%i\n" :empty-lines 1 :immediate-finish t)))
 
+(add-hook 'org-capture-after-finalize-hook
+          (lambda ()
+            (when (equal "Org Capture" (frame-parameter nil 'name))
+              (delete-frame))))
 
 (when (file-exists-p custom-file)
   (load-file custom-file))
