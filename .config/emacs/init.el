@@ -39,6 +39,13 @@
 (setq
  auto-revert-verbose nil)
 
+(defun my/mpv-open (url &optional _new-window)
+  "Open URL in mpv instead of a browser."
+  (interactive (browse-url-interactive-arg "URL: "))
+  (start-process "mpv" nil "mpv" url))
+
+(setq browse-url-handlers '(("youtube\\.com\\|youtu\\.be" . my/mpv-open)))
+
 (unless (eq system-type 'darwin) (menu-bar-mode -1)) ;; Mac's menu bar is always at the top and looks awkward if it's blank
 (tool-bar-mode -1)
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
