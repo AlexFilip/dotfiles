@@ -224,6 +224,19 @@ bindsym $mod+t exec $term-client $term_title_opt Terminal, mode "default"
 # bindsym $mod+e exec $term-client $term_title_opt $editor_title nvim
 bindsym $mod+e exec open-app emacs
 
+bindsym $mod+c mode Capture
+mode "Capture" {
+     bindsym $mod+b exec ~/bin/emacs-capture b, mode "default"
+     bindsym      b exec ~/bin/emacs-capture b, mode "default"
+
+     bindsym $mod+c exec ~/bin/emacs-capture c, mode "default"
+     bindsym      c exec ~/bin/emacs-capture c, mode "default"
+
+     bindsym Return mode "default"
+     bindsym Escape mode "default"
+}
+for_window [title="Org Capture"] floating enable, resize set width 800 px height 600 px, move position center
+
 # Obsidian (Notes)
 bindsym $mod+n exec open-app obsidian
 
