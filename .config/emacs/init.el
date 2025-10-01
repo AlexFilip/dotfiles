@@ -78,6 +78,13 @@
 	("c" "Raw Capture" entry (file+headline ,(concat org-directory "captures.org") "Captures")
 	 "** Captured %U\n%i\n" :empty-lines 1 :immediate-finish t)))
 
+;; Only show capture buffer in single capture window
+(add-hook 'org-capture-mode-hook
+          (lambda ()
+            (when (equal (frame-parameter nil 'name) "Org Capture")
+              (delete-other-windows))))
+
+;; Close the capture window when finished
 (add-hook 'org-capture-after-finalize-hook
           (lambda ()
             (when (equal "Org Capture" (frame-parameter nil 'name))
