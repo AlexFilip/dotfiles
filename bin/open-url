@@ -5,11 +5,22 @@ if [[ $# > 0 ]]; then
     shift
 fi
 
+CONFIG_DIR="$HOME/.config"
+if [[ -n "$XDG_CONFIG_HOME" ]]; then
+    CONFIG_DIR="$XDG_CONFIG_HOME"
+fi
+
+URL_LIST_FILE="$CONFIG_DIR/url-list/open-in-personal-profile"
+
 source ~/bin/pvt/media-predicates
 
+# A way of extracting the domain and extracting it from a url
+# Does not match all urls, ex. ones with 'user:pass@', but I think this would get a good early check and it would make it easier to open certain domains in certain sites
+# echo "$URL" | awk '/^https:\/\/[A-z\.]+/ {match($0, /^https:\/\/([A-z\.]+)/, r); print r[1]}'
+
 should_open_in_personal_profile() {
-    if [[ "$1" =~ ^https?://([a-z]+\.)*((openai|chatgpt|cloudflare|tailscale|mail\.google|calendar\.google|github)\.com|(proton)\.me) ]]; then
-        return 0
+    if [[ -f "$URL_LIST_FILE" ]] && [[ -n $(grep "$1" "$URL_LIST_FILE") ]]; then
+	return 0
     fi
     return 1
 }
@@ -29,4 +40,3 @@ else
     DEFAULT_BROWSER=zen # -P Main
     exec open-app "$DEFAULT_BROWSER" "$@" $URL
 fi
-
