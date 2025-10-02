@@ -9,13 +9,64 @@
 ;; Packages
 (use-package bluetooth :ensure t)
 
+(defun my/mpv-open (url &optional _new-window)
+  "Open URL in mpv instead of a browser."
+  (interactive (browse-url-interactive-arg "URL: "))
+  (start-process "mpv" nil "mpv" url))
+(setq browse-url-handlers '(("youtube\\.com\\|youtu\\.be" . my/mpv-open)))
+
+(use-package org
+  :bind
+  (("C-c l" . org-store-link)
+   ("C-c a" . org-agenda)
+   ("C-c c" . org-capture)))
+
+;; Org capture templates from https://orgmode.org/manual/Capture-templates.html
+;; TODO: Make this load from a template directory
+(setq org-directory (expand-file-name "~/notes.org/")
+      org-default-notes-file (concat org-directory "captures.org")
+      org-capture-templates
+      `(("t" "Todo" entry (file+headline ,(concat org-directory "test.org") "Tasks")
+         "** TODO %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n  %a")
+        ("j" "Journal" entry (file+datetree ,(concat org-directory "journal.org"))
+         "* %T\n  %?\n  %a")
+	("b" "Bookmark" entry (file+headline ,(concat org-directory "test.org") "Bookmarks")
+         "** [[%i][%?]]\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n")
+	("c" "Raw Capture" entry (file+headline ,(concat org-directory "captures.org") "Captures")
+	 "** Captured %U\n%i\n" :empty-lines 1 :immediate-finish t)))
+
+;; Only show capture buffer in single capture window
+(add-hook 'org-capture-mode-hook
+          (lambda ()
+            (when (equal (frame-parameter nil 'name) "Org Capture")
+              (delete-other-windows))))
+
+;; Close the capture window when finished
+(add-hook 'org-capture-after-finalize-hook
+          (lambda ()
+            (when (equal "Org Capture" (frame-parameter nil 'name))
+              (delete-frame))))
+
 (use-package clojure-mode :ensure t)
 (use-package slime :ensure t)
 
 (use-package magit :ensure t)
 
-(use-package elfeed :ensure t)
-(use-package elfeed-org :ensure t)
+(use-package elfeed
+  :ensure t
+  :bind
+  (("C-x w" . elfeed)))
+(use-package elfeed-goodies
+  :ensure t
+  :config
+  (elfeed-goodies/setup))
+(use-package elfeed-org
+  :ensure t
+  :after (elfeed org)
+  :config
+  (elfeed-org))
+(setq rmh-elfeed-org-files (list "~/notes.org/RSS Feeds.org"))
+
 ;; Theming
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.config/emacs/themes/"))
 (load-theme 'custom t)
@@ -57,38 +108,6 @@
 
 (ido-mode 1)
 ; (ido-everywhere 1)
-
-;; Org-mode
-
-(global-set-key (kbd "C-c l") #'org-store-link)
-(global-set-key (kbd "C-c a") #'org-agenda)
-(global-set-key (kbd "C-c c") #'org-capture)
-
-;; Org capture templates from https://orgmode.org/manual/Capture-templates.html
-;; TODO: Make this load from a template directory
-(setq org-directory (expand-file-name "~/notes.org/")
-      org-default-notes-file (concat org-directory "captures.org")
-      org-capture-templates
-      `(("t" "Todo" entry (file+headline ,(concat org-directory "test.org") "Tasks")
-         "** TODO %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n  %a")
-        ("j" "Journal" entry (file+datetree ,(concat org-directory "journal.org"))
-         "* %T\n  %?\n  %a")
-	("b" "Bookmark" entry (file+headline ,(concat org-directory "test.org") "Bookmarks")
-         "** [[%i][%?]]\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n")
-	("c" "Raw Capture" entry (file+headline ,(concat org-directory "captures.org") "Captures")
-	 "** Captured %U\n%i\n" :empty-lines 1 :immediate-finish t)))
-
-;; Only show capture buffer in single capture window
-(add-hook 'org-capture-mode-hook
-          (lambda ()
-            (when (equal (frame-parameter nil 'name) "Org Capture")
-              (delete-other-windows))))
-
-;; Close the capture window when finished
-(add-hook 'org-capture-after-finalize-hook
-          (lambda ()
-            (when (equal "Org Capture" (frame-parameter nil 'name))
-              (delete-frame))))
 
 (when (file-exists-p custom-file)
   (load-file custom-file))
