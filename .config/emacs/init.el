@@ -19,11 +19,10 @@
   :bind
   (("C-c l" . org-store-link)
    ("C-c a" . org-agenda)
-   ("C-c c" . org-capture)))
+   ("C-c c" . org-capture))
 
-;; Org capture templates from https://orgmode.org/manual/Capture-templates.html
-;; TODO: Make this load from a template directory
-(setq org-directory (expand-file-name "~/notes.org/")
+  :config
+  (setq org-directory (expand-file-name "~/notes.org/")
       org-default-notes-file (concat org-directory "captures.org")
       org-capture-templates
       `(("t" "Todo" entry (file+headline ,(concat org-directory "test.org") "Tasks")
@@ -35,17 +34,16 @@
 	("c" "Raw Capture" entry (file+headline ,(concat org-directory "captures.org") "Captures")
 	 "** Captured %U\n%i\n" :empty-lines 1 :immediate-finish t)))
 
-;; Only show capture buffer in single capture window
-(add-hook 'org-capture-mode-hook
-          (lambda ()
-            (when (equal (frame-parameter nil 'name) "Org Capture")
-              (delete-other-windows))))
-
-;; Close the capture window when finished
-(add-hook 'org-capture-after-finalize-hook
-          (lambda ()
-            (when (equal "Org Capture" (frame-parameter nil 'name))
-              (delete-frame))))
+  ;; Org capture templates from https://orgmode.org/manual/Capture-templates.html
+  :hook
+  ;; Only show capture buffer in single capture window
+  ((org-capture-mode . (lambda ()
+			 (when (equal (frame-parameter nil 'name) "Org Capture")
+			   (delete-other-windows))))
+   ;; Close the capture window when finished
+   (org-capture-after-finalize . (lambda ()
+				   (when (equal "Org Capture" (frame-parameter nil 'name))
+				     (delete-frame))))))
 
 (use-package clojure-mode :ensure t)
 (use-package slime :ensure t)
@@ -56,15 +54,19 @@
   :ensure t
   :bind
   (("C-x w" . elfeed)))
+
 (use-package elfeed-goodies
   :ensure t
+  :after (elfeed)
   :config
   (elfeed-goodies/setup))
+
 (use-package elfeed-org
   :ensure t
   :after (elfeed org)
   :config
   (elfeed-org))
+
 (setq rmh-elfeed-org-files (list "~/notes.org/RSS Feeds.org"))
 
 ;; Theming
