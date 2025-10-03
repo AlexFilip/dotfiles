@@ -6,7 +6,8 @@
       (string-red "#F34F57")
       (comment-green "#98be65")
       (constant-yellow "#d8d895")
-      (preproc-brown "#B5835A"))
+      (preproc-brown "#B5835A")
+      (org-source-code-light-gray "#808080"))
   (custom-theme-set-faces
    'custom
 
@@ -42,6 +43,11 @@
    `(minibuffer-prompt ((t (:foreground ,foreground))))
    `(header-line ((t (:foreground "#acacac" :background "#444444"))))
 
+   ;; Org inline code (=like this=)
+   `(org-code ((t (:foreground ,org-source-code-light-gray))))
+   ;; Org verbatim (~like this~)
+   `(org-verbatim ((t (:foreground ,org-source-code-light-gray))))
+   
    ;; Make the fringe same as background
    `(fringe ((t (:background ,background))))
    ;; Make vertical borders same as background
