@@ -27,10 +27,13 @@
       org-capture-templates
       `(("t" "Todo" entry (file+headline ,(concat org-directory "test.org") "Tasks")
          "** TODO %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n  %a")
+
         ("j" "Journal" entry (file+datetree ,(concat org-directory "journal.org"))
          "* %T\n  %?\n  %a")
+
 	("b" "Bookmark" entry (file+headline ,(concat org-directory "test.org") "Bookmarks")
          "** [[%i][%?]]\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n")
+
 	("c" "Raw Capture" entry (file+headline ,(concat org-directory "captures.org") "Captures")
 	 "** Captured %U\n%i\n" :empty-lines 1 :immediate-finish t)))
 
