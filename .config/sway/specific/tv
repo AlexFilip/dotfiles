@@ -2,8 +2,8 @@
 set $SCREEN_PRIMARY   HDMI-A-1
 set $SCREEN_SECONDARY eDP-1
 
-output eDP-1    mode 1920x1080@59.997Hz position 1920,0
-output HDMI-A-1 mode 1920x1080@60.000Hz position 0,1080
+output eDP-1    mode 1920x1080@59.997Hz position 3840,2160
+output HDMI-A-1 mode 3840x2160@30.000Hz position 0,0
 
 # Assign workspace to output
 workspace 10:1  output $SCREEN_PRIMARY
