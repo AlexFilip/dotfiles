@@ -6,24 +6,16 @@
 # Mod4 = Super (Command or Windows key)
 set $mod Mod4
 
-# Variables set for desktop
-set $SCREEN_PRIMARY   DP-1
-set $SCREEN_SECONDARY HDMI-A-1
-set $SCREEN_LEFT      $SCREEN_SECONDARY
-set $SCREEN_RIGHT     $SCREEN_PRIMARY
-
-output DP-1     mode 3840x2160@59.997Hz position 1920,0
-output HDMI-A-1 mode 1920x1080@60.000Hz position 0,0
+# Include machine-specific configuration
+# Path is expanded to 
+# Docs: https://i3wm.org/docs/userguide.html#include
+include specific/`hostname`
 
 # Home row direction keys, like vim
 set $left  h
 set $down  j
 set $up    k
 set $right l
-
-set $PersonalProfileBrave "Profile-Personal"
-set $MainProfileFirefox "default-release"
-set $MainProfileZen "Main"
 
 # Focus
 bindsym $mod+$left  focus left
@@ -55,9 +47,9 @@ bindsym $mod+Shift+f floating toggle
 # Swap focus between the tiling area and the floating area
 # bindsym $mod+ focus mode_toggle
 
-# Enable for now, because of IntelliJ & Signal
-# xwayland disable
-xwayland enable
+# All of the apps I use currently use wayland
+xwayland disable
+# xwayland enable
 
 # Workspaces:
 bindsym $mod+comma  focus output $SCREEN_LEFT
@@ -91,30 +83,6 @@ bindsym $mod+Shift+7 exec ~/bin/pvt/sway-cmd move_window_to_workspace 7
 bindsym $mod+Shift+8 exec ~/bin/pvt/sway-cmd move_window_to_workspace 8
 bindsym $mod+Shift+9 exec ~/bin/pvt/sway-cmd move_window_to_workspace 9
 bindsym $mod+Shift+0 exec ~/bin/pvt/sway-cmd move_window_to_workspace 10
-
-# Assign workspace to output
-workspace 10:1  output $SCREEN_PRIMARY
-workspace 11:2  output $SCREEN_PRIMARY
-workspace 12:3  output $SCREEN_PRIMARY
-workspace 13:4  output $SCREEN_PRIMARY
-workspace 14:5  output $SCREEN_PRIMARY
-workspace 15:6  output $SCREEN_PRIMARY
-workspace 16:7  output $SCREEN_PRIMARY
-workspace 17:8  output $SCREEN_PRIMARY
-workspace 18:9  output $SCREEN_PRIMARY
-workspace 19:10 output $SCREEN_PRIMARY
-
-# Secondary screen
-workspace 20:1  output $SCREEN_SECONDARY
-workspace 21:2  output $SCREEN_SECONDARY
-workspace 22:3  output $SCREEN_SECONDARY
-workspace 23:4  output $SCREEN_SECONDARY
-workspace 24:5  output $SCREEN_SECONDARY
-workspace 25:6  output $SCREEN_SECONDARY
-workspace 26:7  output $SCREEN_SECONDARY
-workspace 27:8  output $SCREEN_SECONDARY
-workspace 28:9  output $SCREEN_SECONDARY
-workspace 29:10 output $SCREEN_SECONDARY
 
 # Applications
 set $main_tmux_session main
@@ -371,7 +339,12 @@ bar {
     }
 }
 
-include /etc/sway/config.d/*
+# include /etc/sway/config.d/*
+# This is all I really used from /etc/sway/config.d/50-systemd-user.conf
+exec systemctl --user import-environment WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+
+exec hash dbus-update-activation-environment 2>/dev/null && \
+        dbus-update-activation-environment --systemd WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
 
 # Notification center
 exec mako
