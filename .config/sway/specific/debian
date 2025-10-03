@@ -1,0 +1,16 @@
+# Variables set for laptop
+set $SCREEN_PRIMARY   eDP-1
+
+output eDP-1 mode 1920x1080@60.031Hz position 0,0
+
+# Assign workspace to output
+workspace 10:1  output $SCREEN_PRIMARY
+workspace 11:2  output $SCREEN_PRIMARY
+workspace 12:3  output $SCREEN_PRIMARY
+workspace 13:4  output $SCREEN_PRIMARY
+workspace 14:5  output $SCREEN_PRIMARY
+workspace 15:6  output $SCREEN_PRIMARY
+workspace 16:7  output $SCREEN_PRIMARY
+workspace 17:8  output $SCREEN_PRIMARY
+workspace 18:9  output $SCREEN_PRIMARY
+workspace 19:10 output $SCREEN_PRIMARY
