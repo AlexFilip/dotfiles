@@ -1,0 +1,33 @@
+# Variables set for tv laptop
+set $SCREEN_PRIMARY   HDMI-A-1
+set $SCREEN_SECONDARY eDP-1
+
+output eDP-1    mode 1920x1080@59.997Hz position 1920,0
+output HDMI-A-1 mode 1920x1080@60.000Hz position 0,1080
+
+# Assign workspace to output
+workspace 10:1  output $SCREEN_PRIMARY
+workspace 11:2  output $SCREEN_PRIMARY
+workspace 12:3  output $SCREEN_PRIMARY
+workspace 13:4  output $SCREEN_PRIMARY
+workspace 14:5  output $SCREEN_PRIMARY
+workspace 15:6  output $SCREEN_PRIMARY
+workspace 16:7  output $SCREEN_PRIMARY
+workspace 17:8  output $SCREEN_PRIMARY
+workspace 18:9  output $SCREEN_PRIMARY
+workspace 19:10 output $SCREEN_PRIMARY
+
+# Secondary screen
+workspace 20:1  output $SCREEN_SECONDARY
+workspace 21:2  output $SCREEN_SECONDARY
+workspace 22:3  output $SCREEN_SECONDARY
+workspace 23:4  output $SCREEN_SECONDARY
+workspace 24:5  output $SCREEN_SECONDARY
+workspace 25:6  output $SCREEN_SECONDARY
+workspace 26:7  output $SCREEN_SECONDARY
+workspace 27:8  output $SCREEN_SECONDARY
+workspace 28:9  output $SCREEN_SECONDARY
+workspace 29:10 output $SCREEN_SECONDARY
+
+workspace 20:1
+workspace 10:1
