@@ -26,7 +26,6 @@ no-color() {
 
 alias ls='ls --color=auto'
 alias dotfiles="/usr/bin/git --work-tree=$HOME --git-dir=$HOME/.rc-files"
-alias vim='nvim'
 
 # useful less flag: -S disables line-wrapping
 alias less='less -mNgiJQuR'
