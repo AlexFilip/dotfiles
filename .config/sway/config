@@ -211,6 +211,9 @@ mode "Capture" {
 }
 for_window [title="Org Capture"] floating enable, resize set width 800 px height 600 px, move position center
 
+# MPV
+bindsym $mod+m exec mpv "$(wl-paste --primary)"
+
 # Obsidian (Notes)
 bindsym $mod+n exec open-app obsidian
 
