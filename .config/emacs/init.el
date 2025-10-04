@@ -70,6 +70,37 @@
   :config
   (elfeed-org))
 
+(use-package org-mpv-notes
+  :ensure t
+  :commands (org-mpv-notes-mode org-mpv-notes-open)
+  :hook (org-mode . org-mpv-notes-setup-link))
+
+(use-package mpv
+  :pin melpa
+  :ensure t)
+
+(use-package elfeed-tube
+  :ensure t
+  :after elfeed
+  :demand t
+  :config
+  ;; (setq elfeed-tube-auto-save-p nil) ; default value
+  ;; (setq elfeed-tube-auto-fetch-p t)  ; default value
+  (elfeed-tube-setup)
+
+  :bind (:map elfeed-show-mode-map
+         ("F" . elfeed-tube-fetch)
+         ([remap save-buffer] . elfeed-tube-save)
+         :map elfeed-search-mode-map
+         ("F" . elfeed-tube-fetch)
+         ([remap save-buffer] . elfeed-tube-save)))
+
+(use-package elfeed-tube-mpv
+  :ensure t
+  :bind (:map elfeed-show-mode-map
+              ("C-c C-f" . elfeed-tube-mpv-follow-mode)
+              ("C-c C-w" . elfeed-tube-mpv-where)))
+
 (setq rmh-elfeed-org-files (list "~/notes.org/RSS Feeds.org"))
 
 ;; Theming
