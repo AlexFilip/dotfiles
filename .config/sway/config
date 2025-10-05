@@ -207,6 +207,9 @@ mode "Capture" {
      bindsym $mod+j exec ~/bin/emacs-capture j, mode "default"
      bindsym      j exec ~/bin/emacs-capture j, mode "default"
 
+     bindsym $mod+i exec ~/bin/emacs-capture i, mode "default"
+     bindsym      i exec ~/bin/emacs-capture i, mode "default"
+
      bindsym Return mode "default"
      bindsym Escape mode "default"
 }
