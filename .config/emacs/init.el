@@ -25,16 +25,16 @@
   (setq org-directory (expand-file-name "~/notes.org/")
       org-default-notes-file (concat org-directory "captures.org")
       org-capture-templates
-      `(("t" "Todo" entry (file+headline ,(concat org-directory "test.org") "Tasks")
+      `(("t" "Todo" entry (file+headline ,(concat org-directory "remote/Reminders.org") "Tasks")
          "** TODO %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n  %a")
 
-        ("j" "Journal" entry (file+datetree ,(concat org-directory "journal.org"))
+        ("j" "Journal" entry (file+datetree ,(concat org-directory "Journal.org"))
          "* %T\n  %?\n  %a")
 
-	("b" "Bookmark" entry (file+headline ,(concat org-directory "test.org") "Bookmarks")
+	("b" "Bookmark" entry (file+headline ,(concat org-directory "remote/Captures.org") "Bookmarks")
          "** [[%i][%?]]\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n")
 
-	("c" "Raw Capture" entry (file+headline ,(concat org-directory "captures.org") "Captures")
+	("c" "Raw Capture" entry (file+headline ,(concat org-directory "remote/Captures.org") "Captures")
 	 "** Captured %U\n%i\n" :empty-lines 1 :immediate-finish t)))
 
   ;; Org capture templates from https://orgmode.org/manual/Capture-templates.html
@@ -101,7 +101,7 @@
               ("C-c C-f" . elfeed-tube-mpv-follow-mode)
               ("C-c C-w" . elfeed-tube-mpv-where)))
 
-(setq rmh-elfeed-org-files (list "~/notes.org/RSS Feeds.org"))
+(setq rmh-elfeed-org-files (list "~/notes.org/remote/RSS-Feeds.org"))
 
 ;; Theming
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.config/emacs/themes/"))
