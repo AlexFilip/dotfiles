@@ -1,3 +1,4 @@
+
 # Complete reference: `man 5 sway`
 
 ### Variables
@@ -98,7 +99,7 @@ set $term_remain_open_opt --hold
 # lock-wm makes sure the wallpaper is set before activating swaylock
 set $lock lock-wm
 
-exec_always $HOME/code/cli-tools/set-wallpaper-go/run-image --no-build &
+exec_always set-wallpaper &
 
 # Lock after 5 minutes, screen off after 10
 # Screen locking
@@ -228,8 +229,8 @@ mode "Terminal" {
     bindsym      m exec $term-client $term_title_opt Tmux tmux new -As $main_tmux_session, mode "default"
 
     # Htop
-    bindsym $mod+h exec $term-client $term_title_opt Htop htop, mode "default"
-    bindsym      h exec $term-client $term_title_opt Htop htop, mode "default"
+    bindsym $mod+h exec $term-client $term_title_opt Tmux tmux new -As $main_tmux_session htop, mode "default"
+    bindsym      h exec $term-client $term_title_opt Tmux tmux new -As $main_tmux_session htop, mode "default"
 
     # Emacs + Tmux
     bindsym $mod+e exec $term-client $term_title_opt $editor_title tmux new -As editor open-app emacs -nw, mode "default"
