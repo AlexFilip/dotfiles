@@ -26,6 +26,7 @@ no-color() {
 
 alias ls='ls --color=auto'
 alias dotfiles="/usr/bin/git --work-tree=$HOME --git-dir=$HOME/.rc-files"
+alias dotfilescp="dotfiles commit -a && dotfiles pull --rebase && dotfiles push"
 
 # useful less flag: -S disables line-wrapping
 alias less='less -mNgiJQuR'
