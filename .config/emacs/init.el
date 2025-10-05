@@ -35,7 +35,9 @@
          "** [[%i][%?]]\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n")
 
 	("c" "Raw Capture" entry (file+headline ,(concat org-directory "remote/Captures.org") "Captures")
-	 "** Captured %U\n%i\n" :empty-lines 1 :immediate-finish t)))
+	 "** Captured %U\n%i\n" :empty-lines 1 :immediate-finish t)
+
+	("i" "Idea" entry (file+headline ,(concat org-directory "remote/Captures.org") "Captures") "** %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n")))
 
   ;; Org capture templates from https://orgmode.org/manual/Capture-templates.html
   :hook
