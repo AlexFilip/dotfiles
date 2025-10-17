@@ -110,16 +110,29 @@
 (load-theme 'custom t)
 
 ;; Settings
+
+(defun my-go-mode-hook ()
+  "Customizations for Go mode."
+  (setq indent-tabs-mode t)
+  (setq tab-width 4)
+  (when (boundp 'go-ts-mode-indent-offset)
+    (setq go-ts-mode-indent-offset tab-width)))
+(add-hook 'go-mode-hook 'my-go-mode-hook)
+
+
+
 (let ((backup-file-directory "~/.local/emacs-saves/")
       (auto-save-file-directory temporary-file-directory))
   (make-directory backup-file-directory t)
-  (setq auto-save-file-name-transforms `(("." ,auto-save-file-directory t)))
-  (setq auto-save-no-message t)
-  (setq auto-save-default nil)
-  (setq backup-directory-alist `(("." . ,backup-file-directory)))
-  (setq backup-by-copying t))
+  (setq
+   auto-save-file-name-transforms `(("." ,auto-save-file-directory t))
+   auto-save-no-message t
+   auto-save-default nil
+   backup-directory-alist `(("." . ,backup-file-directory))
+   backup-by-copying t))
 
 (setq-default
+ tab-width 4
  inhibit-startup-message t
  inhibit-startup-screen t
  initial-scratch-message nil
