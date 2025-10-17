@@ -1,0 +1,5 @@
+video/*; mpv %s
+audio/*; mpv %s
+image/*; imv-wayland %s
+
+application/pdf; zathura %s
