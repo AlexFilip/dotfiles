@@ -1,5 +1,5 @@
 video/*; mpv %s
-audio/*; mpv %s
+audio/*; mpv --force-window %s
 image/*; imv-wayland %s
 
 application/pdf; zathura %s

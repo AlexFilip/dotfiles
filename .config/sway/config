@@ -12,23 +12,17 @@ set $mod Mod4
 # Docs: https://i3wm.org/docs/userguide.html#include
 include specific/`hostname`
 
-# Home row direction keys, like vim
-set $left  h
-set $down  j
-set $up    k
-set $right l
-
 # Focus
-bindsym $mod+$left  focus left
-bindsym $mod+$down  focus down
-bindsym $mod+$up    focus up
-bindsym $mod+$right focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # Moving windows
-bindsym $mod+Shift+$left  move left
-bindsym $mod+Shift+$down  move down
-bindsym $mod+Shift+$up    move up
-bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # Layout control
 bindsym $mod+z split horizontal; layout tabbed
@@ -183,8 +177,8 @@ bindsym --input-device=$TrackballMouse --release --whole-window --no-repeat BTN_
 bindsym $mod+Shift+q kill
 
 # Scratchpad
-bindsym $mod+Shift+o move container to scratchpad, exec pkill -x -SIGRTMIN+2 i3blocks
-bindsym $mod+o scratchpad show, exec pkill -x -SIGRTMIN+2 i3blocks
+bindsym $mod+Shift+i move container to scratchpad, exec pkill -x -SIGRTMIN+2 i3blocks
+bindsym $mod+i scratchpad show, exec pkill -x -SIGRTMIN+2 i3blocks
 
 # Start a terminal
 bindsym $mod+t exec $term-client $term_title_opt Terminal, mode "default"
@@ -356,3 +350,57 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 
 # Notification center
 exec mako
+
+# bindsym $mod+a nop
+bindsym $mod+b nop
+# bindsym $mod+c nop
+bindsym $mod+d nop
+# bindsym $mod+e nop
+# bindsym $mod+f nop
+bindsym $mod+g nop
+# bindsym $mod+h nop
+# bindsym $mod+i nop
+# bindsym $mod+j nop
+# bindsym $mod+k nop
+# bindsym $mod+l nop
+# bindsym $mod+m nop
+# bindsym $mod+n nop
+bindsym $mod+o nop
+bindsym $mod+p nop
+bindsym $mod+q nop
+bindsym $mod+r nop
+# bindsym $mod+s nop
+# bindsym $mod+t nop
+# bindsym $mod+u nop
+# bindsym $mod+v nop
+# bindsym $mod+w nop
+# bindsym $mod+x nop
+bindsym $mod+y nop
+# bindsym $mod+z nop
+
+bindsym $mod+Shift+a nop
+bindsym $mod+Shift+b nop
+bindsym $mod+Shift+c nop
+bindsym $mod+Shift+d nop
+bindsym $mod+Shift+e nop
+# bindsym $mod+Shift+f nop
+bindsym $mod+Shift+g nop
+# bindsym $mod+Shift+h nop
+# bindsym $mod+Shift+i nop
+# bindsym $mod+Shift+j nop
+# bindsym $mod+Shift+k nop
+# bindsym $mod+Shift+l nop
+bindsym $mod+Shift+m nop
+bindsym $mod+Shift+n nop
+bindsym $mod+Shift+o nop
+bindsym $mod+Shift+p nop
+# bindsym $mod+Shift+q nop
+# bindsym $mod+Shift+r nop
+bindsym $mod+Shift+s nop
+bindsym $mod+Shift+t nop
+bindsym $mod+Shift+u nop
+bindsym $mod+Shift+v nop
+bindsym $mod+Shift+w nop
+bindsym $mod+Shift+x nop
+bindsym $mod+Shift+y nop
+bindsym $mod+Shift+z nop
