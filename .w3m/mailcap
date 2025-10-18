@@ -1,5 +1,11 @@
-video/*; mpv %s
-audio/*; mpv --force-window %s
-image/*; imv-wayland %s
+video/*; mpv %u >> /home/alex/mpv.log 2>&1
+audio/*; mpv --force-window %u >> /home/alex/mpv.log 2>&1
+
+# M3U and M3U8 Files
+audio/mpegurl;                 mpv --force-window %u >> /home/alex/mpv.log 2>&1
+audio/x-mpegurl;               mpv --force-window %u >> /home/alex/mpv.log 2>&1
+application/vnd.apple.mpegurl; mpv --force-window %u >> /home/alex/mpv.log 2>&1
+
+image/*; imv-wayland %u
 
 application/pdf; zathura %s
