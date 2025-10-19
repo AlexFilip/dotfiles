@@ -8,7 +8,7 @@ flatpak uninstall --unused -y
 
 if [[ -n "$(which rustup)" ]]; then
     echo "Updating Rust"
-    rustup update -y
+    rustup update
 fi
 
 if [[ -n "$(which npx)" ]]; then
