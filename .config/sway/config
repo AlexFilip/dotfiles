@@ -184,9 +184,10 @@ bindsym $mod+i scratchpad show, exec pkill -x -SIGRTMIN+2 i3blocks
 bindsym $mod+t exec $term-client $term_title_opt Terminal, mode "default"
 
 # Text editor
-# bindsym $mod+e exec $term-client $term_title_opt $editor_title nvim
-bindsym $mod+e exec open-app emacs
+bindsym $mod+e exec $term-client $term_title_opt $editor_title nvim
 
+# Emacs
+bindsym $mod+q exec open-app emacs
 bindsym $mod+c mode Capture
 mode "Capture" {
      bindsym $mod+b exec ~/bin/emacs-capture b, mode "default"
@@ -367,7 +368,7 @@ bindsym $mod+g nop
 # bindsym $mod+n nop
 bindsym $mod+o nop
 bindsym $mod+p nop
-bindsym $mod+q nop
+# bindsym $mod+q nop
 bindsym $mod+r nop
 # bindsym $mod+s nop
 # bindsym $mod+t nop
