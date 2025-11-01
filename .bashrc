@@ -29,6 +29,9 @@ alias dotfiles="/usr/bin/git --work-tree=$HOME --git-dir=$HOME/.rc-files"
 alias dfcp="dotfiles commit -a && dotfiles pull --rebase && dotfiles push"
 alias dfpu="dotfiles pull"
 
+alias tf='terraform'
+alias k='kubectl'
+
 # useful less flag: -S disables line-wrapping
 alias less='less -mNgiJQuR'
 export LESSHISTFILE="-" # no lesshst
