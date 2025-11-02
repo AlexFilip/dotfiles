@@ -160,16 +160,16 @@ input type:touchpad {
 # BTN_FORWARD is already set to scroll above
 
 # Fn1 button
-# bindsym --input-device=$TrackballMouse           --whole-window --no-repeat BTN_FORWARD exec ~/bin/pvt/elecom-mouse-fn-button Fn1 down
-# bindsym --input-device=$TrackballMouse --release --whole-window --no-repeat BTN_FORWARD exec ~/bin/pvt/elecom-mouse-fn-button Fn1 up
+bindsym --input-device=$TrackballMouse           --whole-window --no-repeat BTN_FORWARD nop
+bindsym --input-device=$TrackballMouse --release --whole-window --no-repeat BTN_FORWARD nop
 
 # Fn2 button
 bindsym --input-device=$TrackballMouse           --whole-window --no-repeat BTN_BACK seat - cursor press   BTN_MIDDLE
 bindsym --input-device=$TrackballMouse --release --whole-window --no-repeat BTN_BACK seat - cursor release BTN_MIDDLE
 
 # Fn3 Button
-# bindsym --input-device=$TrackballMouse           --whole-window --no-repeat BTN_TASK exec ~/bin/pvt/elecom-mouse-fn-button Fn3 down
-# bindsym --input-device=$TrackballMouse --release --whole-window --no-repeat BTN_TASK exec ~/bin/pvt/elecom-mouse-fn-button Fn3 up
+bindsym --input-device=$TrackballMouse           --whole-window --no-repeat BTN_TASK nop
+bindsym --input-device=$TrackballMouse --release --whole-window --no-repeat BTN_TASK nop
 
 ### Key bindings
 
