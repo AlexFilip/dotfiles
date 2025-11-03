@@ -22,22 +22,27 @@
    ("C-c c" . org-capture))
 
   :config
-  (setq org-directory (expand-file-name "~/notes.org/")
-      org-default-notes-file (concat org-directory "captures.org")
-      org-capture-templates
-      `(("t" "Todo" entry (file+headline ,(concat org-directory "remote/Reminders.org") "Tasks")
-         "** TODO %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n  %a")
+  (let ((captures-file  "00 - Captures.org")
+		(reminders-file "01 - Reminders.org")
+		(todo-file      "02 - TODO.org")
+		(journal-file   "Journal.org"))
+	(setq org-directory (expand-file-name "~/notes.org/")
+		  org-default-notes-file (concat org-directory captures-file)
+		  org-capture-templates
+		  `(("t" "Todo" entry (file+headline ,(concat org-directory reminders-file) "Tasks")
+			 "** TODO %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n  %a")
 
-        ("j" "Journal" entry (file+datetree ,(concat org-directory "Journal.org"))
-         "* %T\n  %?\n  %a")
+			("j" "Journal" entry (file+datetree ,(concat org-directory journal-file))
+			 "* %T\n  %?\n  %a")
 
-	("b" "Bookmark" entry (file+headline ,(concat org-directory "remote/Captures.org") "Bookmarks")
-         "** [[%i][%?]]\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n")
+			("b" "Bookmark" entry (file+headline ,(concat org-directory captures-file) "Bookmarks")
+			 "** [[%i][%?]]\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n")
 
-	("c" "Raw Capture" entry (file+headline ,(concat org-directory "remote/Captures.org") "Captures")
-	 "** Captured %U\n%i\n" :empty-lines 1 :immediate-finish t)
+			("c" "Raw Capture" entry (file+headline ,(concat org-directory captures-file) "Captures")
+			 "** Captured %U\n%i\n" :empty-lines 1 :immediate-finish t)
 
-	("i" "Idea" entry (file+headline ,(concat org-directory "remote/Captures.org") "Captures") "** %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n")))
+			("i" "Idea" entry (file+headline ,(concat org-directory captures-file) "Captures")
+			 "** %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n"))))
 
   ;; Org capture templates from https://orgmode.org/manual/Capture-templates.html
   :hook
@@ -103,7 +108,7 @@
               ("C-c C-f" . elfeed-tube-mpv-follow-mode)
               ("C-c C-w" . elfeed-tube-mpv-where)))
 
-(setq rmh-elfeed-org-files (list "~/notes.org/remote/RSS-Feeds.org"))
+(setq rmh-elfeed-org-files (list "~/notes.org/RSS-Feeds.org"))
 
 ;; Theming
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.config/emacs/themes/"))
