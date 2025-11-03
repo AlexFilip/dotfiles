@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [[ -n "$*" ]]; then
+    INITIAL="$*"
+fi
+
+INPUT_FILE_NAME=$(mktemp -u)
+OUTPUT_FIFO_NAME=$(mktemp -u)
+mkfifo $OUTPUT_FIFO_NAME
+
+printf "$INITIAL" > $INPUT_FILE_NAME
+$HOME/bin/applications/emacs "$INPUT_FILE_NAME" 2>&1 > /dev/null
+cat "$INPUT_FILE_NAME" > $OUTPUT_FIFO_NAME &
+
+cat $OUTPUT_FIFO_NAME
+
+rm $INPUT_FILE_NAME $OUTPUT_FIFO_NAME

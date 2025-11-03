@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [[ -n "$*" ]]; then
+    INITIAL="$*"
+fi
+
+INPUT_FILE_NAME=$(mktemp -u)
+OUTPUT_FIFO_NAME=$(mktemp -u)
+mkfifo $OUTPUT_FIFO_NAME
+
+printf "$INITIAL" > $INPUT_FILE_NAME
+footclient --app-id acceptstringterm nvim '+norm A' "$INPUT_FILE_NAME"
+cat "$INPUT_FILE_NAME" > $OUTPUT_FIFO_NAME &
+
+cat $OUTPUT_FIFO_NAME
+
+rm $INPUT_FILE_NAME $OUTPUT_FIFO_NAME
