@@ -1,8 +1,6 @@
 #!/bin/sh
 
-if [[ -n "$*" ]]; then
-    INITIAL="$*"
-fi
+INITIAL="$*"
 
 INPUT_FILE_NAME=$(mktemp -u)
 OUTPUT_FIFO_NAME=$(mktemp -u)

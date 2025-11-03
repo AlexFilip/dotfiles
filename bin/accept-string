@@ -1,8 +1,6 @@
 #!/bin/sh
 
-if [[ -n "$*" ]]; then
-    PROMPT="$*"
-fi
+PROMPT="$*"
 
 OUTPUT_FIFO_NAME=$(mktemp -u)
 mkfifo $OUTPUT_FIFO_NAME
