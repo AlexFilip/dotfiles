@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [[ -n "$*" ]]; then
+    PROMPT="$*"
+fi
+
+OUTPUT_FIFO_NAME=$(mktemp -u)
+mkfifo $OUTPUT_FIFO_NAME
+
+footclient --app-id acceptstringterm sh -c "printf '$PROMPT' && read -r OUT && printf \"\$OUT\" > $OUTPUT_FIFO_NAME" &
+
+cat $OUTPUT_FIFO_NAME
+
+rm $OUTPUT_FIFO_NAME

@@ -267,6 +267,7 @@ bindsym $mod+Shift+r reload
 
 # Floating windows
 for_window [app_id="fzfmenu"] floating enable, resize set 850 870
+for_window [app_id="acceptstringterm"] floating enable, resize set 850 500
 for_window [app_id="weather"] floating enable, resize set 1275 900
 for_window [app_id="FloatingTerm"] floating enable, resize set 1600 1800
 
