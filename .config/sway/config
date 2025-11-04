@@ -1,13 +1,12 @@
-
 # Complete reference: `man 5 sway`
 
-### Variables
-# Logo key. Use Mod1 for Alt.
-# Mod1 = Alt
-# Mod4 = Super (Command or Windows key)
-set $mod Mod4
+set $Alt Mod1
+set $Super Mod4
+set $mod $Super
 
 # Include machine-specific configuration
+#  - Defines SCREEN_PRIMARY, SCREEN_SECONDARY, SCREEN_LEFT and SCREEN_RIGHT
+#  - Sets up workspaces and output configurations
 # Path is expanded to 
 # Docs: https://i3wm.org/docs/userguide.html#include
 include specific/`hostname`
@@ -42,7 +41,7 @@ bindsym $mod+Shift+f floating toggle
 # Swap focus between the tiling area and the floating area
 # bindsym $mod+ focus mode_toggle
 
-# All of the apps I use currently use wayland
+# All apps must use wayland directly
 xwayland disable
 # xwayland enable
 
@@ -271,10 +270,6 @@ for_window [app_id="acceptstringterm"] floating enable, resize set 850 500
 for_window [app_id="weather"] floating enable, resize set 1275 900
 for_window [app_id="FloatingTerm"] floating enable, resize set 1600 1800
 
-bindsym $mod+minus gaps inner all plus  4;  gaps outer all plus  2
-bindsym $mod+equal gaps inner all minus 4;  gaps outer all minus 2
-bindsym $mod+plus  gaps inner all set   12; gaps outer all set   6
-
 gaps inner 12
 gaps outer 6
 
@@ -353,6 +348,8 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 # Notification center
 exec mako
 
+# Map all keys that are not taken to nop, so that I can easily pick them out
+
 # bindsym $mod+a nop
 bindsym $mod+b nop
 # bindsym $mod+c nop
@@ -379,6 +376,11 @@ bindsym $mod+r nop
 # bindsym $mod+x nop
 bindsym $mod+y nop
 # bindsym $mod+z nop
+bindsym $mod+minus nop
+bindsym $mod+equal nop
+bindsym $mod+plus nop
+bindsym $mod+Escape nop
+bindsym $mod+Return nop
 
 bindsym $mod+Shift+a nop
 bindsym $mod+Shift+b nop
@@ -406,3 +408,169 @@ bindsym $mod+Shift+w nop
 bindsym $mod+Shift+x nop
 bindsym $mod+Shift+y nop
 bindsym $mod+Shift+z nop
+bindsym $mod+Shift+minus nop
+bindsym $mod+Shift+equal nop
+bindsym $mod+Shift+plus  nop
+bindsym $mod+Shift+Escape nop
+bindsym $mod+Shift+Return nop
+
+bindsym $mod+$Alt+a nop
+bindsym $mod+$Alt+b nop
+bindsym $mod+$Alt+c nop
+bindsym $mod+$Alt+d nop
+bindsym $mod+$Alt+e nop
+bindsym $mod+$Alt+f nop
+bindsym $mod+$Alt+g nop
+bindsym $mod+$Alt+h nop
+bindsym $mod+$Alt+i nop
+bindsym $mod+$Alt+j nop
+bindsym $mod+$Alt+k nop
+bindsym $mod+$Alt+l nop
+bindsym $mod+$Alt+m nop
+bindsym $mod+$Alt+n nop
+bindsym $mod+$Alt+o nop
+bindsym $mod+$Alt+p nop
+bindsym $mod+$Alt+q nop
+bindsym $mod+$Alt+r nop
+bindsym $mod+$Alt+s nop
+bindsym $mod+$Alt+t nop
+bindsym $mod+$Alt+u nop
+bindsym $mod+$Alt+v nop
+bindsym $mod+$Alt+w nop
+bindsym $mod+$Alt+x nop
+bindsym $mod+$Alt+y nop
+bindsym $mod+$Alt+z nop
+bindsym $mod+$Alt+minus nop
+bindsym $mod+$Alt+equal nop
+bindsym $mod+$Alt+plus  nop
+bindsym $mod+$Alt+Escape nop
+bindsym $mod+$Alt+Return nop
+
+bindsym $mod+Control+a nop
+bindsym $mod+Control+b nop
+bindsym $mod+Control+c nop
+bindsym $mod+Control+d nop
+bindsym $mod+Control+e nop
+bindsym $mod+Control+f nop
+bindsym $mod+Control+g nop
+bindsym $mod+Control+h nop
+bindsym $mod+Control+i nop
+bindsym $mod+Control+j nop
+bindsym $mod+Control+k nop
+bindsym $mod+Control+l nop
+bindsym $mod+Control+m nop
+bindsym $mod+Control+n nop
+bindsym $mod+Control+o nop
+bindsym $mod+Control+p nop
+bindsym $mod+Control+q nop
+bindsym $mod+Control+r nop
+bindsym $mod+Control+s nop
+bindsym $mod+Control+t nop
+bindsym $mod+Control+u nop
+bindsym $mod+Control+v nop
+bindsym $mod+Control+w nop
+bindsym $mod+Control+x nop
+bindsym $mod+Control+y nop
+bindsym $mod+Control+z nop
+bindsym $mod+Control+minus nop
+bindsym $mod+Control+equal nop
+bindsym $mod+Control+plus  nop
+bindsym $mod+Control+Escape nop
+bindsym $mod+Control+Return nop
+
+bindsym $mod+Control+$Alt+a nop
+bindsym $mod+Control+$Alt+b nop
+bindsym $mod+Control+$Alt+c nop
+bindsym $mod+Control+$Alt+d nop
+bindsym $mod+Control+$Alt+e nop
+bindsym $mod+Control+$Alt+f nop
+bindsym $mod+Control+$Alt+g nop
+bindsym $mod+Control+$Alt+h nop
+bindsym $mod+Control+$Alt+i nop
+bindsym $mod+Control+$Alt+j nop
+bindsym $mod+Control+$Alt+k nop
+bindsym $mod+Control+$Alt+l nop
+bindsym $mod+Control+$Alt+m nop
+bindsym $mod+Control+$Alt+n nop
+bindsym $mod+Control+$Alt+o nop
+bindsym $mod+Control+$Alt+p nop
+bindsym $mod+Control+$Alt+q nop
+bindsym $mod+Control+$Alt+r nop
+bindsym $mod+Control+$Alt+s nop
+bindsym $mod+Control+$Alt+t nop
+bindsym $mod+Control+$Alt+u nop
+bindsym $mod+Control+$Alt+v nop
+bindsym $mod+Control+$Alt+w nop
+bindsym $mod+Control+$Alt+x nop
+bindsym $mod+Control+$Alt+y nop
+bindsym $mod+Control+$Alt+z nop
+bindsym $mod+Control+$Alt+minus nop
+bindsym $mod+Control+$Alt+equal nop
+bindsym $mod+Control+$Alt+plus  nop
+bindsym $mod+Control+$Alt+Escape nop
+bindsym $mod+Control+$Alt+Return nop
+
+bindsym $mod+Control+Shift+a nop
+bindsym $mod+Control+Shift+b nop
+bindsym $mod+Control+Shift+c nop
+bindsym $mod+Control+Shift+d nop
+bindsym $mod+Control+Shift+e nop
+bindsym $mod+Control+Shift+f nop
+bindsym $mod+Control+Shift+g nop
+bindsym $mod+Control+Shift+h nop
+bindsym $mod+Control+Shift+i nop
+bindsym $mod+Control+Shift+j nop
+bindsym $mod+Control+Shift+k nop
+bindsym $mod+Control+Shift+l nop
+bindsym $mod+Control+Shift+m nop
+bindsym $mod+Control+Shift+n nop
+bindsym $mod+Control+Shift+o nop
+bindsym $mod+Control+Shift+p nop
+bindsym $mod+Control+Shift+q nop
+bindsym $mod+Control+Shift+r nop
+bindsym $mod+Control+Shift+s nop
+bindsym $mod+Control+Shift+t nop
+bindsym $mod+Control+Shift+u nop
+bindsym $mod+Control+Shift+v nop
+bindsym $mod+Control+Shift+w nop
+bindsym $mod+Control+Shift+x nop
+bindsym $mod+Control+Shift+y nop
+bindsym $mod+Control+Shift+z nop
+bindsym $mod+Control+Shift+minus nop
+bindsym $mod+Control+Shift+equal nop
+bindsym $mod+Control+Shift+plus  nop
+bindsym $mod+Control+Shift+Escape nop
+bindsym $mod+Control+Shift+Return nop
+
+bindsym $mod+Control+Shift+$Alt+a nop
+bindsym $mod+Control+Shift+$Alt+b nop
+bindsym $mod+Control+Shift+$Alt+c nop
+bindsym $mod+Control+Shift+$Alt+d nop
+bindsym $mod+Control+Shift+$Alt+e nop
+bindsym $mod+Control+Shift+$Alt+f nop
+bindsym $mod+Control+Shift+$Alt+g nop
+bindsym $mod+Control+Shift+$Alt+h nop
+bindsym $mod+Control+Shift+$Alt+i nop
+bindsym $mod+Control+Shift+$Alt+j nop
+bindsym $mod+Control+Shift+$Alt+k nop
+bindsym $mod+Control+Shift+$Alt+l nop
+bindsym $mod+Control+Shift+$Alt+m nop
+bindsym $mod+Control+Shift+$Alt+n nop
+bindsym $mod+Control+Shift+$Alt+o nop
+bindsym $mod+Control+Shift+$Alt+p nop
+bindsym $mod+Control+Shift+$Alt+q nop
+bindsym $mod+Control+Shift+$Alt+r nop
+bindsym $mod+Control+Shift+$Alt+s nop
+bindsym $mod+Control+Shift+$Alt+t nop
+bindsym $mod+Control+Shift+$Alt+u nop
+bindsym $mod+Control+Shift+$Alt+v nop
+bindsym $mod+Control+Shift+$Alt+w nop
+bindsym $mod+Control+Shift+$Alt+x nop
+bindsym $mod+Control+Shift+$Alt+y nop
+bindsym $mod+Control+Shift+$Alt+z nop
+bindsym $mod+Control+Shift+$Alt+minus nop
+bindsym $mod+Control+Shift+$Alt+equal nop
+bindsym $mod+Control+Shift+$Alt+plus  nop
+bindsym $mod+Control+Shift+$Alt+Escape nop
+bindsym $mod+Control+Shift+$Alt+Return nop
+
