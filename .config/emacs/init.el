@@ -48,12 +48,12 @@
   :hook
   ;; Only show capture buffer in single capture window
   ((org-capture-mode . (lambda ()
-			 (when (equal (frame-parameter nil 'name) "Org Capture")
-			   (delete-other-windows))))
+						 (when (equal (frame-parameter nil 'name) "Org Capture")
+						   (delete-other-windows))))
    ;; Close the capture window when finished
    (org-capture-after-finalize . (lambda ()
-				   (when (equal "Org Capture" (frame-parameter nil 'name))
-				     (delete-frame))))))
+								   (when (equal "Org Capture" (frame-parameter nil 'name))
+									 (delete-frame))))))
 
 (use-package clojure-mode :ensure t)
 (use-package slime :ensure t)
@@ -96,11 +96,11 @@
   (elfeed-tube-setup)
 
   :bind (:map elfeed-show-mode-map
-         ("F" . elfeed-tube-fetch)
-         ([remap save-buffer] . elfeed-tube-save)
-         :map elfeed-search-mode-map
-         ("F" . elfeed-tube-fetch)
-         ([remap save-buffer] . elfeed-tube-save)))
+			  ("F" . elfeed-tube-fetch)
+			  ([remap save-buffer] . elfeed-tube-save)
+			  :map elfeed-search-mode-map
+			  ("F" . elfeed-tube-fetch)
+			  ([remap save-buffer] . elfeed-tube-save)))
 
 (use-package elfeed-tube-mpv
   :ensure t
@@ -111,11 +111,20 @@
 (setq rmh-elfeed-org-files (list "~/notes.org/RSS-Feeds.org"))
 
 ;; Theming
-(add-to-list 'custom-theme-load-path (expand-file-name "~/.config/emacs/themes/"))
-(load-theme 'custom t)
+;; (add-to-list 'custom-theme-load-path themes-dir)
+;; (load-theme 'custom t)
+(use-package nord-theme
+             :ensure t
+             :init
+             (add-hook 'after-init-hook
+                       (lambda ()
+                         (load-theme 'nord t)))
+             (add-hook 'after-make-frame-functions
+                       (lambda (_)
+                         (load-theme 'nord t)))
+             )
 
 ;; Settings
-
 (defun my-go-mode-hook ()
   "Customizations for Go mode."
   (setq indent-tabs-mode t)
