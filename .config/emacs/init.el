@@ -113,15 +113,43 @@
 ;; Theming
 ;; (add-to-list 'custom-theme-load-path themes-dir)
 ;; (load-theme 'custom t)
+
+;; NOTE: These are the colors defined by nord itself
+;; TODO: Try to find out how to use the ones defined in the package itself
+(defconst nord0 "#2E3440")
+(defconst nord1 "#3B4252")
+(defconst nord2 "#434C5E")
+(defconst nord3 "#4C566A")
+(defconst nord4 "#D8DEE9")
+(defconst nord5 "#E5E9F0")
+(defconst nord6 "#ECEFF4")
+(defconst nord7 "#8FBCBB")
+(defconst nord8 "#88C0D0")
+(defconst nord9 "#81A1C1")
+(defconst nord10 "#5E81AC")
+(defconst nord11 "#BF616A")
+(defconst nord12 "#D08770")
+(defconst nord13 "#EBCB8B")
+(defconst nord14 "#A3BE8C")
+(defconst nord15 "#B48EAD")
+
+(defun apply-nord-theme (&rest ignored)
+  "Custom tweaks to the Nord theme."
+  (load-theme 'nord t)
+  (custom-set-faces
+   `(font-lock-comment-face ((t (:foreground ,nord14))))
+   `(font-lock-comment-delimiter-face ((t (:foreground ,nord14))))
+
+   `(font-lock-string-face ((t (:foreground ,nord11))))
+   `(font-lock-doc-face ((t (:foreground ,nord11))))
+
+   `(region ((t (:background ,nord10))))))
+
 (use-package nord-theme
              :ensure t
              :init
-             (add-hook 'after-init-hook
-                       (lambda ()
-                         (load-theme 'nord t)))
-             (add-hook 'after-make-frame-functions
-                       (lambda (_)
-                         (load-theme 'nord t)))
+             (add-hook 'after-init-hook #'apply-nord-theme)
+             (add-hook 'after-make-frame-functions #'apply-nord-theme)
              )
 
 ;; Settings
