@@ -133,24 +133,28 @@
 (defconst nord14 "#A3BE8C")
 (defconst nord15 "#B48EAD")
 
-(defun apply-nord-theme (&rest ignored)
+(defun apply-nord-theme (&optional frame)
   "Custom tweaks to the Nord theme."
-  (load-theme 'nord t)
+  ;; Only apply Nord once globally
+  (with-selected-frame (or frame (selected-frame))
+                       (unless (custom-theme-enabled-p 'nord)
+                         (load-theme 'nord t)))
   (custom-set-faces
-   `(font-lock-comment-face ((t (:foreground ,nord14))))
-   `(font-lock-comment-delimiter-face ((t (:foreground ,nord14))))
+    `(font-lock-comment-face ((t (:foreground ,nord14))))
+    `(font-lock-comment-delimiter-face ((t (:foreground ,nord14))))
 
-   `(font-lock-string-face ((t (:foreground ,nord11))))
-   `(font-lock-doc-face ((t (:foreground ,nord11))))
+    `(font-lock-string-face ((t (:foreground ,nord11))))
+    `(font-lock-doc-face ((t (:foreground ,nord11))))
 
-   `(region ((t (:background ,nord10))))))
+    `(region ((t (:background ,nord10))))))
 
 (use-package nord-theme
              :ensure t
              :init
-             (add-hook 'after-init-hook #'apply-nord-theme)
-             (add-hook 'after-make-frame-functions #'apply-nord-theme)
-             )
+             (if (daemonp)
+               (add-hook 'after-make-frame-functions #'apply-nord-theme)
+               (apply-nord-theme))
+             (add-hook 'tty-setup-hook #'apply-nord-theme))
 
 ;; Settings
 (defun my-go-mode-hook ()
