@@ -277,12 +277,12 @@ gaps outer 6
 # status-bar: -SIGUSR1 status-bar
 # i3blocks:   -SIGRTMIN+1 i3blocks
 bindsym XF86AudioMute        exec amixer set Master toggle && pkill -x -SIGRTMIN+1 i3blocks
-bindsym XF86AudioRaiseVolume exec amixer set Master 5%+    && pkill -x -SIGRTMIN+1 i3blocks
-bindsym XF86AudioLowerVolume exec amixer set Master 5%-    && pkill -x -SIGRTMIN+1 i3blocks
+bindsym XF86AudioRaiseVolume exec amixer set Master "$(amixer get Master | awk '/^[[:space:]]+Front Left/ { split($0, a, /\[|\]/); v = (int(a[2]/5 + 0.5) + 1) * 5; print (v < 100 ? v : 100) }')%" && pkill -x -SIGRTMIN+1 i3blocks
+bindsym XF86AudioLowerVolume exec amixer set Master "$(amixer get Master | awk '/^[[:space:]]+Front Left/ { split($0, a, /\[|\]/); v = (int(a[2]/5 + 0.5) - 1) * 5; print (v >   0 ? v :   0) }')%" && pkill -x -SIGRTMIN+1 i3blocks
 
 # Screen brightness
-bindsym --locked XF86MonBrightnessUp   exec light -S "$(light -G | awk '{ b = int($1 + 5); print (b >   0 ? b :   0) }')"
-bindsym --locked XF86MonBrightnessDown exec light -S "$(light -G | awk '{ b = int($1 - 5); print (b < 100 ? b : 100) }')"
+bindsym --locked XF86MonBrightnessUp   exec light -S "$(light -G | awk '{ b = (int($1/5 + 0.5) + 1) * 5; print (b >   0 ? b :   0) }')"
+bindsym --locked XF86MonBrightnessDown exec light -S "$(light -G | awk '{ b = (int($1/5 + 0.5) - 1) * 5; print (b < 100 ? b : 100) }')"
 
 # Theme
 # border pixel 2
