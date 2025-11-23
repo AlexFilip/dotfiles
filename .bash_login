@@ -3,30 +3,20 @@
 LOG_FILE=$HOME/bash-login-error-log
 TTY="$(tty)"
 
+echo "Logging in on $TTY" > $HOME/bash-login-info 2>&1
+
 # Check if already logged in
 if [[ $(loginctl list-sessions | grep "$TTY" | wc -l) > 1 ]]; then
     echo "Already logged in on $TTY. Exiting" > $LOG_FILE
     exit 1
 fi
 
+# Environment variables for all login sessions
 export XKB_DEFAULT_OPTIONS=ctrl:nocaps # Caps lock to ctrl
-export GDK_BACKEND=wayland # wayland on GTK apps (if they need X, launch with GDK_BACKEND=x11)
-export MOZ_ENABLE_WAYLAND=1 # Firefox wayland
-export GTK_THEME="Adwaita:light" # Light mode
-export QT_STYLE_OVERRIDE="Adwaita" # Light mode for kde apps
-export PINENTRY_USER_DATA="curses" # gpg decrypt UI
-export XDG_CONFIG_HOME="$HOME/.config"
-export TERMINAL="foot"
-export _JAVA_AWT_WM_NONREPARENTING=1 # For burpsuite
 
-if [[ -z "$XDG_DATA_DIRS" ]]; then
-    XDG_DATA_DIRS="/usr/local/share/:/usr/share/:/home/alex/.local/share/flatpak/exports/share"
+if [[ -f "$HOME/.local/cargo/env" ]]; then
+    . $HOME/.local/cargo/env
 fi
-
-if [[ ":$XDG_DATA_DIRS:" != *"$HOME/.local/share/flatpak/exports/share"* ]]; then
-    XDG_DATA_DIRS=$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share
-fi
-export XDG_DATA_DIRS
 
 if [[ ":$PATH:" != *":$HOME/bin/go:"* ]]; then
     PATH="$HOME/bin/go:$PATH"
@@ -38,7 +28,26 @@ fi
 
 export PATH
 
+export PINENTRY_USER_DATA="curses" # gpg decrypt UI
+export XDG_CONFIG_HOME="$HOME/.config"
+
+if [[ -z "$XDG_DATA_DIRS" ]]; then
+    XDG_DATA_DIRS="/usr/local/share/:/usr/share/:/home/alex/.local/share/flatpak/exports/share"
+fi
+
+if [[ ":$XDG_DATA_DIRS:" != *"$HOME/.local/share/flatpak/exports/share"* ]]; then
+    XDG_DATA_DIRS=$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share
+fi
+export XDG_DATA_DIRS
+
 if [[ "$TTY" == "/dev/tty1" ]]; then
+    export GDK_BACKEND=wayland # wayland on GTK apps (if they need X, launch with GDK_BACKEND=x11)
+    export MOZ_ENABLE_WAYLAND=1 # Firefox wayland
+    export GTK_THEME="Adwaita:light" # Light mode
+    export QT_STYLE_OVERRIDE="Adwaita" # Light mode for kde apps
+    export TERMINAL="foot"
+    export _JAVA_AWT_WM_NONREPARENTING=1 # For burpsuite
+
     exec sway
 elif [[ "$TTY" == "/dev/tty2" ]]; then
     exec tmux new -As main
