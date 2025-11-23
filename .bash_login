@@ -3,8 +3,6 @@
 LOG_FILE=$HOME/bash-login-error-log
 TTY="$(tty)"
 
-echo "Logging in on $TTY" > $HOME/bash-login-info 2>&1
-
 # Check if already logged in
 if [[ $(loginctl list-sessions | grep "$TTY" | wc -l) > 1 ]]; then
     echo "Already logged in on $TTY. Exiting" > $LOG_FILE

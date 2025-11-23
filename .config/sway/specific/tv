@@ -34,3 +34,6 @@ workspace 29:10 output $SCREEN_SECONDARY
 
 workspace 20:1
 workspace 10:1
+
+# Start tmux in sway environment
+exec tmux new -d

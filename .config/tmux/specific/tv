@@ -1,0 +1,4 @@
+
+# Keep tmux alive after last pane closed
+set -g remain-on-exit on
+set-hook -g pane-died "if -F '#{&&:#{==:#{session_windows},1},#{==:#{window_panes},1}}' 'respawn-pane' 'kill-pane'"
