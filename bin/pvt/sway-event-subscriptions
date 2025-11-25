@@ -1,0 +1,8 @@
+#!/bin/sh
+
+swaymsg -t subscribe -m '["window", "workspace"]' | jq -r --unbuffered '.change' | while read -r change_type; do
+    if [[ "$change_type" == "focus" ]]; then
+        pkill -SIGRTMIN+3 i3blocks
+    fi
+done
+
