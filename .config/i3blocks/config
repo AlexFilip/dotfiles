@@ -1,4 +1,9 @@
 
+[activeapp]
+command=swaymsg -t get_tree | jq -r '.. | select(.type?) | select(.focused==true).app_id // empty'
+interval=once
+signal=3
+
 [scratchpad]
 command=X="$(swaymsg -t get_tree | jq '.nodes[] | select(.name == "__i3").nodes[] | select(.name == "__i3_scratch").floating_nodes | length')"; if [[ "$X" > 0 ]]; then echo "(S:$X)"; fi
 interval=once

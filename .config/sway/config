@@ -12,10 +12,10 @@ set $mod $Super
 include specific/`hostname`
 
 # Focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+h focus left, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+j focus down, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+k focus up, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+l focus right, exec pkill -x -SIGRTMIN+3 i3blocks
 
 # Moving windows
 bindsym $mod+Shift+h move left
@@ -46,37 +46,37 @@ xwayland disable
 # xwayland enable
 
 # Workspaces:
-bindsym $mod+comma  focus output $SCREEN_LEFT
-bindsym $mod+period focus output $SCREEN_RIGHT
+bindsym $mod+comma  focus output $SCREEN_LEFT, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+period focus output $SCREEN_RIGHT, exec pkill -x -SIGRTMIN+3 i3blocks
 
-bindsym $mod+Shift+comma  move container to output $SCREEN_LEFT
-bindsym $mod+Shift+period move container to output $SCREEN_RIGHT
+bindsym $mod+Shift+comma  move container to output $SCREEN_LEFT, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+Shift+period move container to output $SCREEN_RIGHT, exec pkill -x -SIGRTMIN+3 i3blocks
 
 # Move window or focus to workspace depending on current output
-bindsym $mod+1 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 1
-bindsym $mod+2 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 2
-bindsym $mod+3 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 3
-bindsym $mod+4 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 4
-bindsym $mod+5 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 5
-bindsym $mod+6 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 6
-bindsym $mod+7 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 7
-bindsym $mod+8 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 8
-bindsym $mod+9 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 9
-bindsym $mod+0 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 10
+bindsym $mod+1 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 1, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+2 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 2, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+3 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 3, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+4 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 4, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+5 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 5, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+6 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 6, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+7 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 7, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+8 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 8, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+9 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 9, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+0 exec ~/bin/pvt/sway-cmd move_focus_to_workspace 10, exec pkill -x -SIGRTMIN+3 i3blocks
 
-bindsym $mod+left  workspace prev
-bindsym $mod+right workspace next
+bindsym $mod+left  workspace prev, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+right workspace next, exec pkill -x -SIGRTMIN+3 i3blocks
 
-bindsym $mod+Shift+1 exec ~/bin/pvt/sway-cmd move_window_to_workspace 1
-bindsym $mod+Shift+2 exec ~/bin/pvt/sway-cmd move_window_to_workspace 2
-bindsym $mod+Shift+3 exec ~/bin/pvt/sway-cmd move_window_to_workspace 3
-bindsym $mod+Shift+4 exec ~/bin/pvt/sway-cmd move_window_to_workspace 4
-bindsym $mod+Shift+5 exec ~/bin/pvt/sway-cmd move_window_to_workspace 5
-bindsym $mod+Shift+6 exec ~/bin/pvt/sway-cmd move_window_to_workspace 6
-bindsym $mod+Shift+7 exec ~/bin/pvt/sway-cmd move_window_to_workspace 7
-bindsym $mod+Shift+8 exec ~/bin/pvt/sway-cmd move_window_to_workspace 8
-bindsym $mod+Shift+9 exec ~/bin/pvt/sway-cmd move_window_to_workspace 9
-bindsym $mod+Shift+0 exec ~/bin/pvt/sway-cmd move_window_to_workspace 10
+bindsym $mod+Shift+1 exec ~/bin/pvt/sway-cmd move_window_to_workspace 1, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+Shift+2 exec ~/bin/pvt/sway-cmd move_window_to_workspace 2, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+Shift+3 exec ~/bin/pvt/sway-cmd move_window_to_workspace 3, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+Shift+4 exec ~/bin/pvt/sway-cmd move_window_to_workspace 4, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+Shift+5 exec ~/bin/pvt/sway-cmd move_window_to_workspace 5, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+Shift+6 exec ~/bin/pvt/sway-cmd move_window_to_workspace 6, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+Shift+7 exec ~/bin/pvt/sway-cmd move_window_to_workspace 7, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+Shift+8 exec ~/bin/pvt/sway-cmd move_window_to_workspace 8, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+Shift+9 exec ~/bin/pvt/sway-cmd move_window_to_workspace 9, exec pkill -x -SIGRTMIN+3 i3blocks
+bindsym $mod+Shift+0 exec ~/bin/pvt/sway-cmd move_window_to_workspace 10, exec pkill -x -SIGRTMIN+3 i3blocks
 
 # Applications
 set $main_tmux_session main
