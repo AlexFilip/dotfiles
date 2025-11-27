@@ -351,7 +351,7 @@ exec mako
 
 # Scripts
 exec ~/bin/pvt/sway-event-subscriptions
-exec cat crontab/all crontab/`hostname` 2> /dev/null | crontab -
+exec cat ~/.config/sway/crontab/all ~/.config/sway/crontab/`hostname` 2> /dev/null | crontab -
 
 # Map all keys that are not taken to nop, so that I can easily pick them out
 
