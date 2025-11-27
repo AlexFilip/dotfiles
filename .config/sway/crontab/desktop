@@ -1,0 +1,2 @@
+# Refresh emacs RSS feeds, if a daemon is running
+0 * * * * if /usr/local/bin/emacsclient --socket-name=/run/user/1000/emacs/server -e 0 >&/dev/null; then exec /usr/local/bin/emacsclient --socket-name=/run/user/1000/emacs/server -e '(elfeed-update)' > /dev/null 2>&1; fi

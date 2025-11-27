@@ -349,8 +349,9 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 # Notification center
 exec mako
 
-# Event subscriptions
+# Scripts
 exec ~/bin/pvt/sway-event-subscriptions
+exec cat crontab/all crontab/`hostname` 2> /dev/null | crontab -
 
 # Map all keys that are not taken to nop, so that I can easily pick them out
 
