@@ -1,6 +1,6 @@
 
 [activeapp]
-command=swaymsg -t get_tree | jq -r '.. | select(.type?) | select(.focused==true).app_id // empty'
+command=swaymsg -t get_tree | jq -r '.. | select(.type?) | select(.focused==true).name // empty | .[0:50]'
 interval=once
 signal=3
 
