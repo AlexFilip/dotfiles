@@ -1,8 +1,9 @@
 #!/bin/sh
 
-swaymsg -t subscribe -m '["window", "workspace"]' | jq -r --unbuffered '.change' | while read -r change_type; do
-    if [[ "$change_type" == "focus" ]] || [[ "$change_type" == "close" ]] || [[ "$change_type" == "title" ]]; then
-        pkill -SIGRTMIN+3 i3blocks
-    fi
-done
+# swaymsg -t subscribe -m '["window", "workspace"]' | jq -r --unbuffered '.change' | while read -r change_type; do
+#     if [[ "$change_type" == "focus" ]] || [[ "$change_type" == "close" ]] || [[ "$change_type" == "title" ]]; then
+#         pkill -SIGRTMIN+3 i3blocks
+#     fi
+# done
 
+swaymsg -t subscribe -m '["window", "workspace"]' | $HOME/bin/pvt/update-title.py --field change --values focus,close,title
