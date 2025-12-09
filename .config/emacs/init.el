@@ -26,7 +26,7 @@
 		(reminders-file "01 - Reminders.org")
 		(todo-file      "02 - TODO.org")
 		(journal-file   "Journal.org"))
-	(setq org-directory (expand-file-name "~/notes.org/")
+	(setq org-directory (expand-file-name "~/notes.org/shared/")
 		  org-default-notes-file (concat org-directory captures-file)
 		  org-capture-templates
 		  `(("t" "Todo" entry (file+headline ,(concat org-directory reminders-file) "Tasks")
