@@ -50,7 +50,6 @@ def main():
         if isinstance(value, str) and value in triggers:
             pid = find_pid_by_name("i3blocks")
             if pid is not None:
-                print("Killin' it")
                 os.kill(pid, sig)
 
 if __name__ == "__main__":
