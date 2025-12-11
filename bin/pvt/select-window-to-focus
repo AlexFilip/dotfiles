@@ -1,0 +1,3 @@
+#!/bin/sh
+
+swaymsg -t get_tree | jq -r '.nodes[].nodes | .. | objects | select(.type == "con" and .name != null) | [.id, .name] | @tsv' | fzf --delimiter '\t' --with-nth 2 --accept-nth 1 | xargs -I {} swaymsg "[con_id={}] focus"

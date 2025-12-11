@@ -179,6 +179,9 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Shift+i move container to scratchpad, exec pkill -x -SIGRTMIN+2 i3blocks
 bindsym $mod+i scratchpad show, exec pkill -x -SIGRTMIN+2 i3blocks
 
+# Select window to focus
+bindsym $mod+g exec $term-client $term_title_opt "Select Window" $term_app_id_opt "select-window" ~/bin/pvt/select-window-to-focus
+
 # Start a terminal
 bindsym $mod+t exec $term-client $term_title_opt Terminal, mode "default"
 
@@ -270,6 +273,7 @@ for_window [app_id="fzfmenu"] floating enable, resize set 850 870
 for_window [app_id="acceptstringterm"] floating enable, resize set 850 500
 for_window [app_id="weather"] floating enable, resize set 1275 900
 for_window [app_id="FloatingTerm"] floating enable, resize set 1600 1800
+for_window [app_id="select-window"] floating enable, resize set 850 870
 
 gaps inner 12
 gaps outer 6
@@ -361,7 +365,7 @@ bindsym $mod+b nop
 bindsym $mod+d nop
 # bindsym $mod+e nop
 # bindsym $mod+f nop
-bindsym $mod+g nop
+# bindsym $mod+g nop
 # bindsym $mod+h nop
 # bindsym $mod+i nop
 # bindsym $mod+j nop
