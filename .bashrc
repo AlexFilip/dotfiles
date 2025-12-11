@@ -106,7 +106,7 @@ PROMPT_RESET="\[$(tput sgr0)\]"
     echo -n "$RESULT"
 }
 
-PROMPT_COMMAND='PS1="$(-prompt-ssh-info)${PROMPT_COLOR}\w $(-prompt-env-info)\n${PROMPT_COLOR}\$ ${PROMPT_RESET}"'
+PROMPT_COMMAND='echo -ne "\033]0;Bash: ${PWD}\007";PS1="$(-prompt-ssh-info)${PROMPT_COLOR}\w $(-prompt-env-info)\n${PROMPT_COLOR}\$ ${PROMPT_RESET}"'
 PS2="${PROMPT_COLOR}> ${PROMPT_RESET}"
 # --- End Prompt ---
 
