@@ -165,7 +165,12 @@
     (setq go-ts-mode-indent-offset tab-width)))
 (add-hook 'go-mode-hook 'my-go-mode-hook)
 
-
+;; Insert creation date on new headings
+(add-hook 'org-insert-heading-hook
+		  (lambda()
+			(save-excursion
+              (org-back-to-heading)
+              (org-set-property "CREATED" (format-time-string "%Y-%m-%d %T")))))
 
 (let ((backup-file-directory "~/.local/emacs-saves/")
       (auto-save-file-directory temporary-file-directory))
