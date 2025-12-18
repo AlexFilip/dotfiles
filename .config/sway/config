@@ -102,6 +102,7 @@ exec swayidle -w \
        resume 'swaymsg "output * dpms on"' \
        before-sleep "$lock" \
        lock "$lock"
+for_window [shell=".*"] inhibit_idle fullscreen
 
 bindsym $mod+Shift+grave exec echo "Shutdown\nRestart\nLock\nLogOut" | fzfmenu | power-control
 
