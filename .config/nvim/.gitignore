@@ -1,0 +1,8 @@
+.DS_Store
+.netrwhist
+pythonx/
+spell/
+python*-env/
+wip/
+/plugin/
+/lazy-lock.json
