@@ -170,7 +170,7 @@
 		  (lambda()
 			(save-excursion
               (org-back-to-heading)
-              (org-set-property "CREATED" (format-time-string "%Y-%m-%d %T")))))
+              (org-set-property "CREATED" (org-format-time-string (org-time-stamp-format t t))))))
 
 (let ((backup-file-directory "~/.local/emacs-saves/")
       (auto-save-file-directory temporary-file-directory))
