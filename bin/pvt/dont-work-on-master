@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# I put this file in a known directory. I used ~/bin/
+# If you decide to use a different directory, update the references to this file in the other files.
+
+ON_SWITCH=false
+ACTION="$1"
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+if $ON_SWITCH && [[ "$current_branch" == "master" ]] || [[ "$current_branch" == "main" ]]; then
+    echo "Cannot $ACTION to $current_branch branch"
+    exit 1
+fi

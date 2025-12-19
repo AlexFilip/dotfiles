@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Add the parent directory to git hooks with 
+#  git config --global core.hooksPath ~/path/to/parent/dir
+
+source ~/bin/pvt/dont-work-on-master commit
