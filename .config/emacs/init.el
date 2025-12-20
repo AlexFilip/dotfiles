@@ -157,6 +157,7 @@
              (add-hook 'tty-setup-hook #'apply-nord-theme))
 
 (set-frame-font "Hack 12" nil t)
+(add-to-list 'default-frame-alist '(font . "Hack-10"))
 
 ;; Settings
 (defun my-go-mode-hook ()
