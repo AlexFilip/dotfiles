@@ -60,9 +60,6 @@ path_add_begin \
     $HOME/bin/go \
     $HOME/bin
 
-# path_add_end \
-#     "/home/alex/.local/share/coursier/bin"
-
 export GPG_TTY=$(tty)
 export GOBIN=$HOME/bin/go
 export PATH

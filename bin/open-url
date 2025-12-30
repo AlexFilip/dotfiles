@@ -35,8 +35,9 @@ elif is_image_url "$URL"; then
 # elif should_open_in_personal_profile "$URL"; then
 #     exec open-app chrome "$@" "$URL"
 else
-    DEFAULT_BROWSER=chrome
+    # DEFAULT_BROWSER=chrome
     # DEFAULT_BROWSER=brave
     # DEFAULT_BROWSER=zen # -P Main
+    DEFAULT_BROWSER=librewolf
     exec open-app "$DEFAULT_BROWSER" "$@" $URL
 fi

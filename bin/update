@@ -21,4 +21,7 @@ if [[ -n "$(which npm)" ]]; then
     npm update -g -y
 fi
 
-
+if [[ -n "$(which cs)" ]]; then
+    echo "Updating cs"
+    cs update
+fi

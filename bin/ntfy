@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ssh homelab-prod docker exec ntfy-app-1 /ntfy-secrets/publish "${@}"
