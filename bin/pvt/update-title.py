@@ -32,6 +32,7 @@ def main():
     field = args.field
     triggers = {v.strip() for v in args.values.split(",")}
     sig = signal.SIGRTMIN + 3
+    lastTitle = ""
 
     for line in sys.stdin:
         line = line.strip()
@@ -47,7 +48,9 @@ def main():
             continue
 
         value = obj[field]
-        if isinstance(value, str) and value in triggers:
+        newTitle = obj["container"]["name"]
+        if isinstance(value, str) and value in triggers and newTitle != lastTitle:
+            lastTitle = newTitle
             pid = find_pid_by_name("i3blocks")
             if pid is not None:
                 os.kill(pid, sig)
