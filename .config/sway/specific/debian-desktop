@@ -4,8 +4,9 @@ set $SCREEN_SECONDARY HDMI-A-1
 set $SCREEN_LEFT      $SCREEN_SECONDARY
 set $SCREEN_RIGHT     $SCREEN_PRIMARY
 
-output DP-1     mode 3840x2160@59.997Hz position 1920,0
-output HDMI-A-1 mode 1920x1080@60.000Hz position 0,0
+output DP-1     mode 2560x1440@100.000Hz position 2560,0
+# output DP-2     mode 2560x1440@100.000Hz position 0,0
+output HDMI-A-1 mode 2560x1440@59.951Hz  position 0,0
 
 # Assign workspace to output
 workspace 10:1  output $SCREEN_PRIMARY
